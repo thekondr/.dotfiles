@@ -8,11 +8,6 @@ echo_p() {
     echo "\033[0;34m$@\033[0m"
 }
 
-mpd() {
-    local path=$1
-    mkdir -p $path && cd $path
-}
-
 backup_file() {
     local file=$1
     if [ -e $file ]; then
@@ -37,10 +32,8 @@ hash_q git && backup_file ~/.dotfiles && env git clone --depth=1 https://github.
   exit
 }
 
-mpd ~/.dotfiles/vim/bundle
-env git clone --depth=1 https://github.com/gmarik/vundle
-cd
-vim +PluginInstall +qall
+# force plugin install
+vim +qall
 
 echo_p "Updating config files..."
 
@@ -55,6 +48,5 @@ config_callback() {
 
 unset -f config_callback
 unset -f backup_file
-unset -f mpd
 unset -f echo_p
 unset -f hash_q

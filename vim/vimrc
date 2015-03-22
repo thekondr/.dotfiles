@@ -7,6 +7,12 @@ set guioptions-=r
 set guioptions-=L
 filetype off
 
+let vundle_install=!filereadable(expand('~/.vim/bundle/vundle/README.md'))
+if vundle_install
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+endif
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
@@ -22,6 +28,10 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Lokaltog/vim-easymotion'
 
 call vundle#end()
+
+if vundle_install
+    silent PluginInstall
+endif
 
 filetype plugin indent on
 syntax on
