@@ -32,7 +32,7 @@ do
     hash_q $i && sudo $i install -y git vim tmux
 done
 
-echo_p "Clonning..."
+echo_p "Cloning..."
 
 hash_q git && env git clone --depth=1 https://github.com/thekondr/.dotfiles || {
   echo_p "git not installed"
