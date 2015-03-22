@@ -1,0 +1,36 @@
+set nocompatible
+set nobackup
+set nowritebackup
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#begin()
+
+Plugin 'gmarik/vundle'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Lokaltog/vim-easymotion'
+
+call vundle#end()
+
+filetype plugin indent on
+syntax on
+set backspace=indent,eol,start
+set background=dark
+let g:solarized_termtrans=1
+colorscheme solarized
+set incsearch
+set smartcase
+
+let mapleader=","
+noremap <leader>t :NERDTreeToggle<CR>
