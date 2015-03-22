@@ -22,7 +22,7 @@ echo_p "Installing..."
 
 for i in yum apt-get
 do
-    hash_q $i && sudo $i install -y git vim tmux
+    hash_q $i && sudo $i install -y git zsh vim tmux
 done
 
 echo_p "Cloning..."
@@ -47,3 +47,6 @@ unset -f config_callback
 unset -f backup_file
 unset -f echo_p
 unset -f hash_q
+
+sudo chsh -s `which zsh`
+. ~/.zshrc

@@ -1,0 +1,54 @@
+[ -z "$TMUX" ] && export TERM=xterm-256color
+
+export ZSH=$HOME/.dotfiles/zsh
+
+fpath=($ZSH/functions $ZSH/completions $fpath)
+
+if [[ -z "$ZSH_PRIVATE" ]]; then
+    ZSH_PRIVATE="$ZSH/private"
+fi
+
+if [[ -z "$ZSH_CACHE_DIR" ]]; then
+    ZSH_CACHE_DIR="$ZSH/cache/"
+fi
+
+for config_file ($ZSH/lib/*.zsh); do
+    source $config_file
+done
+
+fpath=($ZSH/git $fpath)
+
+if [[ "$OSTYPE" = darwin* ]]; then
+    # OS X's $HOST changes with dhcp, etc. Use ComputerName if possible.
+    SHORT_HOST=$(scutil --get ComputerName 2>/dev/null) || SHORT_HOST=${HOST/.*/}
+else
+    SHORT_HOST=${HOST/.*/}
+fi
+
+if [ -z "$ZSH_COMPDUMP" ]; then
+    ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
+fi
+
+autoload -U compinit
+compinit -i -d "${ZSH_COMPDUMP}"
+
+source $ZSH/git/git.zsh
+
+# for config_file ($ZSH_PRIVATE/*.zsh(N)); do
+    # source $config_file
+# done
+# unset config_file
+
+source $ZSH/theme.zsh
+
+alias rf='rm -rf'
+alias gc='git commit -am'
+alias vz='vim ~/.zshrc && source ~/.zshrc'
+alias s='eval sudo $(fc -nl -1)'
+
+alias vs='vagrant ssh'
+alias vup='vagrant up && vagrant ssh'
+alias vd='vagrant destroy'
+alias vh='vagrant halt'
+
+eval `dircolors ~/.dotfiles/dircolors.ansi-dark`
