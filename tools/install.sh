@@ -13,14 +13,12 @@ mpd() {
     mkdir -p $path && cd $path
 }
 
-ibckp() {
-    local dfile=$1
-    local nfile=$2
-    if [ -f $nfile ] || [ -h $nfile ]; then
-        echo_p "\033[0;33mFound $nfile.\033[0m \033[0;32mBacking up to $nfile.old";
-        mv $nfile $nfile.old;
+backup_file() {
+    local file=$1
+    if [ -e $file ]; then
+        echo_p "$file -> $file.old"
+        mv $file $file.old
     fi
-    ln -sf $dfile $nfile
 }
 
 cd
@@ -34,21 +32,29 @@ done
 
 echo_p "Cloning..."
 
-hash_q git && env git clone --depth=1 https://github.com/thekondr/.dotfiles || {
+hash_q git && backup_file ~/.dotfiles && env git clone --depth=1 https://github.com/thekondr/.dotfiles || {
   echo_p "git not installed"
   exit
 }
 
-mpd .dotfiles/vim/bundle
+mpd ~/.dotfiles/vim/bundle
 env git clone --depth=1 https://github.com/gmarik/vundle
 cd
+vim +PluginInstall +qall
 
 echo_p "Updating config files..."
 
-ibckp .dotfiles/vim ~/.vim
-ibckp .dotfiles/vim/vimrc ~/.vimrc
-ibckp .dotfiles/tmux.conf ~/.tmux.conf
+config_callback() {
+    local src_file=$1
+    local dst_file=$2
+    backup_file $dst_file
+    ln -sf $src_file $dst_file
+}
 
-unset -f ibckp
+. ~/.dotfiles/tools/configs.sh
+
+unset -f config_callback
+unset -f backup_file
+unset -f mpd
 unset -f echo_p
 unset -f hash_q
