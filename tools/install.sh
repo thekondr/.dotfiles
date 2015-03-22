@@ -32,9 +32,6 @@ hash_q git && backup_file ~/.dotfiles && env git clone --depth=1 https://github.
   exit
 }
 
-# force plugin install
-vim +qall
-
 echo_p "Updating config files..."
 
 config_callback() {
