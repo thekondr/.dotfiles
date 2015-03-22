@@ -48,5 +48,4 @@ unset -f backup_file
 unset -f echo_p
 unset -f hash_q
 
-sudo chsh -s `which zsh`
-. ~/.zshrc
+chsh -s `which zsh`
