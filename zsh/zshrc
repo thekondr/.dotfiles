@@ -45,6 +45,7 @@ source ~/.dotfiles/base16-default.dark.sh
 alias rf='rm -rf'
 alias gc='git commit -am'
 alias vz='vim ~/.zshrc && source ~/.zshrc'
+alias vv='vim ~/.vimrc'
 alias s='eval sudo $(fc -nl -1)'
 
 alias vs='vagrant ssh'
