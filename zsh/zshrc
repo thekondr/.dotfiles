@@ -52,4 +52,20 @@ alias vup='vagrant up && vagrant ssh'
 alias vd='vagrant destroy'
 alias vh='vagrant halt'
 
+alias pd='popd'
+
+bck() {
+    for file in $@
+    do
+        mv $file $file.old
+    done
+}
+
+uck() {
+    for file in $@
+    do
+        mv $file.old $file
+    done
+}
+
 eval `dircolors ~/.dotfiles/dircolors.ansi-dark`

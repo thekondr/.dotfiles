@@ -26,6 +26,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'rking/ag.vim'
 
 call vundle#end()
 
