@@ -17,7 +17,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
 Plugin 'gmarik/vundle'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
@@ -36,9 +36,9 @@ endif
 filetype plugin indent on
 syntax on
 set backspace=indent,eol,start
+let base16colorspace=256
 set background=dark
-let g:solarized_termtrans=1
-colorscheme solarized
+colorscheme base16-default
 set incsearch
 set smartcase
 

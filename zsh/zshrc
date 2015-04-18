@@ -40,6 +40,7 @@ source $ZSH/git/git.zsh
 # unset config_file
 
 source $ZSH/theme.zsh
+source ~/.dotfiles/base16-default.dark.sh
 
 alias rf='rm -rf'
 alias gc='git commit -am'
