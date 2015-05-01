@@ -1,6 +1,6 @@
 local return_status="%(?:%{$fg_bold[green]%}:%{$fg_bold[red]%})$%{$reset_color%}"
 local current_directory="%{$fg_bold[cyan]%}%c%{$reset_color%}"
-PROMPT='${current_directory}$(git_prompt_info) ${return_status} '
+PROMPT='${return_status} ${current_directory}$(git_prompt_info) ${return_status} '
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg_bold[blue]%}git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
