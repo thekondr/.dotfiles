@@ -44,6 +44,20 @@ source $ZSH/theme.zsh
 source ~/.dotfiles/base16-default.dark.sh
 
 alias rf='rm -rf'
+
+function rfme() {
+    local name="$(basename $(pwd))"
+    cd ..
+    rf ${name}
+}
+
+function rfr() {
+    local name="$(basename $(pwd))"
+    cd ..
+    rf ${name}
+    take ${name}
+}
+
 alias gc='git commit -am'
 alias vz='vim ~/.zshrc && source ~/.zshrc'
 alias vv='vim ~/.vimrc'
