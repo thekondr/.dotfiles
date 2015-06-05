@@ -26,6 +26,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'terryma/vim-expand-region'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rking/ag.vim'
 Plugin 'kchmck/vim-coffee-script'
@@ -45,9 +46,12 @@ colorscheme base16-default
 set incsearch
 set smartcase
 
-let mapleader=","
-noremap <leader>t :NERDTreeToggle<CR>
+let mapleader="\<Space>"
+nnoremap <Leader>t :NERDTreeToggle<CR>
+
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 let g:EasyMotion_smartcase=1
-nmap <leader>s <Plug>(easymotion-s)
-nmap <leader>f <Plug>(easymotion-bd-w)
+nmap <Leader>s <Plug>(easymotion-s)
+nmap <Leader>f <Plug>(easymotion-bd-w)
