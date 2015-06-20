@@ -5,3 +5,5 @@ function print-public-key() {
 function authorize-key() {
     print-public-key | ssh $@ 'cat - >> ~/.ssh/authorized_keys'
 }
+
+alias vissh='vim ~/.ssh/config'
