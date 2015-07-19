@@ -41,7 +41,7 @@ done
 unset config_file
 
 source $ZSH/theme.zsh
-source ~/.dotfiles/base16-default.dark.sh
+source ~/.dotfiles/shell/base16-tomorrow.dark.sh
 
 alias rf='rm -rf'
 
@@ -84,4 +84,4 @@ uck() {
     done
 }
 
-eval `dircolors ~/.dotfiles/dircolors.ansi-dark`
+eval `dircolors ~/.dotfiles/shell/dircolors.ansi-dark`
