@@ -1,5 +1,11 @@
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
+if [ -n "$INSIDE_EMACS" ]; then
+    chpwd() { print -P "\033AnSiTc %d" }
+    print -P "\033AnSiTu %n"
+    print -P "\033AnSiTc %d"
+fi
+
 export ZSH=$HOME/.dotfiles/zsh
 export EDITOR=vim
 
@@ -41,7 +47,9 @@ done
 unset config_file
 
 source $ZSH/theme.zsh
-source ~/.dotfiles/shell/base16-tomorrow.dark.sh
+if [ -z "$INSIDE_EMACS" ]; then
+    source ~/.dotfiles/shell/base16-tomorrow.dark.sh
+fi
 
 alias rf='rm -rf'
 
