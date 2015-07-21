@@ -47,8 +47,13 @@ done
 unset config_file
 
 source $ZSH/theme.zsh
-if [ -z "$INSIDE_EMACS" ]; then
+
+apply-color-theme() {
     source ~/.dotfiles/shell/base16-tomorrow.dark.sh
+}
+
+if [ -z "$INSIDE_EMACS" ]; then
+    apply-color-theme
 fi
 
 alias rf='rm -rf'
