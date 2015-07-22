@@ -107,4 +107,6 @@ uck() {
     done
 }
 
-eval `dircolors ~/.dotfiles/shell/dircolors.ansi-dark`
+if [[ ! "$OSTYPE" = darwin* ]]; then
+    eval `dircolors ~/.dotfiles/shell/dircolors.ansi-dark`
+fi
