@@ -175,3 +175,5 @@ alias gignore='git update-index --assume-unchanged'
 alias gunignore='git update-index --no-assume-unchanged'
 # list temporarily ignored files
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'
+
+alias vgit='vim-source ~/.dotfiles/zsh/git/git.zsh'

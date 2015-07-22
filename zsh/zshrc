@@ -56,6 +56,12 @@ if [ -z "$INSIDE_EMACS" ]; then
     apply-color-theme
 fi
 
+vim-source() {
+    vim $1 && . $1
+}
+
+alias vis=vim-source
+
 alias rf='rm -rf'
 
 function rfme() {
@@ -71,8 +77,7 @@ function rfr() {
     take ${name}
 }
 
-alias gc='git commit -am'
-alias vz='vim ~/.zshrc && source ~/.zshrc'
+alias vz='vim-source ~/.zshrc'
 alias vv='vim ~/.vimrc'
 alias s='eval sudo $(fc -nl -1)'
 
