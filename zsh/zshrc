@@ -40,13 +40,12 @@ autoload -U compinit
 compinit -i -d "${ZSH_COMPDUMP}"
 
 source $ZSH/git/git.zsh
+source $ZSH/theme.zsh
 
 for config_file ($ZSH_PRIVATE/*.zsh(N)); do
     source $config_file
 done
 unset config_file
-
-source $ZSH/theme.zsh
 
 apply-color-theme() {
     source ~/.dotfiles/shell/base16-tomorrow.dark.sh
