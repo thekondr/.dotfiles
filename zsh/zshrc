@@ -64,8 +64,13 @@ vim-private-zsh() {
     vim-source "$ZSH_PRIVATE/$1.zsh"
 }
 
+rm-private-zsh() {
+    rm "$ZSH_PRIVATE/$1.zsh"
+}
+
 alias vis=vim-source
 alias vpz=vim-private-zsh
+alias rmpz=rm-private-zsh
 
 alias rf='rm -rf'
 
