@@ -74,13 +74,13 @@ alias rmpz=rm-private-zsh
 
 alias rf='rm -rf'
 
-function rfme() {
+rfme() {
     local name="$(basename $(pwd))"
     cd ..
     rf ${name}
 }
 
-function rfr() {
+rfr() {
     local name="$(basename $(pwd))"
     cd ..
     rf ${name}
