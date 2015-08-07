@@ -48,7 +48,8 @@ done
 unset config_file
 
 apply-color-theme() {
-    source ~/.dotfiles/shell/base16-tomorrow.dark.sh
+    local theme=${1:-base16-tomorrow.dark}
+    source ~/.dotfiles/shell/$theme.sh
 }
 
 if [ -z "$INSIDE_EMACS" ]; then
