@@ -27,6 +27,7 @@ if vundle_install
     silent PluginInstall
 endif
 
+set shiftwidth=4 expandtab
 filetype plugin indent on
 syntax on
 set backspace=indent,eol,start
