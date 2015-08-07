@@ -45,7 +45,7 @@ compinit -i -d "${ZSH_COMPDUMP}"
 source $ZSH/git/git.zsh
 source $ZSH/theme.zsh
 
-for config_file ($ZSH_PRIVATE/*.zsh(N)); do
+for config_file ($ZSH_PRIVATE/**/*.zsh(N)); do
     source $config_file
 done
 unset config_file
