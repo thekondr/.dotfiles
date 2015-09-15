@@ -94,6 +94,8 @@ alias vz='vim-source ~/.zshrc'
 alias vv='vim ~/.vimrc'
 alias s='eval sudo $(fc -nl -1)'
 
+alias find='noglob find'
+
 alias vs='vagrant ssh'
 alias vup='vagrant up && vagrant ssh'
 alias vd='vagrant destroy'
