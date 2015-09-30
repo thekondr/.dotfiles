@@ -46,4 +46,5 @@ hi DiffLine ctermbg=none
 hi DiffRemoved ctermbg=none
 hi MatchParen ctermfg=none ctermbg=04
 set incsearch
+set ignorecase
 set smartcase
