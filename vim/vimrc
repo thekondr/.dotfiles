@@ -34,16 +34,6 @@ set backspace=indent,eol,start
 let base16colorspace=256
 set background=dark
 colorscheme base16-tomorrow
-hi Normal ctermbg=none
-hi DiffAdd ctermbg=none
-hi DiffChange ctermbg=none
-hi DiffDelete ctermbg=none
-hi DiffText ctermbg=none
-hi DiffAdded ctermbg=none
-hi DiffFile ctermbg=none
-hi DiffNewFile ctermbg=none
-hi DiffLine ctermbg=none
-hi DiffRemoved ctermbg=none
 hi MatchParen ctermfg=none ctermbg=04
 set incsearch
 set ignorecase
