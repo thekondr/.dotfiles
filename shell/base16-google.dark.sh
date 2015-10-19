@@ -1,6 +1,6 @@
 #!/bin/sh
-# Base16 Tomorrow - Shell color setup script
-# Chris Kempson (http://chriskempson.com)
+# Base16 Google - Shell color setup script
+# Seth Wright (http://sethawright.com)
 
 if [ "${TERM%%-*}" = 'linux' ]; then
     # This script doesn't support linux console (use 'vconsole' template instead)
@@ -8,12 +8,12 @@ if [ "${TERM%%-*}" = 'linux' ]; then
 fi
 
 color00="1d/1f/21" # Base 00 - Black
-color01="cc/66/66" # Base 08 - Red
-color02="b5/bd/68" # Base 0B - Green
-color03="f0/c6/74" # Base 0A - Yellow
-color04="81/a2/be" # Base 0D - Blue
-color05="b2/94/bb" # Base 0E - Magenta
-color06="8a/be/b7" # Base 0C - Cyan
+color01="CC/34/2B" # Base 08 - Red
+color02="19/88/44" # Base 0B - Green
+color03="FB/A9/22" # Base 0A - Yellow
+color04="39/71/ED" # Base 0D - Blue
+color05="A3/6A/C7" # Base 0E - Magenta
+color06="39/71/ED" # Base 0C - Cyan
 color07="c5/c8/c6" # Base 05 - White
 color08="96/98/96" # Base 03 - Bright Black
 color09=$color01 # Base 08 - Bright Red
@@ -23,8 +23,8 @@ color12=$color04 # Base 0D - Bright Blue
 color13=$color05 # Base 0E - Bright Magenta
 color14=$color06 # Base 0C - Bright Cyan
 color15="ff/ff/ff" # Base 07 - Bright White
-color16="de/93/5f" # Base 09
-color17="a3/68/5a" # Base 0F
+color16="F9/6A/38" # Base 09
+color17="39/71/ED" # Base 0F
 color18="28/2a/2e" # Base 01
 color19="37/3b/41" # Base 02
 color20="b4/b7/b4" # Base 04

@@ -76,9 +76,21 @@ printf $printf_template 19 $color19
 printf $printf_template 20 $color20
 printf $printf_template 21 $color21
 
-printf $printf_template_var 10 $color_foreground
-printf $printf_template_var 11 $color_background
-printf $printf_template_custom 12 ";7" # cursor (reverse video)
+# foreground / background / cursor color
+if [ -n "$ITERM_SESSION_ID" ]; then
+  # iTerm2 proprietary escape codes
+  printf $printf_template_custom Pg d8d8d8 # forground
+  printf $printf_template_custom Ph 181818 # background
+  printf $printf_template_custom Pi d8d8d8 # bold color
+  printf $printf_template_custom Pj 383838 # selection color
+  printf $printf_template_custom Pk d8d8d8 # selected text color
+  printf $printf_template_custom Pl d8d8d8 # cursor
+  printf $printf_template_custom Pm 181818 # cursor text
+else
+  printf $printf_template_var 10 $color_foreground
+  printf $printf_template_var 11 $color_background
+  printf $printf_template_var 12 $color_cursor
+fi
 
 # clean up
 unset printf_template
