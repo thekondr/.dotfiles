@@ -3,7 +3,7 @@
 && [[ "$TERM" != dumb ]] \
 && export TERM=xterm-256color
 
-if [ -n "$INSIDE_EMACS" ]; then
+if [[ -n "$INSIDE_EMACS" ]] && [[ "$TERM" != dumb ]]; then
     multi-term-chpwd() {
         print -P "\033AnSiTc %d"
     }
@@ -62,9 +62,9 @@ apply-color-theme() {
     source ~/.dotfiles/shell/base16-$TK_THEME.$TK_BACKGROUND.sh
 }
 
-if [ -z "$INSIDE_EMACS" ]; then
-    apply-color-theme
-fi
+[[ -z "$INSIDE_EMACS" ]] \
+&& [[ "$TERM" != dumb ]] \
+&& apply-color-theme
 
 vim-source() {
     vim $1 && . $1
