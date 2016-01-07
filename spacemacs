@@ -24,6 +24,11 @@ values."
      (git :variables
           git-magit-status-fullscreen t)
      c-c++
+     html
+     java
+     javascript
+     python
+     ruby
      gtags
      (shell :variables
             shell-default-height 30
