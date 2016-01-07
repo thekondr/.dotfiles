@@ -388,12 +388,6 @@ layers configuration. You are free to put any user code."
   (setq require-final-newline t)
 
   ;; utils
-  (defun add-to-exec-path (path &optional append)
-    (if append
-        (setenv "PATH" (concat (getenv "PATH") ":" path))
-      (setenv "PATH" (concat path ":" (getenv "PATH"))))
-    (add-to-list 'exec-path path append))
-
   (defun spacemacs-tk/cleanup-buffer-safe ()
     (interactive)
     (if indent-tabs-mode
