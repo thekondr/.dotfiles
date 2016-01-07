@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: func (...) { ... }
+# key: fnc
+# --
+${1:void} ${2:func}(${3:int arg})${4: const}
+{
+$0
+}

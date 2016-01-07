@@ -367,34 +367,28 @@ layers configuration. You are free to put any user code."
   ;;   (define-key ac-complete-mode-map (kbd "TAB") 'ac-complete)
   ;;   (add-to-list 'ac-sources 'ac-source-yasnippet))
 
-  ;; (use-package yasnippet
-  ;;   :defer t
-  ;;   :diminish yas-minor-mode
-  ;;   :init
-  ;;   (add-hook 'prog-mode-hook 'yas-minor-mode)
-  ;;   (evil-leader/set-key
-  ;;     "yn" 'yas-new-snippet
-  ;;     "yv" 'yas-visit-snippet-file)
-  ;;   (evil-set-initial-state 'snippet-mode 'insert)
-  ;;   (setq yas-snippet-dirs (list (concat tk-emacs-dir "snippets")))
-  ;;   :config
-  ;;   (require 'popup)
-  ;;   (define-key popup-menu-keymap (kbd "C-j") 'popup-next)
-  ;;   (define-key popup-menu-keymap (kbd "C-k") 'popup-previous)
+  (with-eval-after-load "yasnippet"
+    (spacemacs/set-leader-keys-for-minor-mode 'yas-minor-mode
+      "oyn" 'yas-new-snippet
+      "oyv" 'yas-visit-snippet-file)
+    (evil-set-initial-state 'snippet-mode 'insert)
+    (setq yas-snippet-dirs (list (expand-file-name "~/.dotfiles/emacs/snippets")))
+    (require 'popup)
+    (define-key popup-menu-keymap (kbd "C-j") 'popup-next)
+    (define-key popup-menu-keymap (kbd "C-k") 'popup-previous)
 
-  ;;   (defun yas-popup-prompt (prompt choices &optional display-fn)
-  ;;     (popup-menu*
-  ;;      (mapcar
-  ;;       (lambda (choice)
-  ;;         (popup-make-item
-  ;;          (or (and display-fn (funcall display-fn choice))
-  ;;              choice)
-  ;;          :value choice))
-  ;;       choices)))
+    (defun yas-popup-prompt (prompt choices &optional display-fn)
+      (popup-menu*
+       (mapcar
+        (lambda (choice)
+          (popup-make-item
+           (or (and display-fn (funcall display-fn choice))
+               choice)
+           :value choice))
+        choices)))
 
-  ;;   (setq yas-prompt-functions '(yas-popup-prompt))
-  ;;   (setq yas-also-auto-indent-first-line t)
-  ;;   (yas-reload-all))
+    (setq yas-prompt-functions '(yas-popup-prompt))
+    (setq yas-also-auto-indent-first-line t))
 
   ;; basic
   (setq backup-directory-alist
@@ -657,6 +651,10 @@ layers configuration. You are free to put any user code."
   ;;          ("M-9" . mc/mark-all-like-this)
   ;;          ("M-0" . mc/mark-all-like-this-in-defun)))
   ;; (use-package phi-search)
+
+  (let ((tk-private (expand-file-name "~/.dotfiles/emacs/private/private.el")))
+    (when (file-readable-p tk-private)
+      (load-file tk-private)))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

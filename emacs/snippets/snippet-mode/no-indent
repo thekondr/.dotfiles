@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: no-indent
+# key: ni
+# --
+# expand-env: ((yas/indent-line nil))

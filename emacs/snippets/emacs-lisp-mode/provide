@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: provide
+# key: prv
+# --
+(provide '${1:`(file-name-base (buffer-file-name))`})
