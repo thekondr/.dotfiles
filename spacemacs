@@ -399,7 +399,7 @@ layers configuration. You are free to put any user code."
   (remove-hook 'diff-mode-hook 'spacemacs//set-whitespace-style-for-diff)
   (defun spacemacs-tk/find-color-theme ()
     (interactive)
-    (find-file-existing (expand-file-name "~/.emacs.d/base16-tomorrow-dark-theme.el")))
+    (find-file-existing (expand-file-name "~/.dotfiles/theme/base16-tomorrow-dark-theme.el")))
   (setq avy-background nil)
   (setq delete-by-moving-to-trash nil)
 
