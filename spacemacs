@@ -23,7 +23,8 @@ values."
      emacs-lisp
      (git :variables
           git-magit-status-fullscreen t)
-     c-c++
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c++-mode)
      html
      java
      javascript
@@ -42,7 +43,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(google-c-style flymake-cursor)
+   dotspacemacs-additional-packages '(google-c-style flymake-cursor multiple-cursors phi-search)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(evil-escape evil-search-highlight-persist)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -249,82 +250,18 @@ layers configuration. You are free to put any user code."
   ;; evil little word
   ;; magnars hippie-exp closest first
 
-  ;; (use-package diff-mode
-  ;;   :defer t
-  ;;   :config
-  ;;   (evil-set-initial-state 'diff-mode 'emacs)
-  ;;   (add-hook 'diff-mode-hook 'whitespace-mode)
-  ;;   (define-key diff-mode-shared-map "j" 'diff-hunk-next)
-  ;;   (define-key diff-mode-shared-map "k" 'diff-hunk-prev)
-  ;;   (define-key diff-mode-shared-map "d" 'diff-hunk-kill)
-  ;;   (define-key diff-mode-shared-map "J" 'diff-file-next)
-  ;;   (define-key diff-mode-shared-map "K" 'diff-file-prev)
-  ;;   (define-key diff-mode-shared-map "D" 'diff-file-kill))
+  (with-eval-after-load "ediff"
+    (add-hook 'ediff-before-setup-hook
+              (lambda ()
+                (window-configuration-to-register :ediff-window-config)))
+    (add-hook 'ediff-quit-hook
+              (lambda ()
+                (jump-to-register :ediff-window-config)) 'append))
 
-  ;; (use-package ediff
-  ;;   :defer t
-  ;;   :config
-  ;;   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-  ;;   (setq ediff-split-window-function 'split-window-horizontally)
-  ;;   (setq ediff-merge-split-window-function 'split-window-horizontally)
-  ;;   (add-hook 'ediff-before-setup-hook
-  ;;             (lambda ()
-  ;;               (window-configuration-to-register :ediff-window-config)))
-  ;;   (add-hook 'ediff-quit-hook
-  ;;             (lambda ()
-  ;;               (jump-to-register :ediff-window-config)) 'append))
+  (with-eval-after-load "with-editor"
+    (add-hook 'with-editor-mode-hook 'evil-insert-state))
 
-  ;; (use-package with-editor
-  ;;   :defer t
-  ;;   :config
-  ;;   (add-hook 'with-editor-mode-hook 'evil-insert-state))
-
-  ;; (use-package magit
-  ;;   :defer t
-  ;;   :commands (tk/magit-diff-head)
-  ;;   :init
-  ;;   (setq magit-last-seen-setup-instructions "1.4.0")
-  ;;   (evil-leader/set-key
-  ;;     "gb" 'magit-blame
-  ;;     "gl" 'magit-log-all
-  ;;     "gL" 'magit-log-buffer-file
-  ;;     "gd" 'tk/magit-diff-head
-  ;;     "g=" 'vc-version-ediff)
-
-  ;;   :config
-  ;;   (evil-set-initial-state 'magit-mode 'emacs)
-  ;;   (setq magit-push-always-verify nil)
-  ;;   (setq magit-delete-by-moving-to-trash nil)
-  ;;   (defadvice magit-status-internal (around magit-fullscreen activate)
-  ;;     (window-configuration-to-register :magit-fullscreen)
-  ;;     ad-do-it
-  ;;     (delete-other-windows))
-
-  ;;   (defun magit-quit-session ()
-  ;;     "Restores the previous window configuration and kills the magit buffer"
-  ;;     (interactive)
-  ;;     (kill-buffer)
-  ;;     (jump-to-register :magit-fullscreen))
-
-  ;;   (add-hook 'magit-status-mode-hook
-  ;;             (lambda ()
-  ;;               (define-key magit-status-mode-map
-  ;;                 (kbd "q") 'magit-quit-session)))
-
-  ;;   (define-key magit-blame-mode-map "j" 'magit-blame-next-chunk)
-  ;;   (define-key magit-blame-mode-map "J" 'magit-blame-next-chunk-same-commit)
-  ;;   (define-key magit-blame-mode-map "k" 'magit-blame-previous-chunk)
-  ;;   (define-key magit-blame-mode-map "K" 'magit-blame-previous-chunk-same-commit)
-
-  ;;   (defun tk/post-magit-blame-mode (&rest args)
-  ;;     (if magit-blame-mode (evil-emacs-state) (evil-normal-state)))
-  ;;   (advice-add 'magit-blame-mode :after 'tk/post-magit-blame-mode)
-
-  ;;   (defun tk/magit-diff-head ()
-  ;;     "Execute `magit-diff' against current HEAD."
-  ;;     (interactive)
-  ;;     (magit-diff "HEAD")))
-
+  (setq magit-delete-by-moving-to-trash nil)
   ;; (defun ediff-write-merge-buffer ()
   ;;   (let ((file ediff-merge-store-file))
   ;;     (set-buffer ediff-buffer-C)
@@ -332,7 +269,7 @@ layers configuration. You are free to put any user code."
   ;;     (message "Merge buffer saved in: %s" file)
   ;;     (set-buffer-modified-p nil)
   ;;     (sit-for 1)))
-
+  ;; ;;
   ;; ;; For use with git mergetool, add these lines to .gitconfig:
   ;; ;;
   ;; ;; [merge]
@@ -421,217 +358,190 @@ layers configuration. You are free to put any user code."
     "Display a warning to the user, using message"
     (message warning))
 
-  ;; projectile
-  (defadvice projectile-compile-project (around spacemacs-tk/projectile-compile-project activate)
-    (let ((default-directory (projectile-project-root)))
-      (call-interactively 'compile)))
-
-  (defun find-file-in-project-from-kill ()
-    (interactive)
-    (find-file (projectile-expand-root (current-kill 0))))
-  (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
-  ;; (with-eval-after-load "projectile"
-  ;;   (define-key projectile-command-map (kbd "w") 'find-file-in-project-from-kill)
-  ;;   (spacemacs/set-leader-keys "p" 'projectile-command-map))
-
   ;; c++-mode
-  ;; (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
-  ;; (use-package auto-complete-clang)
-  ;; (defun tk-clang-complete ()
-  ;;   (interactive)
-  ;;   (auto-complete '(ac-source-clang)))
+  (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 
-  ;; (defadvice c-mark-function (after c-mark-function-ad activate)
-  ;;   (if (looking-back "\n\n")
-  ;;       (forward-line -1)))
+  (defadvice c-mark-function (after c-mark-function-ad activate)
+    (if (looking-back "\n\n")
+        (forward-line -1)))
 
-  ;; (defun tk-beginning-of-args ()
-  ;;   (unless (looking-back "(")
-  ;;     (cond ((looking-at "(") nil)
-  ;;           ((looking-back ");?") (forward-list -1))
-  ;;           (t (progn (forward-char)
-  ;;                     (c-beginning-of-defun))))
-  ;;     (search-forward "(")))
+  (defun tk-beginning-of-args ()
+    (unless (looking-back "(")
+      (cond ((looking-at "(") nil)
+            ((looking-back ");?") (forward-list -1))
+            (t (progn (forward-char)
+                      (c-beginning-of-defun))))
+      (search-forward "(")))
 
-  ;; (defmacro tk-do-args (&rest body)
-  ;;   `(while (progn (search-forward-regexp "[<>{}(),]")
-  ;;                  (or (not (string= (match-string 0) ")"))
-  ;;                      (c-in-literal)))
-  ;;      (unless (c-in-literal)
-  ;;        (cond ((string-match "[<({]" (match-string 0)) (forward-char -1) (forward-list))
-  ;;              ((string= (match-string 0) ",") ,@body)))))
+  (defmacro tk-do-args (&rest body)
+    `(while (progn (search-forward-regexp "[<>{}(),]")
+                   (or (not (string= (match-string 0) ")"))
+                       (c-in-literal)))
+       (unless (c-in-literal)
+         (cond ((string-match "[<({]" (match-string 0)) (forward-char -1) (forward-list))
+               ((string= (match-string 0) ",") ,@body)))))
 
-  ;; (defun tk-backward-arg-1 ()
-  ;;   (let ((r (point)))
-  ;;     (skip-chars-backward " \t\n")
-  ;;     (when (looking-back ",")
-  ;;       (forward-char -1))
-  ;;     (while
-  ;;         (progn
-  ;;           (search-backward-regexp "[<>{}(),]" nil t)
-  ;;           (or (not (string-match "[{(<,]" (match-string 0)))
-  ;;               (c-in-literal)))
-  ;;       (unless (c-in-literal)
-  ;;         (forward-char)
-  ;;         (forward-list -1)))
-  ;;     (search-forward-regexp "[^({<,[:space:]\n]")
-  ;;     (forward-char -1)
-  ;;     (not (equal r (point)))))
+  (defun tk-backward-arg-1 ()
+    (let ((r (point)))
+      (skip-chars-backward " \t\n")
+      (when (looking-back ",")
+        (forward-char -1))
+      (while
+          (progn
+            (search-backward-regexp "[<>{}(),]" nil t)
+            (or (not (string-match "[{(<,]" (match-string 0)))
+                (c-in-literal)))
+        (unless (c-in-literal)
+          (forward-char)
+          (forward-list -1)))
+      (search-forward-regexp "[^({<,[:space:]\n]")
+      (forward-char -1)
+      (not (equal r (point)))))
 
-  ;; (defun tk-forward-arg-1 ()
-  ;;   (let ((r (point)))
-  ;;     (when (looking-at ",")
-  ;;       (forward-char))
-  ;;     (while
-  ;;         (progn
-  ;;           (search-forward-regexp "[<>{}(),]" nil t)
-  ;;           (or (not (string-match "[})>,]" (match-string 0)))
-  ;;               (c-in-literal)))
-  ;;       (unless (c-in-literal)
-  ;;         (forward-char -1)
-  ;;         (forward-list)))
-  ;;     (forward-char -1)
-  ;;     (not (equal r (point)))))
+  (defun tk-forward-arg-1 ()
+    (let ((r (point)))
+      (when (looking-at ",")
+        (forward-char))
+      (while
+          (progn
+            (search-forward-regexp "[<>{}(),]" nil t)
+            (or (not (string-match "[})>,]" (match-string 0)))
+                (c-in-literal)))
+        (unless (c-in-literal)
+          (forward-char -1)
+          (forward-list)))
+      (forward-char -1)
+      (not (equal r (point)))))
 
-  ;; (defun tk-forward-arg (&optional arg)
-  ;;   (interactive "p")
-  ;;   (or arg (setq arg 1))
-  ;;   (while (> arg 0)
-  ;;     (setq arg (- arg 1))
-  ;;     (tk-forward-arg-1))
-  ;;   (while (< arg 0)
-  ;;     (setq arg (+ arg 1))
-  ;;     (tk-backward-arg-1)))
+  (defun tk-forward-arg (&optional arg)
+    (interactive "p")
+    (or arg (setq arg 1))
+    (while (> arg 0)
+      (setq arg (- arg 1))
+      (tk-forward-arg-1))
+    (while (< arg 0)
+      (setq arg (+ arg 1))
+      (tk-backward-arg-1)))
 
-  ;; (defun tk-backward-arg (&optional arg)
-  ;;   (interactive "p")
-  ;;   (or arg (setq arg 1))
-  ;;   (tk-forward-arg (- arg)))
+  (defun tk-backward-arg (&optional arg)
+    (interactive "p")
+    (or arg (setq arg 1))
+    (tk-forward-arg (- arg)))
 
-  ;; (defun tk-beginning-of-arg-p ()
-  ;;   (and (looking-back "[{(<,][[:space:]\n]*")
-  ;;        (not (c-in-literal))))
+  (defun tk-beginning-of-arg-p ()
+    (and (looking-back "[{(<,][[:space:]\n]*")
+         (not (c-in-literal))))
 
-  ;; (defun tk-end-of-arg-p ()
-  ;;   (and (looking-at "[[:space:]\n]*[})>,]")
-  ;;        (not (c-in-literal))))
+  (defun tk-end-of-arg-p ()
+    (and (looking-at "[[:space:]\n]*[})>,]")
+         (not (c-in-literal))))
 
-  ;; (defun tk-first-arg-p ()
-  ;;   (save-excursion
-  ;;     (unless (tk-beginning-of-arg-p)
-  ;;       (tk-backward-arg-1))
-  ;;     (and (looking-back "[({<][[:space:]\n]*")
-  ;;          (not (c-in-literal)))))
+  (defun tk-first-arg-p ()
+    (save-excursion
+      (unless (tk-beginning-of-arg-p)
+        (tk-backward-arg-1))
+      (and (looking-back "[({<][[:space:]\n]*")
+           (not (c-in-literal)))))
 
-  ;; (defun tk-last-arg-p ()
-  ;;   (save-excursion
-  ;;     (unless (tk-end-of-arg-p)
-  ;;       (tk-forward-arg-1))
-  ;;     (and (looking-at "[[:space:]\n]*[)}>]")
-  ;;          (not (c-in-literal)))))
+  (defun tk-last-arg-p ()
+    (save-excursion
+      (unless (tk-end-of-arg-p)
+        (tk-forward-arg-1))
+      (and (looking-at "[[:space:]\n]*[)}>]")
+           (not (c-in-literal)))))
 
-  ;; (defun tk-kill-arg (arg)
-  ;;   (interactive "p")
-  ;;   (save-excursion
-  ;;     (if (tk-beginning-of-arg-p)
-  ;;         (skip-chars-forward " \t\n")
-  ;;       (tk-backward-arg-1))
-  ;;     (if (tk-last-arg-p)
-  ;;         (kill-region (progn (if (tk-backward-arg-1)
-  ;;                                 (tk-forward-arg-1))
-  ;;                             (point))
-  ;;                      (progn (tk-forward-arg arg)
-  ;;                             (point)))
-  ;;       (kill-region (point)
-  ;;                    (progn (tk-forward-arg arg)
-  ;;                           (if (tk-forward-arg-1)
-  ;;                               (tk-backward-arg-1))
-  ;;                           (point))))))
+  (defun tk-kill-arg (arg)
+    (interactive "p")
+    (save-excursion
+      (if (tk-beginning-of-arg-p)
+          (skip-chars-forward " \t\n")
+        (tk-backward-arg-1))
+      (if (tk-last-arg-p)
+          (kill-region (progn (if (tk-backward-arg-1)
+                                  (tk-forward-arg-1))
+                              (point))
+                       (progn (tk-forward-arg arg)
+                              (point)))
+        (kill-region (point)
+                     (progn (tk-forward-arg arg)
+                            (if (tk-forward-arg-1)
+                                (tk-backward-arg-1))
+                            (point))))))
 
-  ;; (defun tk-transpose-arg (arg)
-  ;;   (interactive "*p")
-  ;;   (transpose-subr 'tk-forward-arg arg))
+  (defun tk-transpose-arg (arg)
+    (interactive "*p")
+    (transpose-subr 'tk-forward-arg arg))
 
-  ;; (defun tk-multiline-wf-args ()
-  ;;   (interactive)
-  ;;   (save-excursion
-  ;;     (tk-beginning-of-args)
-  ;;     (unless (looking-at ")") (newline-and-indent))
-  ;;     (tk-do-args (newline-and-indent))))
+  (defun tk-multiline-wf-args ()
+    (interactive)
+    (save-excursion
+      (tk-beginning-of-args)
+      (unless (looking-at ")") (newline-and-indent))
+      (tk-do-args (newline-and-indent))))
 
-  ;; (defun tk-inline-wf-args ()
-  ;;   (interactive)
-  ;;   (save-excursion
-  ;;     (tk-beginning-of-args)
-  ;;     (tk-do-args (save-excursion (delete-indentation)))
-  ;;     (unless (looking-back "()") (delete-indentation))))
+  (defun tk-inline-wf-args ()
+    (interactive)
+    (save-excursion
+      (tk-beginning-of-args)
+      (tk-do-args (save-excursion (delete-indentation)))
+      (unless (looking-back "()") (delete-indentation))))
 
-  ;; (defun tk-line-wf-args-switch ()
-  ;;   (interactive)
-  ;;   (let (b e)
-  ;;     (save-excursion
-  ;;       (tk-beginning-of-args)
-  ;;       (setq b (line-number-at-pos))
-  ;;       (forward-char -1)
-  ;;       (forward-list)
-  ;;       (setq e (line-number-at-pos)))
-  ;;     (if (equal b e)
-  ;;         (tk-multiline-wf-args)
-  ;;       (tk-inline-wf-args))))
+  (defun tk-line-wf-args-switch ()
+    (interactive)
+    (let (b e)
+      (save-excursion
+        (tk-beginning-of-args)
+        (setq b (line-number-at-pos))
+        (forward-char -1)
+        (forward-list)
+        (setq e (line-number-at-pos)))
+      (if (equal b e)
+          (tk-multiline-wf-args)
+        (tk-inline-wf-args))))
 
-  ;; (defun tk-comment-dwim-arg ()
-  ;;   (interactive)
-  ;;   (let ((comment-start "/* ") (comment-end " */"))
-  ;;     (call-interactively 'comment-dwim)))
+  (defun tk-comment-dwim-arg ()
+    (interactive)
+    (let ((comment-start "/* ") (comment-end " */"))
+      (call-interactively 'comment-dwim)))
 
-  ;; (defun tk-c-mode-common-hook ()
-  ;;   (setq c-set-style "linux")
-  ;;   (setq c-basic-offset 4)
-  ;;   (c-set-offset 'substatement-open '0)
-  ;;   (c-set-offset 'innamespace '0)
-  ;;   (c-set-offset 'inline-open '0)
-  ;;   (c-set-offset 'arglist-intro '+)
-  ;;   (c-set-offset 'arglist-cont '0)
-  ;;   (c-set-offset 'arglist-cont-nonempty '+)
-  ;;   (setq ac-sources '(ac-source-words-in-same-mode-buffers))
-  ;;   (local-set-key (kbd "C-c r a") 'tk-line-wf-args-switch))
+  (defun tk-c-mode-common-hook ()
+    (setq ac-sources '(ac-source-words-in-same-mode-buffers))
+    (local-set-key (kbd "C-c r a") 'tk-line-wf-args-switch))
+  (add-hook 'c-mode-common-hook 'tk-c-mode-common-hook)
 
-  ;; (add-hook 'c-mode-common-hook 'tk-c-mode-common-hook)
+  (with-eval-after-load "helm"
+    (define-key helm-map (kbd "M-j") 'helm-follow-action-forward)
+    (define-key helm-map (kbd "M-k") 'helm-follow-action-backward)
+    (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents))
 
-  ;; helm
-  (define-key helm-map (kbd "M-j") 'helm-follow-action-forward)
-  (define-key helm-map (kbd "M-k") 'helm-follow-action-backward)
-  (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents)
+  (with-eval-after-load "projectile"
+    (defadvice projectile-compile-project (around spacemacs-tk/projectile-compile-project activate)
+      (let ((default-directory (projectile-project-root)))
+        (call-interactively 'compile)))
+    (defun find-file-in-project-from-kill ()
+      (interactive)
+      (find-file (projectile-expand-root (current-kill 0))))
+    (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
+    (helm-projectile-on)
+    (define-key projectile-command-map (kbd "w") 'find-file-in-project-from-kill)
+    (spacemacs/set-leader-keys "p" 'projectile-command-map))
 
   (spacemacs/set-leader-keys
     "fm" 'helm-multi-files
     ".f" 'flymake-mode
     "fec" 'spacemacs-tk/find-color-theme
-    "pw" 'find-file-in-project-from-kill
     "sm" 'helm-multi-swoop-current-mode
+    "g=" 'vc-version-ediff
     "sj" 'helm-imenu-in-all-buffers)
 
-  ;; android
-  ;; (defun tk-ant ()
-  ;;   (interactive)
-  ;;   (let ((compilation-process-setup-function
-  ;;          (lambda ()
-  ;;            (setq-local compilation-finish-functions
-  ;;                        'tk-android-auto-run))))
-  ;;     (android-ant "debug install")))
-  ;; (defun tk-android-auto-run (buffer msg)
-  ;;   (when (string-match "finished" msg)
-  ;;     (android-start-app)))
-
-  ;; multipe cursors
-  ;; (use-package multiple-cursors
-  ;;   :bind (("C-C C-C" . mc/edit-lines)
-  ;;          ("M-)" . mc/mark-next-like-this)
-  ;;          ("M-(" . mc/mark-previous-like-this)
-  ;;          ("M-9" . mc/mark-all-like-this)
-  ;;          ("M-0" . mc/mark-all-like-this-in-defun)))
-  ;; (use-package phi-search)
+  (global-set-key (kbd "C-C C-C") 'mc/edit-lines)
+  (global-set-key (kbd "M-)") 'mc/mark-next-like-this)
+  (global-set-key (kbd "M-(") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "M-9") 'mc/mark-all-like-this)
+  (global-set-key (kbd "M-0") 'mc/mark-all-like-this-in-defun)
+  (setq mc/unsupported-minor-modes '(company-mode auto-complete-mode flyspell-mode jedi-mode))
+  (add-hook 'multiple-cursors-mode-enabled-hook 'evil-emacs-state)
+  (add-hook 'multiple-cursors-mode-disabled-hook 'evil-normal-state)
 
   (let ((tk-private (expand-file-name "~/.dotfiles/emacs/private/private.el")))
     (when (file-readable-p tk-private)
