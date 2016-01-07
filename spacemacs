@@ -199,11 +199,6 @@ It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   ;; color theme
   (setq custom-theme-directory (expand-file-name "~/.dotfiles/theme"))
-  (setq tk-theme 'base16-tomorrow-dark)
-  (unless (window-system)
-    (custom-theme-set-faces
-     tk-theme
-     '(default ((t (:background unspecified))))))
   )
 
 (defun dotspacemacs/user-config ()
