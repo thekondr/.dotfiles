@@ -96,7 +96,9 @@ values."
    dotspacemacs-colorize-cursor-according-to-state nil
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro Medium-14")
+   dotspacemacs-default-font (if (window-system)
+                                 '("Consolas-11")
+                               '("Source Code Pro Medium-14"))
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -389,7 +391,8 @@ layers configuration. You are free to put any user code."
   (defadvice spacemacs//helm-hjkl-navigation (after spacemacs//helm-hjl-navigation activate)
     (define-key helm-map (kbd "C-k") 'helm-delete-minibuffer-contents))
   (setq powerline-default-separator 'arrow)
-  (setq shell-command-switch "-ic")
+  (unless (window-system)
+    (setq shell-command-switch "-ic"))
   (setq whitespace-style
         '(face
           trailing
