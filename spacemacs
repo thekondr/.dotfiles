@@ -407,8 +407,6 @@ layers configuration. You are free to put any user code."
     (cleanup-buffer-safe)
     (indent-region (point-min) (point-max)))
 
-  (defadvice spacemacs//helm-hjkl-navigation (after spacemacs//helm-hjl-navigation activate)
-    (define-key helm-map (kbd "C-k") 'helm-delete-minibuffer-contents))
   (setq powerline-default-separator 'arrow)
   (unless (spacemacs/system-is-mswindows)
     (setq shell-command-switch "-ic"))
@@ -608,10 +606,9 @@ layers configuration. You are free to put any user code."
   ;; (add-hook 'c-mode-common-hook 'tk-c-mode-common-hook)
 
   ;; helm
-  ;; (define-key helm-map (kbd "M-n") 'helm-follow-action-forward)
-  ;; (define-key helm-map (kbd "M-p") 'helm-follow-action-backward)
-  ;; (define-key helm-map (kbd "M-j") 'helm-follow-action-forward)
-  ;; (define-key helm-map (kbd "M-k") 'helm-follow-action-backward)
+  (define-key helm-map (kbd "M-j") 'helm-follow-action-forward)
+  (define-key helm-map (kbd "M-k") 'helm-follow-action-backward)
+  (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents)
 
   (spacemacs/set-leader-keys
     "fm" 'helm-multi-files
