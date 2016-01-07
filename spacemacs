@@ -249,8 +249,6 @@ layers configuration. You are free to put any user code."
   ;; evil little word
   ;; magnars hippie-exp closest first
 
-  ;; (setq vc-make-backup-files t)
-
   ;; (use-package diff-mode
   ;;   :defer t
   ;;   :config
@@ -387,10 +385,6 @@ layers configuration. You are free to put any user code."
     (setq yas-also-auto-indent-first-line t))
 
   ;; basic
-  (setq backup-directory-alist
-        `((".*" . ,temporary-file-directory)))
-  (setq auto-save-file-name-transforms
-        `((".*" ,temporary-file-directory t)))
   (setq require-final-newline t)
 
   ;; utils
