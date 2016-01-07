@@ -82,7 +82,7 @@
 
  ;; Popups
  `(popup-face ((t (:foreground ,base05 :background ,base02))))
- `(popup-isearch-match ((t (:foreground ,base00 :background ,base0B))))
+ `(popup-isearch-match ((t (:foreground ,base01 :background ,base0B))))
  `(popup-scroll-bar-background-face ((t (:background ,base03))))
  `(popup-scroll-bar-foreground-face ((t (:background ,base05))))
  `(popup-summary-face ((t (:foreground ,base04))))
@@ -291,8 +291,6 @@
  `(magit-section-secondary-heading ((t (:foreground ,base0A))))
  `(magit-tag ((t (:foreground ,base0A))))
 
- `(link ((t (:foreground nil :underline t))))
- `(widget-button ((t (:underline t))))
  `(widget-field ((t (:background ,base03 :box (:line-width 1 :color ,base06)))))
 
  ;; Compilation (most faces politely inherit from 'success, 'error, 'warning etc.)
@@ -549,7 +547,7 @@
  `(company-scrollbar-fg ((t (:background ,base05))))
  `(company-tooltip ((t (:foreground ,base05 :background ,base02))))
  `(company-tooltip-annotation ((t (:foreground ,base08))))
- `(company-tooltip-selection ((t (:foreground ,base00 :background ,base0C))))
+ `(company-tooltip-selection ((t (:foreground ,base01 :background ,base0C))))
  `(diff-hl-change ((t (:foreground ,base0A :background ,base0A))))
  `(diff-hl-delete ((t (:foreground ,base08 :background ,base08))))
  `(diff-hl-insert ((t (:foreground ,base0B :background ,base0B))))
