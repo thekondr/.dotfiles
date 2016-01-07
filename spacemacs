@@ -210,6 +210,8 @@ user code."
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (defun dotspacemacs/location ()
+    (expand-file-name "~/.dotfiles/spacemacs"))
   (when (window-system)
     (setq ns-use-srgb-colorspace nil))
   (setq paradox-github-token t)
