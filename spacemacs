@@ -18,27 +18,17 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t)
-     ;; better-defaults
      emacs-lisp
      (git :variables
           git-magit-status-fullscreen t)
      c-c++
      gtags
-     ;; markdown
-     ;; org
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      shell-scripts
-     ;; spell-checking
-     ;; syntax-checking
      (version-control :variables
                       version-control-diff-tool 'diff-hl)
      )
