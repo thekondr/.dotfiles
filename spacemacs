@@ -288,7 +288,7 @@ This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (defun dotspacemacs/location ()
     (expand-file-name "~/.dotfiles/spacemacs"))
-  (when (window-system)
+  (when (spacemacs/system-is-mac)
     (setq ns-use-srgb-colorspace nil))
   (setq paradox-github-token t)
   (setq evil-want-fine-undo 'no)
