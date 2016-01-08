@@ -373,7 +373,7 @@ layers configuration. You are free to put any user code."
   (setq avy-background nil)
   (setq delete-by-moving-to-trash nil)
 
-  (defun flymake-display-warning (warning)
+  (defadvice flymake-display-warning (around tk/flymake-display-warning activate)
     "Display a warning to the user, using message"
     (message warning))
 
