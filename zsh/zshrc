@@ -12,9 +12,6 @@ if [[ -n "$INSIDE_EMACS" ]] && [[ "$TERM" != dumb ]]; then
     print -P "\033AnSiTc %d"
 fi
 
-export TK_THEME=tomorrow
-export TK_BACKGROUND=dark
-
 export ZSH=$HOME/.dotfiles/zsh
 export EDITOR=vim
 
@@ -57,9 +54,7 @@ done
 unset config_file
 
 apply-color-theme() {
-    export TK_THEME=${1:-$TK_THEME}
-    export TK_BACKGROUND=${2:-$TK_BACKGROUND}
-    source ~/.dotfiles/shell/base16-$TK_THEME.$TK_BACKGROUND.sh
+    source ~/.dotfiles/shell/base16-tomorrow.dark.sh
 }
 
 [[ -z "$INSIDE_EMACS" ]] \
@@ -125,5 +120,5 @@ uck() {
 }
 
 if [[ ! "$OSTYPE" = darwin* ]]; then
-    eval $(dircolors ~/.dotfiles/shell/dircolors.base16.$TK_BACKGROUND)
+    eval $(dircolors ~/.dotfiles/shell/dircolors.base16.dark)
 fi

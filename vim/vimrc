@@ -34,8 +34,8 @@ filetype plugin indent on
 syntax on
 set backspace=indent,eol,start
 let base16colorspace=256
-execute "set background=".$TK_BACKGROUND
-execute "colorscheme base16-".$TK_THEME
+set background=dark
+colorscheme base16-tomorrow
 hi MatchParen ctermfg=none ctermbg=04
 set incsearch
 set ignorecase
