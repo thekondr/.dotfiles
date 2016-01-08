@@ -358,12 +358,14 @@
  `(py-builtins-face ((t (:foreground ,base09 :weight normal))))
 
  ;; js2-mode
- `(js2-warning-face ((t (:underline ,base09))))
- `(js2-error-face ((t (:foreground nil :underline ,base08))))
- `(js2-external-variable-face ((t (:foreground ,base0E))))
- `(js2-function-param-face ((t (:foreground ,base0D))))
- `(js2-instance-member-face ((t (:foreground ,base0D))))
- `(js2-private-function-call-face ((t (:foreground ,base08))))
+ `(js2-warning ((t (:underline ,base09))))
+ `(js2-error ((t (:foreground nil :underline ,base08))))
+ `(js2-external-variable ((t (:foreground ,base09))))
+ `(js2-function-param ((t (:foreground ,base0D))))
+ `(js2-instance-member ((t (:foreground ,base0D))))
+ `(js2-private-function-call ((t (:foreground ,base08))))
+ `(js2-jsdoc-html-tag-delimiter ((t (:foreground ,base0B))))
+ `(js2-jsdoc-html-tag-name ((t (:foreground ,base0A))))
 
  ;; js3-mode
  `(js3-warning-face ((t (:underline ,base09))))
