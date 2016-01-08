@@ -231,7 +231,6 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
-  ;; color theme
   (setq custom-theme-directory (expand-file-name "~/.dotfiles/theme"))
   (setq exec-path-from-shell-check-startup-files nil)
   ;;
