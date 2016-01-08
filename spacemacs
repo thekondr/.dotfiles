@@ -561,6 +561,11 @@ layers configuration. You are free to put any user code."
   (setq mc/unsupported-minor-modes '(company-mode auto-complete-mode flyspell-mode jedi-mode))
   (add-hook 'multiple-cursors-mode-enabled-hook 'evil-emacs-state)
   (add-hook 'multiple-cursors-mode-disabled-hook 'evil-normal-state)
+  (add-hook 'multiple-cursors-mode-enabled-hook 'spacemacs/toggle-mode-line-minor-modes-on)
+  (add-hook 'multiple-cursors-mode-disabled-hook 'spacemacs/toggle-mode-line-minor-modes-off)
+
+  (spacemacs/toggle-mode-line-major-mode-off)
+  (spacemacs/toggle-mode-line-minor-modes-off)
 
   (let ((tk-private (expand-file-name "~/.dotfiles/emacs/private/private.el")))
     (when (file-readable-p tk-private)
