@@ -32,6 +32,9 @@ values."
      ruby
      gtags
      (shell :variables
+            shell-default-shell (if (eq window-system 'w32)
+                                    'eshell
+                                  'multi-term)
             shell-default-height 30
             shell-default-position 'bottom)
      shell-scripts
@@ -533,6 +536,10 @@ layers configuration. You are free to put any user code."
     (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents))
 
   (with-eval-after-load "projectile"
+    (defun spacemacs-tk/default-pop-shell-in-project-root ()
+      (interactive)
+      (let ((default-directory (projectile-project-root)))
+        (spacemacs/default-pop-shell)))
     (defadvice projectile-compile-project (around spacemacs-tk/projectile-compile-project activate)
       (let ((default-directory (projectile-project-root)))
         (call-interactively 'compile)))
@@ -542,7 +549,10 @@ layers configuration. You are free to put any user code."
     (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
     (helm-projectile-on)
     (define-key projectile-command-map (kbd "w") 'find-file-in-project-from-kill)
-    (spacemacs/set-leader-keys "p" 'projectile-command-map))
+    (spacemacs/set-leader-keys
+      "p" 'projectile-command-map
+      "'" 'spacemacs-tk/default-pop-shell-in-project-root
+      "\"" 'spacemacs/default-pop-shell))
 
   (spacemacs/set-leader-keys
     "fm" 'helm-multi-files
