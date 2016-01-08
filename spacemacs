@@ -234,6 +234,52 @@ in `dotspacemacs/user-config'."
   ;; color theme
   (setq custom-theme-directory (expand-file-name "~/.dotfiles/theme"))
   (setq exec-path-from-shell-check-startup-files nil)
+  ;;
+  ;; For use with git mergetool, add these lines to .gitconfig:
+  ;;
+  ;; [merge]
+  ;; 	tool = ediff
+  ;; [mergetool.ediff]
+  ;; 	cmd = emacs --eval \"(tk/mergetool \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"
+  ;; or
+  ;; 	cmd = emacsclient -t --eval \"(tk/mergetool \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"
+  ;; or
+  ;; 	cmd = emacsclient -c --frame-parameters=\"((fullscreen . maximized))\" --eval \"(tk/mergetool \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"
+  ;;
+  (defun tk/mergetool (file-a file-b file-ancestor file-merge)
+    (defun mergetool/ediff-startup-hook ()
+      (remove-hook 'ediff-startup-hook 'mergetool/ediff-startup-hook)
+      (ediff-toggle-show-clashes-only)
+      (ediff-next-difference))
+    (defun mergetool/ediff-quit-merge-hook ()
+      (remove-hook 'ediff-quit-merge-hook 'mergetool/ediff-quit-merge-hook)
+      (let ((file ediff-merge-store-file))
+        (with-current-buffer ediff-buffer-C
+          (write-region (point-min) (point-max) file)
+          (set-buffer-modified-p nil)))
+      (when ediff-buffer-A (kill-buffer ediff-buffer-A))
+      (when ediff-buffer-B (kill-buffer ediff-buffer-B))
+      (when ediff-buffer-C (kill-buffer ediff-buffer-C))
+      (when ediff-ancestor-buffer (kill-buffer ediff-ancestor-buffer))
+      (when ediff-diff-buffer (kill-buffer ediff-diff-buffer))
+      (when ediff-fine-diff-buffer (kill-buffer ediff-fine-diff-buffer))
+      (when ediff-error-buffer (kill-buffer ediff-error-buffer))
+      (when ediff-control-buffer (kill-buffer ediff-control-buffer))
+      (delete-frame))
+    (add-hook 'ediff-startup-hook 'mergetool/ediff-startup-hook)
+    (add-hook 'ediff-quit-merge-hook 'mergetool/ediff-quit-merge-hook)
+    (with-demoted-errors
+        (ediff-merge-files-with-ancestor file-a file-b file-ancestor nil file-merge)))
+
+  (with-eval-after-load "ediff"
+    (add-hook 'ediff-keymap-setup-hook
+              (lambda () (define-key ediff-mode-map (kbd "SPC") 'spacemacs-cmds)))
+    (add-hook 'ediff-before-setup-hook
+              (lambda ()
+                (window-configuration-to-register :ediff-window-config)))
+    (add-hook 'ediff-quit-hook
+              (lambda ()
+                (jump-to-register :ediff-window-config)) 'append))
   )
 
 (defun dotspacemacs/user-config ()
@@ -250,37 +296,10 @@ layers configuration. You are free to put any user code."
   ;; evil little word
   ;; magnars hippie-exp closest first
 
-  (with-eval-after-load "ediff"
-    (add-hook 'ediff-before-setup-hook
-              (lambda ()
-                (window-configuration-to-register :ediff-window-config)))
-    (add-hook 'ediff-quit-hook
-              (lambda ()
-                (jump-to-register :ediff-window-config)) 'append))
-
   (with-eval-after-load "with-editor"
     (add-hook 'with-editor-mode-hook 'evil-insert-state))
 
   (setq magit-delete-by-moving-to-trash nil)
-  ;; (defun ediff-write-merge-buffer ()
-  ;;   (let ((file ediff-merge-store-file))
-  ;;     (set-buffer ediff-buffer-C)
-  ;;     (write-region (point-min) (point-max) file)
-  ;;     (message "Merge buffer saved in: %s" file)
-  ;;     (set-buffer-modified-p nil)
-  ;;     (sit-for 1)))
-  ;; ;;
-  ;; ;; For use with git mergetool, add these lines to .gitconfig:
-  ;; ;;
-  ;; ;; [merge]
-  ;; ;; 	tool = ediff
-  ;; ;; [mergetool.ediff]
-  ;; ;; 	cmd = emacs --eval \"(tk/mergetool \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" \\\"$MERGED\\\")\"
-  ;; ;;
-  ;; (defun tk/mergetool (file-a file-b file-ancestor file-merge)
-  ;;   (setq ediff-quit-hook 'kill-emacs
-  ;;         ediff-quit-merge-hook 'ediff-write-merge-buffer)
-  ;;   (ediff-merge-files-with-ancestor file-a file-b file-ancestor nil file-merge))
 
   ;; (use-package auto-complete
   ;;   :defer t
