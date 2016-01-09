@@ -558,6 +558,7 @@ layers configuration. You are free to put any user code."
 
   (spacemacs/set-leader-keys
     "fm" 'helm-multi-files
+    "ha" 'helm-apropos
     ".f" 'flymake-mode
     "fec" 'spacemacs-tk/find-color-theme
     "sm" 'helm-multi-swoop-current-mode
