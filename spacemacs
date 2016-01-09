@@ -569,6 +569,14 @@ layers configuration. You are free to put any user code."
                    (if thing thing ""))))))
         (call-interactively 'helm-multi-swoop-current-mode))))
 
+  (let ((comint-hooks '(eshell-mode-hook
+                        term-mode-hook
+                        messages-buffer-mode-hook
+                        comint-mode-hook)))
+    (spacemacs/add-to-hooks (defun tk/no-hl-line-mode ()
+                              (setq-local global-hl-line-mode nil))
+                            comint-hooks))
+
   (spacemacs/set-leader-keys
     "fm" 'helm-multi-files
     "ha" 'helm-apropos
