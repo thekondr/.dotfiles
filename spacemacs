@@ -538,7 +538,9 @@ layers configuration. You are free to put any user code."
   (with-eval-after-load "projectile"
     (defun spacemacs-tk/default-pop-shell-in-project-root ()
       (interactive)
-      (let ((default-directory (projectile-project-root)))
+      (if (projectile-project-p)
+          (let ((default-directory (projectile-project-root)))
+            (spacemacs/default-pop-shell))
         (spacemacs/default-pop-shell)))
     (defadvice projectile-compile-project (around spacemacs-tk/projectile-compile-project activate)
       (let ((default-directory (projectile-project-root)))
