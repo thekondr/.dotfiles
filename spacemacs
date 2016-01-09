@@ -556,12 +556,26 @@ layers configuration. You are free to put any user code."
       "'" 'spacemacs-tk/default-pop-shell-in-project-root
       "\"" 'spacemacs/default-pop-shell))
 
+  (with-eval-after-load "helm-swoop"
+    (defun spacemacs/helm-multi-swoop-current-mode-region-or-symbol ()
+      "Call `helm-multi-swoop-current-mode' with default input."
+      (interactive)
+      (let ((helm-swoop-pre-input-function
+             (lambda ()
+               (if (region-active-p)
+                   (buffer-substring-no-properties (region-beginning)
+                                                   (region-end))
+                 (let ((thing (thing-at-point 'symbol t)))
+                   (if thing thing ""))))))
+        (call-interactively 'helm-multi-swoop-current-mode))))
+
   (spacemacs/set-leader-keys
     "fm" 'helm-multi-files
     "ha" 'helm-apropos
     ".f" 'flymake-mode
     "fec" 'spacemacs-tk/find-color-theme
     "sm" 'helm-multi-swoop-current-mode
+    "sM" 'spacemacs/helm-multi-swoop-current-mode-region-or-symbol
     "g=" 'vc-version-ediff
     "sj" 'helm-imenu-in-all-buffers)
 
