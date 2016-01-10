@@ -576,6 +576,7 @@ layers configuration. You are free to put any user code."
     (spacemacs/add-to-hooks (defun tk/no-hl-line-mode ()
                               (setq-local global-hl-line-mode nil))
                             comint-hooks))
+  (evil-set-initial-state 'term-mode 'emacs)
 
   (spacemacs/set-leader-keys
     "fm" 'helm-multi-files
