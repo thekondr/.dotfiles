@@ -236,6 +236,7 @@ any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
   (setq custom-theme-directory (expand-file-name "~/.dotfiles/theme"))
   (setq exec-path-from-shell-check-startup-files nil)
+  (setq ido-use-faces nil)
   ;;
   ;; For use with git mergetool, add these lines to .gitconfig:
   ;;
@@ -302,6 +303,7 @@ layers configuration. You are free to put any user code."
     (add-hook 'with-editor-mode-hook 'evil-insert-state))
 
   (setq magit-delete-by-moving-to-trash nil)
+  (pending-delete-mode 1)
 
   ;; (use-package auto-complete
   ;;   :defer t
@@ -556,18 +558,29 @@ layers configuration. You are free to put any user code."
       "'" 'spacemacs-tk/default-pop-shell-in-project-root
       "\"" 'spacemacs/default-pop-shell))
 
-  (with-eval-after-load "helm-swoop"
-    (defun spacemacs/helm-multi-swoop-current-mode-region-or-symbol ()
-      "Call `helm-multi-swoop-current-mode' with default input."
-      (interactive)
-      (let ((helm-swoop-pre-input-function
-             (lambda ()
-               (if (region-active-p)
-                   (buffer-substring-no-properties (region-beginning)
-                                                   (region-end))
-                 (let ((thing (thing-at-point 'symbol t)))
-                   (if thing thing ""))))))
-        (call-interactively 'helm-multi-swoop-current-mode))))
+  (defmacro customize-helm-swoop (swoop-func)
+    (let ((func-name (intern (format "spacemacs/%s-region-or-symbol" (symbol-name swoop-func))))
+          (advice-name (intern (format "add-evil-jump-to-%s" (symbol-name swoop-func)))))
+      `(progn
+         (defun ,func-name ()
+           ,(format "Call `%s' with default input."
+                    (symbol-name swoop-func))
+           (interactive)
+           (let ((helm-swoop-pre-input-function
+                  (lambda ()
+                    (if (region-active-p)
+                        (buffer-substring-no-properties (region-beginning)
+                                                        (region-end))
+                      (let ((thing (thing-at-point 'symbol t)))
+                        (if thing thing ""))))))
+             (call-interactively ',swoop-func)))
+         (defadvice ,swoop-func (before ,advice-name activate)
+           (when (configuration-layer/package-usedp 'evil-jumper)
+             (evil-set-jump))))))
+
+  ;; (customize-helm-swoop helm-swoop)
+  (customize-helm-swoop helm-multi-swoop-all)
+  (customize-helm-swoop helm-multi-swoop-current-mode)
 
   (let ((comint-hooks '(eshell-mode-hook
                         term-mode-hook
@@ -583,21 +596,44 @@ layers configuration. You are free to put any user code."
     "ha" 'helm-apropos
     ".f" 'flymake-mode
     "fec" 'spacemacs-tk/find-color-theme
+    "fzd" (defun tk/find-zshrc ()
+            (interactive)
+            (find-file-existing (expand-file-name "~/.dotfiles/zsh/zshrc")))
     "sm" 'helm-multi-swoop-current-mode
     "sM" 'spacemacs/helm-multi-swoop-current-mode-region-or-symbol
     "g=" 'vc-version-ediff
     "sj" 'helm-imenu-in-all-buffers)
+
+  (with-eval-after-load "term"
+    (add-hook 'term-mode-hook
+              (defun tk/setup-term-map ()
+                (define-key term-raw-map (kbd "C-r") 'term-send-raw)
+                (define-key term-raw-map (kbd "C-s") 'term-send-raw)
+                (define-key term-raw-map (kbd "C-p") 'term-send-raw)
+                (define-key term-raw-map (kbd "C-n") 'term-send-raw)
+                (define-key term-raw-map (kbd "M-p") 'term-send-raw-meta)
+                (define-key term-raw-map (kbd "M-n") 'term-send-raw-meta)
+                (define-key term-raw-map (kbd "M-j") 'term-send-raw-meta)
+                (define-key term-raw-map (kbd "M-k") 'term-send-raw-meta)
+                (define-key term-raw-map (kbd "M-l") 'term-send-raw-meta)) t))
 
   (global-set-key (kbd "C-C C-C") 'mc/edit-lines)
   (global-set-key (kbd "M-)") 'mc/mark-next-like-this)
   (global-set-key (kbd "M-(") 'mc/mark-previous-like-this)
   (global-set-key (kbd "M-9") 'mc/mark-all-like-this)
   (global-set-key (kbd "M-0") 'mc/mark-all-like-this-in-defun)
+  (global-set-key (kbd "M-#") 'er/expand-region)
   (setq mc/unsupported-minor-modes '(company-mode auto-complete-mode flyspell-mode jedi-mode))
   (add-hook 'multiple-cursors-mode-enabled-hook 'evil-emacs-state)
   (add-hook 'multiple-cursors-mode-disabled-hook 'evil-normal-state)
+  ;; (add-hook 'multiple-cursors-mode-disabled-hook 'evil-change-to-previous-state)
   (add-hook 'multiple-cursors-mode-enabled-hook 'spacemacs/toggle-mode-line-minor-modes-on)
   (add-hook 'multiple-cursors-mode-disabled-hook 'spacemacs/toggle-mode-line-minor-modes-off)
+
+  ;; (defadvice mc/maybe-multiple-cursors-mode (around tk/maybe-multiple-cursors-mode activate)
+  ;;   (if (> (mc/num-cursors) 1)
+  ;;       (unless multiple-cursors-mode (multiple-cursors-mode 1))
+  ;;     (when multiple-cursors-mode (multiple-cursors-mode 0))))
 
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
