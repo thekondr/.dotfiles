@@ -1,0 +1,38 @@
+function parse_git_dirty() {
+    local STATUS=''
+    local FLAGS
+    FLAGS=('--porcelain')
+    if [[ "$(command git config --get zsh-prompt.hide-dirty)" != "1" ]]; then
+        FLAGS+='--ignore-submodules=dirty'
+        if [[ "$DISABLE_UNTRACKED_FILES_DIRTY" == "true" ]]; then
+            FLAGS+='--untracked-files=no'
+        fi
+        STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+    fi
+    if [[ -n $STATUS ]]; then
+        echo " %F{3}*"
+    fi
+}
+
+function git_prompt_info() {
+    if [[ "$(command git config --get zsh-prompt.hide-status 2>/dev/null)" != "1" ]]; then
+        ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+            ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+        echo " %F{5}${ref#refs/heads/}$(parse_git_dirty)%f"
+    fi
+}
+
+function prompt_tk_setup() {
+    setopt LOCAL_OPTIONS
+    unsetopt XTRACE KSH_ARRAYS
+    prompt_opts=(cr percent subst)
+
+    current_time='%F{3}%T%f'
+    return_status='%F{%(?:2:1)}%(!.#.$)%f'
+    current_directory='%F{6}%c%f'
+    PROMPT='%B${current_time} ${current_directory}$(git_prompt_info) ${return_status}%b '
+    RPROMPT=''
+    SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
+}
+
+prompt_tk_setup "$@"

@@ -1,10 +1,55 @@
+#
+# Executes commands at the start of an interactive session.
+#
+
 [[ -z "$TMUX" ]] \
-&& [[ "$OSTYPE" != cygwin ]] \
-&& [[ "$TERM" != dumb ]] \
-&& export TERM=xterm-256color
+    && [[ "$OSTYPE" != cygwin ]] \
+    && [[ "$TERM" != dumb ]] \
+    && export TERM=xterm-256color
+
+fpath=($HOME/.dotfiles/zsh/functions $fpath)
+
+zstyle ':prezto:*:*' color 'yes'
+zstyle ':prezto:load' zfunction 'zargs' 'zmv'
+zstyle ':prezto:load' pmodule \
+       'environment' \
+       'terminal' \
+       'editor' \
+       'git' \
+       'gnu-utility' \
+       'history' \
+       'directory' \
+       'spectrum' \
+       'utility' \
+       'completion' \
+       'syntax-highlighting' \
+       'history-substring-search' \
+       'prompt'
+zstyle ':prezto:module:editor' key-bindings 'emacs'
+zstyle ':prezto:module:gnu-utility' prefix 'g'
+zstyle ':prezto:module:syntax-highlighting' styles \
+       'unknown-token' 'fg=red' \
+       'builtin' 'fg=yellow' \
+       'alias' 'fg=blue' \
+       'command' 'fg=green' \
+       'path' 'fg=cyan' \
+       'path_prefix' 'fg=cyan' \
+       'function' 'fg=magenta'
+zstyle ':prezto:module:prompt' theme 'tk'
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+setopt CLOBBER
+
+bindkey -s '\el' 'ls\n'
+bindkey -s '\ej' 'gwS\n'
+bindkey -s '\ek' 'gwd\n'
 
 if [[ -n "$INSIDE_EMACS" ]] && [[ "$TERM" != dumb ]]; then
-    multi-term-chpwd() {
+    function multi-term-chpwd() {
         print -P "\033AnSiTc %d"
     }
     chpwd_functions=(${chpwd_functions[@]} 'multi-term-chpwd')
@@ -12,113 +57,52 @@ if [[ -n "$INSIDE_EMACS" ]] && [[ "$TERM" != dumb ]]; then
     print -P "\033AnSiTc %d"
 fi
 
-export ZSH=$HOME/.dotfiles/zsh
-export EDITOR=vim
-
-fpath=($ZSH/functions $ZSH/completions $fpath)
-
-if [[ -z "$ZSH_PRIVATE" ]]; then
-    ZSH_PRIVATE="$ZSH/private"
-fi
-
-if [[ -z "$ZSH_CACHE_DIR" ]]; then
-    ZSH_CACHE_DIR="$ZSH/cache/"
-fi
-
-for config_file ($ZSH/lib/*.zsh); do
-    source $config_file
-done
-
-fpath=($ZSH/git $fpath)
-
-if [[ "$OSTYPE" = darwin* ]]; then
-    # OS X's $HOST changes with dhcp, etc. Use ComputerName if possible.
-    SHORT_HOST=$(scutil --get ComputerName 2>/dev/null) || SHORT_HOST=${HOST/.*/}
-else
-    SHORT_HOST=${HOST/.*/}
-fi
-
-if [ -z "$ZSH_COMPDUMP" ]; then
-    ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
-fi
-
-autoload -U compinit
-compinit -i -d "${ZSH_COMPDUMP}"
-
-source $ZSH/git/git.zsh
-source $ZSH/theme.zsh
-
-for config_file ($ZSH_PRIVATE/**/*.zsh(N)); do
-    source $config_file
-done
-unset config_file
-
-apply-color-theme() {
+function apply-color-theme() {
     source ~/.dotfiles/shell/base16-tomorrow.dark.sh
 }
 
 [[ -z "$INSIDE_EMACS" ]] \
-&& [[ "$TERM" != dumb ]] \
-&& apply-color-theme
-
-vim-source() {
-    vim $1 && . $1
-}
-
-vim-private-zsh() {
-    vim-source "$ZSH_PRIVATE/$1.zsh"
-}
-
-rm-private-zsh() {
-    rm "$ZSH_PRIVATE/$1.zsh"
-}
-
-alias vis=vim-source
-alias vpz=vim-private-zsh
-alias rmpz=rm-private-zsh
+    && [[ "$TERM" != dumb ]] \
+    && apply-color-theme
 
 alias rf='rm -rf'
 
-rfme() {
+function take() {
+    mkdir -p $1
+    cd $1
+}
+
+function rfme() {
     local name="$(basename $(pwd))"
     cd ..
     rf ${name}
 }
 
-rfr() {
+function rfr() {
     local name="$(basename $(pwd))"
     cd ..
     rf ${name}
     take ${name}
 }
 
+function print-public-key() {
+    cat ~/.ssh/id_rsa.pub
+}
+
+function authorize-key() {
+    print-public-key | ssh $@ 'cat - >> ~/.ssh/authorized_keys'
+}
+
+alias vissh='vim ~/.ssh/config'
 alias vz='vim-source ~/.zshrc'
 alias vv='vim ~/.vimrc'
 alias s='eval sudo $(fc -nl -1)'
+alias ta='tmux attach'
 
 alias find='noglob find'
 
-alias vs='vagrant ssh'
-alias vup='vagrant up && vagrant ssh'
-alias vd='vagrant destroy'
-alias vh='vagrant halt'
-
 alias pd='popd'
 
-bck() {
-    for file in $@
-    do
-        mv $file $file.old
-    done
-}
-
-uck() {
-    for file in $@
-    do
-        mv $file.old $file
-    done
-}
-
-if [[ ! "$OSTYPE" = darwin* ]]; then
+if [[ "$OSTYPE" != darwin* ]]; then
     eval $(dircolors ~/.dotfiles/shell/dircolors.base16.dark)
 fi

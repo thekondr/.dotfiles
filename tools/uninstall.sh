@@ -1,32 +1,14 @@
 set -e
 
-echo_p() {
-    echo "\033[0;34m$@\033[0m"
-}
-
-unbackup_file() {
-    local file=$1
-    if [ -e $file.old ]; then
-        echo_p "$file.old -> $file"
-        mv $file.old $file
+uninstall_repo() {
+    local dir=$1
+    rm -rf $dir
+    if [ -e $dir.old ]; then
+        echo "\033[32m$dir.old -> $dir\033[0m"
+        mv $dir.old $dir
     fi
 }
 
-cd
-
-echo_p "Removing..."
-
-config_callback() {
-    local file=$2
-    rm -rf $file
-    unbackup_file $file
-}
-
-. ~/.dotfiles/tools/configs.sh
-
-rm -rf ~/.dotfiles
-unbackup_file ~/.dotfiles
-
-unset -f config_callback
-unset -f unbackup_file
-unset -f echo_p
+uninstall_repo ~/.zprezto
+uninstall_repo ~/.emacs.d
+uninstall_repo ~/.dotfiles
