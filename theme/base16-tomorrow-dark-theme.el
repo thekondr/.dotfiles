@@ -547,6 +547,7 @@
 
  ;; tk
 
+ `(iedit-occurrence ((t (:background ,base02))))
  `(company-scrollbar-bg ((t (:background ,base03))))
  `(company-scrollbar-fg ((t (:background ,base05))))
  `(company-tooltip ((t (:foreground ,base05 :background ,base02))))
@@ -558,22 +559,19 @@
  `(ggtags-highlight ((t nil)))
  `(spacemacs-emacs-face ((t (:foreground ,base01 :background ,base0D))))
  `(spacemacs-evilified-face ((t (:foreground ,base01 :background ,base0F))))
+ `(spacemacs-hybrid-face ((t (:inherit spacemacs-emacs-face))))
+ `(spacemacs-iedit-face ((t (:foreground ,base01 :background ,base08))))
+ `(spacemacs-iedit-insert-face ((t (:inherit spacemacs-iedit-face))))
  `(spacemacs-insert-face ((t (:foreground ,base01 :background ,base0B))))
  `(spacemacs-lisp-face ((t (:foreground ,base01 :background ,base0D))))
  `(spacemacs-motion-face ((t (:foreground ,base01 :background ,base0E))))
  `(spacemacs-normal-face ((t (:foreground ,base01 :background ,base09))))
  `(spacemacs-replace-face ((t (:foreground ,base01 :background ,base08))))
  `(spacemacs-visual-face ((t (:foreground ,base01 :background ,base05))))
- ;; `(spacemacs-helm-navigation-ms-face ((t (:foreground ,base00 :background ,base00))))
- ;; `(spacemacs-hybrid-face ((t (:foreground ,base00 :background ,base00))))
- ;; `(spacemacs-ido-navigation-ms-face ((t (:foreground ,base00 :background ,base00))))
- ;; `(spacemacs-iedit-face ((t (:foreground ,base00 :background ,base00))))
- ;; `(spacemacs-iedit-insert-face ((t (:foreground ,base00 :background ,base00))))
- ;; `(spacemacs-micro-state-binding-face ((t (:foreground ,base00 :background ,base00))))
- ;; `(spacemacs-micro-state-header-face ((t (:foreground ,base00 :background ,base00))))
- ;; `(spacemacs-mode-line-new-version-lighter-error-face ((t (:foreground ,base00 :background ,base00))))
- ;; `(spacemacs-mode-line-new-version-lighter-success-face ((t (:foreground ,base00 :background ,base00))))
- ;; `(spacemacs-mode-line-new-version-lighter-warning-face ((t (:foreground ,base00 :background ,base00))))
+ `(spacemacs-helm-navigation-ms-face ((t (:foreground ,base0B))))
+ `(spacemacs-ido-navigation-ms-face ((t (:foreground ,base0B))))
+ `(spacemacs-micro-state-binding-face ((t (:foreground ,base0D))))
+ `(spacemacs-micro-state-header-face ((t (:foreground ,base0B))))
  )
 
 (custom-theme-set-variables
