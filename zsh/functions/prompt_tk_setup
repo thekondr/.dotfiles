@@ -28,7 +28,7 @@ function prompt_tk_setup() {
     prompt_opts=(cr percent subst)
 
     current_time='%F{3}%T%f'
-    return_status='%F{%(?:2:1)}%(!.#.$)%f'
+    return_status='%(?:%F{2}:%F{1})%(!.#.$)%f'
     current_directory='%F{6}%c%f'
     PROMPT='%B${current_time} ${current_directory}$(git_prompt_info) ${return_status}%b '
     RPROMPT=''
