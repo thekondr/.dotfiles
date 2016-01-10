@@ -16,7 +16,7 @@ hash_q git || {
 
 install_repo() {
     local url=$1
-    local dir=$1
+    local dir=$2
     if [ -e $dir ]; then
         echo "\033[32m$dir -> $dir.old\033[0m"
         mv $dir $dir.old
