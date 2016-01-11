@@ -540,9 +540,7 @@ layers configuration. You are free to put any user code."
   (with-eval-after-load "projectile"
     (defun spacemacs-tk/default-pop-shell-in-project-root ()
       (interactive)
-      (if (projectile-project-p)
-          (let ((default-directory (projectile-project-root)))
-            (spacemacs/default-pop-shell))
+      (let ((default-directory (projectile-project-root)))
         (spacemacs/default-pop-shell)))
     (defadvice projectile-compile-project (around spacemacs-tk/projectile-compile-project activate)
       (let ((default-directory (projectile-project-root)))
@@ -555,8 +553,7 @@ layers configuration. You are free to put any user code."
     (define-key projectile-command-map (kbd "w") 'find-file-in-project-from-kill)
     (spacemacs/set-leader-keys
       "p" 'projectile-command-map
-      "'" 'spacemacs-tk/default-pop-shell-in-project-root
-      "\"" 'spacemacs/default-pop-shell))
+      "\"" 'spacemacs-tk/default-pop-shell-in-project-root))
 
   (with-eval-after-load "helm-projectile"
     (defun spacemacs/helm-default-pop-shell (dir)
