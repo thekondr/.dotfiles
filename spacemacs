@@ -31,6 +31,7 @@ values."
      python
      ruby
      gtags
+     ranger
      (shell :variables
             shell-default-shell (if (eq window-system 'w32)
                                     'eshell
