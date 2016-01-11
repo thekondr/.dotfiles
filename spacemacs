@@ -558,6 +558,17 @@ layers configuration. You are free to put any user code."
       "'" 'spacemacs-tk/default-pop-shell-in-project-root
       "\"" 'spacemacs/default-pop-shell))
 
+  (with-eval-after-load "helm-projectile"
+    (defun spacemacs/helm-default-pop-shell (dir)
+      (interactive)
+      (let ((default-directory dir))
+        (spacemacs/default-pop-shell)))
+    (define-key helm-projectile-projects-map
+      (kbd "M-t")
+      (lambda ()
+        (interactive)
+        (helm-exit-and-execute-action 'spacemacs/helm-default-pop-shell))))
+
   (defmacro customize-helm-swoop (swoop-func)
     (let ((func-name (intern (format "spacemacs/%s-region-or-symbol" (symbol-name swoop-func))))
           (advice-name (intern (format "add-evil-jump-to-%s" (symbol-name swoop-func)))))
