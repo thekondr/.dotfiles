@@ -613,6 +613,9 @@ layers configuration. You are free to put any user code."
     "fzd" (defun tk/find-zshrc ()
             (interactive)
             (find-file-existing (expand-file-name "~/.dotfiles/zsh/zshrc")))
+    "fzc" (defun tk/find-zsh-prompt ()
+            (interactive)
+            (find-file-existing (expand-file-name "~/.dotfiles/zsh/functions/prompt_tk_setup")))
     "sm" 'helm-multi-swoop-current-mode
     "sM" 'spacemacs/helm-multi-swoop-current-mode-region-or-symbol
     "g=" 'vc-version-ediff
