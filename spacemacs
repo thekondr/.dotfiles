@@ -238,6 +238,7 @@ in `dotspacemacs/user-config'."
   (setq custom-theme-directory (expand-file-name "~/.dotfiles/theme"))
   (setq exec-path-from-shell-check-startup-files nil)
   (setq ido-use-faces nil)
+  (defadvice spacemacs/defface-micro-state-faces (around tk/defface-micro-state-faces activate))
   ;;
   ;; For use with git mergetool, add these lines to .gitconfig:
   ;;
