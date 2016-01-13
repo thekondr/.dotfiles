@@ -601,6 +601,10 @@ layers configuration. You are free to put any user code."
   (evil-set-initial-state 'term-mode 'emacs)
 
   (spacemacs/set-leader-keys
+    "bD" (defun tk/kill-this-buffer-with-window ()
+           (interactive)
+           (kill-this-buffer)
+           (delete-window))
     "fm" 'helm-multi-files
     "ha" 'helm-apropos
     ".f" 'flymake-mode
