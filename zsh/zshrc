@@ -104,6 +104,7 @@ alias s='eval sudo $(fc -nl -1)'
 alias ta='tmux attach'
 
 alias find='noglob find'
+alias gfap='git fetch --all -p'
 
 alias pd='popd'
 
