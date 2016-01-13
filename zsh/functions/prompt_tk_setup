@@ -1,39 +1,90 @@
 # -*- mode: sh -*-
 
-function parse_git_dirty() {
-    local STATUS=''
-    local FLAGS
-    FLAGS=('--porcelain')
-    if [[ "$(command git config --get zsh-prompt.hide-dirty)" != "1" ]]; then
-        FLAGS+='--ignore-submodules=dirty'
-        if [[ "$DISABLE_UNTRACKED_FILES_DIRTY" == "true" ]]; then
-            FLAGS+='--untracked-files=no'
+function prompt_tk_git_info {
+    if (( _prompt_tk_precmd_async_pid > 0 )); then
+        # Append Git status.
+        if [[ -s "$_prompt_tk_precmd_async_data" ]]; then
+            alias typeset='typeset -g'
+            source "$_prompt_tk_precmd_async_data"
+            PROMPT='
+${base_info}${git_info:+${(e)git_info[status]}}
+${return_status} '
+            unalias typeset
         fi
-        STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
-    fi
-    if [[ -n $STATUS ]]; then
-        echo " %F{3}*"
+
+        # Reset PID.
+        _prompt_tk_precmd_async_pid=0
+
+        # Redisplay prompt.
+        zle && zle reset-prompt
     fi
 }
 
-function git_prompt_info() {
-    if [[ "$(command git config --get zsh-prompt.hide-status 2>/dev/null)" != "1" ]]; then
-        ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-            ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-        echo " %F{5}${ref#refs/heads/}$(parse_git_dirty)%f"
+function prompt_tk_precmd_async {
+    # Get Git repository information.
+    if (( $+functions[git-info] )); then
+        git-info
+        typeset -p git_info >! "$_prompt_tk_precmd_async_data"
     fi
+
+    # Signal completion to parent process.
+    kill -WINCH $$
 }
 
-function prompt_tk_setup() {
+function prompt_tk_precmd {
+    setopt LOCAL_OPTIONS
+    unsetopt XTRACE KSH_ARRAYS
+
+    PROMPT='
+${base_info}
+${return_status} '
+
+    # Kill the old process of slow commands if it is still running.
+    if (( _prompt_tk_precmd_async_pid > 0 )); then
+        kill -KILL "$_prompt_tk_precmd_async_pid" &>/dev/null
+    fi
+
+    trap prompt_tk_git_info WINCH
+    prompt_tk_precmd_async &!
+    _prompt_tk_precmd_async_pid=$!
+}
+
+function prompt_tk_setup {
     setopt LOCAL_OPTIONS
     unsetopt XTRACE KSH_ARRAYS
     prompt_opts=(cr percent subst)
+    _prompt_tk_precmd_async_pid=0
+    _prompt_tk_precmd_async_data="${TMPPREFIX}-prompt_tk_data"
+
+    # Load required functions.
+    autoload -Uz add-zsh-hook
+
+    # Add hook for calling git-info before each command.
+    add-zsh-hook precmd prompt_tk_precmd
+
+    # Set git-info parameters.
+    zstyle ':prezto:module:git:info' verbose 'yes'
+    zstyle ':prezto:module:git:info:action' format '%F{7}:%f%%B%F{1}%s%f%%b'
+    zstyle ':prezto:module:git:info:added' format ' %%B%F{2}*%f%%b'
+    zstyle ':prezto:module:git:info:ahead' format ' %%B%F{2}/%f%%b'
+    zstyle ':prezto:module:git:info:behind' format ' %%B%F{1}\%f%%b'
+    zstyle ':prezto:module:git:info:branch' format ' %%B%F{5}%b%f%%b'
+    zstyle ':prezto:module:git:info:commit' format ' %%B%F{3}%.7c%f%%b'
+    zstyle ':prezto:module:git:info:deleted' format ' %%B%F{1}*%f%%b'
+    zstyle ':prezto:module:git:info:modified' format ' %%B%F{3}*%f%%b'
+    zstyle ':prezto:module:git:info:position' format ' %%B%F{5}%p%f%%b'
+    zstyle ':prezto:module:git:info:renamed' format ' %%B%F{4}*%f%%b'
+    zstyle ':prezto:module:git:info:stashed' format ' %%B%F{5}*%f%%b'
+    zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{6}*%f%%b'
+    zstyle ':prezto:module:git:info:untracked' format ' %%B%F{7}*%f%%b'
+    zstyle ':prezto:module:git:info:keys' format \
+           'status' '$(coalesce "%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u'
 
     current_time='%F{3}%T%f'
-    return_status='%(?:%F{2}:%F{1})%(!.#.$)%f'
+    return_status='%B%(?:%F{2}:%F{1})%(!.#.$)%f%b'
     current_directory='%F{6}%c%f'
-    PROMPT='%B${current_time} ${current_directory}$(git_prompt_info) ${return_status}%b '
-    RPROMPT=''
+    current_machine='%F{2}%m%f'
+    base_info="%B${current_time} ${current_machine} ${current_directory}%b"
     SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 
