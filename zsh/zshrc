@@ -44,7 +44,7 @@ fi
 setopt CLOBBER
 
 bindkey -s '\el' 'ls\n'
-bindkey -s '\ej' 'gwS\n'
+bindkey -s '\ej' 'gws\n'
 bindkey -s '\ek' 'gwd\n'
 
 if [[ -n "$INSIDE_EMACS" ]] && [[ "$TERM" != dumb ]]; then
