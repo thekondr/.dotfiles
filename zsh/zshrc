@@ -48,7 +48,7 @@ bindkey -s '\ej' 'gws\n'
 bindkey -s '\ek' 'gwd\n'
 
 if [[ -n "$INSIDE_EMACS" ]] && [[ "$TERM" != dumb ]]; then
-    function multi-term-chpwd() {
+    function multi-term-chpwd {
         print -P "\033AnSiTc %d"
     }
     chpwd_functions=(${chpwd_functions[@]} 'multi-term-chpwd')
@@ -56,7 +56,7 @@ if [[ -n "$INSIDE_EMACS" ]] && [[ "$TERM" != dumb ]]; then
     print -P "\033AnSiTc %d"
 fi
 
-function apply-color-theme() {
+function apply-color-theme {
     source ~/.dotfiles/shell/base16-tomorrow.dark.sh
 }
 
@@ -71,29 +71,29 @@ unalias ln
 
 alias rf='rm -rf'
 
-function take() {
+function take {
     mkdir -p $1
     cd $1
 }
 
-function rfme() {
+function rfme {
     local name="$(basename $(pwd))"
     cd ..
     rf ${name}
 }
 
-function rfr() {
+function rfr {
     local name="$(basename $(pwd))"
     cd ..
     rf ${name}
     take ${name}
 }
 
-function print-public-key() {
+function print-public-key {
     cat ~/.ssh/id_rsa.pub
 }
 
-function authorize-key() {
+function authorize-key {
     print-public-key | ssh $@ 'cat - >> ~/.ssh/authorized_keys'
 }
 
