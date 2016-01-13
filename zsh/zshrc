@@ -98,8 +98,6 @@ function authorize-key() {
 }
 
 alias vissh='vim ~/.ssh/config'
-alias vz='vim-source ~/.zshrc'
-alias vv='vim ~/.vimrc'
 alias s='eval sudo $(fc -nl -1)'
 alias ta='tmux attach'
 
