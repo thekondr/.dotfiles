@@ -32,12 +32,7 @@ values."
      ruby
      gtags
      ranger
-     (shell :variables
-            shell-default-shell (if (eq window-system 'w32)
-                                    'eshell
-                                  'multi-term)
-            shell-default-height 30
-            shell-default-position 'bottom)
+     shell
      shell-scripts
      (version-control :variables
                       version-control-diff-tool 'diff-hl)
