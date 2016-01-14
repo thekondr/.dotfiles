@@ -22,6 +22,7 @@ zstyle ':prezto:load' pmodule \
        'spectrum' \
        'utility' \
        'completion' \
+       'syntax-highlighting' \
        'history-substring-search' \
        'prompt'
 zstyle ':prezto:module:editor' key-bindings 'emacs'
