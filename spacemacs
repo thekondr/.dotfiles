@@ -614,7 +614,7 @@ layers configuration. You are free to put any user code."
     "sm" 'helm-multi-swoop-current-mode
     "sM" 'spacemacs/helm-multi-swoop-current-mode-region-or-symbol
     "g=" 'vc-version-ediff
-    "sj" 'helm-imenu-in-all-buffers)
+    "sJ" 'helm-imenu-in-all-buffers)
 
   (with-eval-after-load "term"
     (add-hook 'term-mode-hook
