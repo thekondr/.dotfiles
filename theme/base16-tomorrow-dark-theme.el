@@ -572,6 +572,9 @@
  `(spacemacs-ido-navigation-ms-face ((t (:foreground ,base0B))))
  `(spacemacs-micro-state-binding-face ((t (:foreground ,base0D))))
  `(spacemacs-micro-state-header-face ((t (:foreground ,base0B))))
+ `(vhl/default-face ((t (:background ,base01))))
+ `(eval-sexp-fu-flash ((t (:foreground ,base0B :background ,base01))))
+ `(eval-sexp-fu-flash-error ((t (:foreground ,base08 :background ,base01))))
  )
 
 (custom-theme-set-variables
