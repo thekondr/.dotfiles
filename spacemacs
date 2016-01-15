@@ -350,7 +350,7 @@ layers configuration. You are free to put any user code."
     (setq yas-also-auto-indent-first-line t))
 
   ;; basic
-  (setq require-final-newline t)
+  (setq-default require-final-newline t)
 
   ;; utils
   (defun spacemacs-tk/cleanup-buffer-safe ()
