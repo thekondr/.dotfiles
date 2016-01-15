@@ -605,6 +605,7 @@ layers configuration. You are free to put any user code."
                             comint-hooks))
   (evil-set-initial-state 'term-mode 'emacs)
   (evil-set-initial-state 'eshell-mode 'emacs)
+  (add-hook 'eshell-mode-hook 'spacemacs//unset-scroll-margin)
 
   (spacemacs/set-leader-keys
     "bD" (defun tk/kill-this-buffer-with-window ()
