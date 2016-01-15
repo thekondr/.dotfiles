@@ -575,6 +575,8 @@
  `(vhl/default-face ((t (:background ,base01))))
  `(eval-sexp-fu-flash ((t (:foreground ,base0B :background ,base01))))
  `(eval-sexp-fu-flash-error ((t (:foreground ,base08 :background ,base01))))
+ `(evil-snipe-matches-face ((t)))
+ `(evil-snipe-first-match-face ((t)))
  )
 
 (custom-theme-set-variables

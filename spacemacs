@@ -37,6 +37,10 @@ values."
      (version-control :variables
                       version-control-diff-tool 'diff-hl)
      ibuffer
+     vim-empty-lines
+     (evil-snipe :variables
+                evil-snipe-enable-alternate-f-and-t-behaviors t)
+     unimpaired
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
