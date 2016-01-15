@@ -599,10 +599,12 @@ layers configuration. You are free to put any user code."
                         term-mode-hook
                         messages-buffer-mode-hook
                         comint-mode-hook)))
-    (spacemacs/add-to-hooks (defun tk/no-hl-line-mode ()
+    (spacemacs/add-to-hooks (defun tk/setup-comint-modes ()
+                              (setq-local evil-move-cursor-back nil)
                               (setq-local global-hl-line-mode nil))
                             comint-hooks))
   (evil-set-initial-state 'term-mode 'emacs)
+  (evil-set-initial-state 'eshell-mode 'emacs)
 
   (spacemacs/set-leader-keys
     "bD" (defun tk/kill-this-buffer-with-window ()
@@ -631,6 +633,8 @@ layers configuration. You are free to put any user code."
                 (define-key term-raw-map (kbd "C-s") 'term-send-raw)
                 (define-key term-raw-map (kbd "C-p") 'term-send-raw)
                 (define-key term-raw-map (kbd "C-n") 'term-send-raw)
+                (define-key term-raw-map (kbd "C-_") 'term-send-raw)
+                (define-key term-raw-map (kbd "M-Y") 'term-paste)
                 (define-key term-raw-map (kbd "M-f") 'term-send-raw-meta)
                 (define-key term-raw-map (kbd "M-b") 'term-send-raw-meta)
                 (define-key term-raw-map (kbd "M-d") 'term-send-raw-meta)
