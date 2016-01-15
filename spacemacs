@@ -653,6 +653,24 @@ layers configuration. You are free to put any user code."
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
 
+  (define-minor-mode big-fringe-mode
+    "Minor mode to use big fringe in the current buffer."
+    :init-value nil
+    :global t
+    :group 'editing-basics
+    (if (not big-fringe-mode)
+        (set-fringe-style nil)
+      (set-fringe-mode
+       (/ (- (frame-pixel-width)
+             (* 100 (frame-char-width)))
+          2))))
+  (spacemacs|add-toggle big-fringe-mode
+      :status big-fringe-mode
+      :on (big-fringe-mode 1) (diff-hl-mode -1) (vi-tilde-fringe-mode -1)
+      :off (big-fringe-mode -1) (diff-hl-mode 1) (vi-tilde-fringe-mode 1)
+      :documentation "Center text"
+      :evil-leader "tb")
+
   (let ((tk-private (expand-file-name "~/.dotfiles/emacs/private/private.el")))
     (when (file-readable-p tk-private)
       (load-file tk-private)))
