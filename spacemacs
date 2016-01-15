@@ -19,7 +19,9 @@ values."
    dotspacemacs-configuration-layers
    '(
      (auto-completion :variables
-                      auto-completion-enable-snippets-in-popup t)
+                      auto-completion-tab-key-behavior 'complete
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-sort-by-usage t)
      emacs-lisp
      (git :variables
           git-magit-status-fullscreen t)
@@ -328,6 +330,8 @@ layers configuration. You are free to put any user code."
       "oyv" 'yas-visit-snippet-file)
     (evil-set-initial-state 'snippet-mode 'insert)
     (setq yas-snippet-dirs (list (expand-file-name "~/.dotfiles/emacs/snippets")))
+    (define-key yas-minor-mode-map (kbd "TAB") 'yas-expand)
+    (define-key yas-minor-mode-map (kbd "<tab>") 'yas-expand)
     (require 'popup)
     (define-key popup-menu-keymap (kbd "C-j") 'popup-next)
     (define-key popup-menu-keymap (kbd "C-k") 'popup-previous)
