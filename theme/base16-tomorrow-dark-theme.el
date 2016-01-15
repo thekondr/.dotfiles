@@ -151,7 +151,8 @@
  `(show-paren-mismatch ((t (:background ,base09 :foreground ,base03))))
 
  ;; Pair matching (show-smartparens-mode)
- `(sp-show-pair-match-face ((t (:background ,base01 :foreground ,base05))))
+ `(sp-show-pair-match-face ((t (:background ,base01 :foreground ,base0B :weight bold))))
+ `(sp-show-pair-mismatch-face ((t (:background ,base01 :foreground ,base08 :weight bold))))
 
  ;; Parenthesis matching (mic-paren)
  `(paren-face-match ((t (:foreground nil :background nil :inherit show-paren-match))))
