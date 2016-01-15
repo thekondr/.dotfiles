@@ -32,7 +32,7 @@
  `(border-glyph ((t (nil))))
  `(cursor ((t (:background ,base05))))
  `(default ((t (:background ,base00 :foreground ,base05))))
- `(fringe ((t (:background ,base02))))
+ `(fringe ((t (:background ,base01))))
  `(gui-element ((t (:background ,base03 :foreground ,base06))))
  `(highlight ((t (:background ,base01))))
  `(link ((t (:foreground ,base0D))))
