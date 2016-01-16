@@ -46,12 +46,13 @@ values."
 
      ;; tk
      c++-args
+     multiple-cursors
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(google-c-style flymake-cursor multiple-cursors phi-search)
+   dotspacemacs-additional-packages '(google-c-style flymake-cursor)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(evil-escape evil-search-highlight-persist vi-tilde-fringe)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -309,7 +310,6 @@ layers configuration. You are free to put any user code."
     (add-hook 'with-editor-mode-hook 'evil-insert-state))
 
   (setq magit-delete-by-moving-to-trash nil)
-  (pending-delete-mode 1)
 
   ;; (use-package auto-complete
   ;;   :defer t
@@ -508,24 +508,6 @@ layers configuration. You are free to put any user code."
                 (define-key term-raw-map (kbd "M-j") 'term-send-raw-meta)
                 (define-key term-raw-map (kbd "M-k") 'term-send-raw-meta)
                 (define-key term-raw-map (kbd "M-l") 'term-send-raw-meta)) t))
-
-  (global-set-key (kbd "C-C C-C") 'mc/edit-lines)
-  (global-set-key (kbd "M-)") 'mc/mark-next-like-this)
-  (global-set-key (kbd "M-(") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "M-9") 'mc/mark-all-like-this)
-  (global-set-key (kbd "M-0") 'mc/mark-all-like-this-in-defun)
-  (global-set-key (kbd "M-#") 'er/expand-region)
-  (setq mc/unsupported-minor-modes '(company-mode auto-complete-mode flyspell-mode jedi-mode))
-  (add-hook 'multiple-cursors-mode-enabled-hook 'evil-emacs-state)
-  (add-hook 'multiple-cursors-mode-disabled-hook 'evil-normal-state)
-  ;; (add-hook 'multiple-cursors-mode-disabled-hook 'evil-change-to-previous-state)
-  (add-hook 'multiple-cursors-mode-enabled-hook 'spacemacs/toggle-mode-line-minor-modes-on)
-  (add-hook 'multiple-cursors-mode-disabled-hook 'spacemacs/toggle-mode-line-minor-modes-off)
-
-  ;; (defadvice mc/maybe-multiple-cursors-mode (around tk/maybe-multiple-cursors-mode activate)
-  ;;   (if (> (mc/num-cursors) 1)
-  ;;       (unless multiple-cursors-mode (multiple-cursors-mode 1))
-  ;;     (when multiple-cursors-mode (multiple-cursors-mode 0))))
 
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
