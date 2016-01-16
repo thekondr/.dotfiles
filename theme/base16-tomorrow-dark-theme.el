@@ -578,6 +578,9 @@
  `(eval-sexp-fu-flash-error ((t (:foreground ,base08 :background ,base01))))
  `(evil-snipe-matches-face ((t)))
  `(evil-snipe-first-match-face ((t)))
+ `(ahs-face ((t (:foreground ,base0A))))
+ `(ahs-plugin-whole-buffer-face ((t (:foreground ,base0A))))
+ `(ahs-definition-face ((t (:foreground ,base0A :underline t))))
  )
 
 (custom-theme-set-variables
