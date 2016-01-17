@@ -41,7 +41,7 @@ values."
      ibuffer
      vim-empty-lines
      (evil-snipe :variables
-                evil-snipe-enable-alternate-f-and-t-behaviors t)
+                 evil-snipe-enable-alternate-f-and-t-behaviors t)
      unimpaired
 
      ;; tk
@@ -528,7 +528,7 @@ layers configuration. You are free to put any user code."
   (let ((tk-private (expand-file-name "~/.dotfiles/emacs/private/private.el")))
     (when (file-readable-p tk-private)
       (load-file tk-private)))
-)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
