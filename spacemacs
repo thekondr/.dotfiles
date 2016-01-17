@@ -311,21 +311,12 @@ layers configuration. You are free to put any user code."
 
   (setq magit-delete-by-moving-to-trash nil)
 
-  ;; (use-package auto-complete
-  ;;   :defer t
-  ;;   :diminish auto-complete-mode
-  ;;   :init
-  ;;   (setq ac-comphist-file (concat tk-cache-dir "ac-comphist.dat")
-  ;;         ac-ignore-case 'smart
-  ;;         ac-use-menu-map t
-  ;;         ac-use-quick-help nil)
-  ;;   (ac-config-default)
-  ;;   :config
-  ;;   (define-key ac-complete-mode-map (kbd "C-j") 'ac-next)
-  ;;   (define-key ac-complete-mode-map (kbd "C-k") 'ac-previous)
-  ;;   (define-key ac-complete-mode-map (kbd "<tab>") 'ac-complete)
-  ;;   (define-key ac-complete-mode-map (kbd "TAB") 'ac-complete)
-  ;;   (add-to-list 'ac-sources 'ac-source-yasnippet))
+  (setq ac-ignore-case 'smart
+        ac-use-menu-map t)
+  (add-hook 'emacs-lisp-mode-hook (defun tk/emacs-lisp-mode-hook ()
+                                    (company-mode -1)
+                                    (auto-complete-mode 1)
+                                    (ac-emacs-lisp-mode-setup)) t)
 
   (with-eval-after-load "yasnippet"
     (spacemacs/set-leader-keys-for-minor-mode 'yas-minor-mode
