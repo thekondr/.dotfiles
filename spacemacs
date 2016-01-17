@@ -48,6 +48,9 @@ values."
      c++-args
      multiple-cursors
 
+     ;; magnars
+     hippie-closest-first
+
      ;; bb
      encoding
      evil-little-word
@@ -310,9 +313,6 @@ layers configuration. You are free to put any user code."
   (setq paradox-github-token t)
   (setq evil-want-fine-undo 'no)
 
-  ;; evil little word
-  ;; magnars hippie-exp closest first
-
   (with-eval-after-load "with-editor"
     (add-hook 'with-editor-mode-hook 'evil-insert-state))
 
@@ -506,6 +506,21 @@ layers configuration. You are free to put any user code."
                 (define-key term-raw-map (kbd "M-j") 'term-send-raw-meta)
                 (define-key term-raw-map (kbd "M-k") 'term-send-raw-meta)
                 (define-key term-raw-map (kbd "M-l") 'term-send-raw-meta)) t))
+
+  (setq hippie-expand-try-functions-list '(try-expand-dabbrev-closest-first
+                                           try-complete-file-name
+                                           try-expand-dabbrev-all-buffers
+                                           try-expand-dabbrev-from-kill
+                                           try-expand-all-abbrevs
+                                           try-complete-lisp-symbol-partially
+                                           try-complete-lisp-symbol))
+
+  (setq evil-complete-next-func
+        (defun hippie-expand-lines (arg)
+          (interactive)
+          (let ((hippie-expand-try-functions-list '(try-expand-line-closest-first
+                                                    try-expand-line-all-buffers)))
+            (hippie-expand arg))))
 
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
