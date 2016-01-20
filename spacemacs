@@ -317,6 +317,8 @@ layers configuration. You are free to put any user code."
     (add-hook 'with-editor-mode-hook 'evil-insert-state))
 
   (setq magit-delete-by-moving-to-trash nil)
+  (with-eval-after-load "evil-magit"
+    (evil-define-key evil-magit-state magit-status-mode-map (kbd "ESC") nil))
 
   (setq ac-ignore-case 'smart
         ac-use-menu-map t)
