@@ -522,6 +522,9 @@ layers configuration. You are free to put any user code."
                                                     try-expand-line-all-buffers)))
             (hippie-expand arg))))
 
+  (global-vim-empty-lines-mode -1)
+  (add-hook 'prog-mode-hook (lambda () (vim-empty-lines-mode 1)))
+
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
 
