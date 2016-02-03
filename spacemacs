@@ -484,6 +484,9 @@ layers configuration. You are free to put any user code."
     "fzc" (defun tk/find-zsh-prompt ()
             (interactive)
             (find-file-existing (expand-file-name "~/.dotfiles/zsh/functions/prompt_tk_setup")))
+    "Cr" (defun tk/reload-theme ()
+           (interactive)
+           (load-theme 'base16-tomorrow-dark t))
     "sm" 'helm-multi-swoop-current-mode
     "sM" 'spacemacs/helm-multi-swoop-current-mode-region-or-symbol
     "g=" 'vc-version-ediff
