@@ -354,7 +354,7 @@ layers configuration. You are free to put any user code."
   (setq-default require-final-newline t)
 
   ;; utils
-  (defun spacemacs-tk/cleanup-buffer-safe ()
+  (defun tk/cleanup-buffer-safe ()
     (interactive)
     (if indent-tabs-mode
         (tabify (point-min) (point-max))
@@ -362,7 +362,7 @@ layers configuration. You are free to put any user code."
     (delete-trailing-whitespace)
     (set-buffer-file-coding-system 'utf-8))
 
-  (defun spacemacs-tk/cleanup-buffer ()
+  (defun tk/cleanup-buffer ()
     (interactive)
     (cleanup-buffer-safe)
     (indent-region (point-min) (point-max)))
@@ -377,9 +377,6 @@ layers configuration. You are free to put any user code."
           space-before-tab
           space-after-tab))
   (remove-hook 'diff-mode-hook 'spacemacs//set-whitespace-style-for-diff)
-  (defun spacemacs-tk/find-color-theme ()
-    (interactive)
-    (find-file-existing (expand-file-name "~/.dotfiles/theme/base16-tomorrow-dark-theme.el")))
   (setq avy-background nil)
   (setq delete-by-moving-to-trash nil)
 
@@ -405,11 +402,11 @@ layers configuration. You are free to put any user code."
     (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents))
 
   (with-eval-after-load "projectile"
-    (defun spacemacs-tk/default-pop-shell-in-project-root ()
+    (defun tk/default-pop-shell-in-project-root ()
       (interactive)
       (let ((default-directory (projectile-project-root)))
         (spacemacs/default-pop-shell)))
-    (defadvice projectile-compile-project (around spacemacs-tk/projectile-compile-project activate)
+    (defadvice projectile-compile-project (around tk/projectile-compile-project activate)
       (let ((default-directory (projectile-project-root)))
         (call-interactively 'compile)))
     (defun find-file-in-project-from-kill ()
@@ -420,7 +417,7 @@ layers configuration. You are free to put any user code."
     (define-key projectile-command-map (kbd "w") 'find-file-in-project-from-kill)
     (spacemacs/set-leader-keys
       "p" 'projectile-command-map
-      "\"" 'spacemacs-tk/default-pop-shell-in-project-root))
+      "\"" 'tk/default-pop-shell-in-project-root))
 
   (with-eval-after-load "helm-projectile"
     (defun spacemacs/helm-default-pop-shell (dir)
@@ -477,7 +474,9 @@ layers configuration. You are free to put any user code."
     "fm" 'helm-multi-files
     "ha" 'helm-apropos
     ".f" 'flymake-mode
-    "fec" 'spacemacs-tk/find-color-theme
+    "fec" (defun tk/find-color-theme ()
+            (interactive)
+            (find-file-existing (expand-file-name "~/.dotfiles/theme/base16-tomorrow-dark-theme.el")))
     "fzd" (defun tk/find-zshrc ()
             (interactive)
             (find-file-existing (expand-file-name "~/.dotfiles/zsh/zshrc")))
