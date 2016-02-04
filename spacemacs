@@ -410,12 +410,23 @@ layers configuration. You are free to put any user code."
     (defadvice projectile-compile-project (around tk/projectile-compile-project activate)
       (let ((default-directory (projectile-project-root)))
         (call-interactively 'compile)))
-    (defun find-file-in-project-from-kill ()
+    (defun tk/find-file-in-project-from-kill ()
       (interactive)
       (find-file (projectile-expand-root (current-kill 0))))
+    (defun tk/projectile-show-and-copy-buffer-filename ()
+      "Show the path to the current file from project root in the minibuffer."
+      (interactive)
+      (let ((file-name (buffer-file-name)))
+        (if file-name
+            (progn
+              (setq file-name (s-chop-prefix (projectile-project-root) file-name))
+              (message file-name)
+              (kill-new file-name))
+          (error "Buffer not visiting a file"))))
     (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
     (helm-projectile-on)
-    (define-key projectile-command-map (kbd "w") 'find-file-in-project-from-kill)
+    (define-key projectile-command-map (kbd "w") 'tk/find-file-in-project-from-kill)
+    (define-key projectile-command-map (kbd "W") 'tk/projectile-show-and-copy-buffer-filename)
     (spacemacs/set-leader-keys
       "p" 'projectile-command-map
       "\"" 'tk/default-pop-shell-in-project-root))
