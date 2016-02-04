@@ -34,6 +34,7 @@ values."
      ruby
      gtags
      ranger
+     restclient
      shell
      shell-scripts
      (version-control :variables
