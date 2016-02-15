@@ -25,6 +25,7 @@ values."
      emacs-lisp
      (git :variables
           git-magit-status-fullscreen t)
+     markdown
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
      html
