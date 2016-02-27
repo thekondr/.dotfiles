@@ -103,7 +103,16 @@ alias s='eval sudo $(fc -nl -1)'
 alias ta='tmux attach'
 
 alias find='noglob find'
-alias gfap='git fetch --all -p'
+
+# git aliases
+alias gfa='git fetch --all -p'
+
+alias gB='git bisect'
+alias gBg='git bisect good'
+alias gBb='git bisect bad'
+alias gBr='git bisect reset'
+alias gBs='git bisect start'
+alias gBS='git bisect skip'
 
 alias pd='popd'
 
