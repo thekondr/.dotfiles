@@ -502,6 +502,8 @@ layers configuration. You are free to put any user code."
     "sm" 'helm-multi-swoop-current-mode
     "sM" 'spacemacs/helm-multi-swoop-current-mode-region-or-symbol
     "g=" 'vc-version-ediff
+    "gv" 'diff-hl-diff-goto-hunk
+    "gu" 'vc-revert
     "sJ" 'helm-imenu-in-all-buffers)
 
   (with-eval-after-load "term"
