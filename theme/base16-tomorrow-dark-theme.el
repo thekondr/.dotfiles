@@ -549,6 +549,9 @@
  ;; tk
 
  `(iedit-occurrence ((t (:background ,base02))))
+ `(ac-completion-face ((t (:foreground ,base03))))
+ `(company-preview-common ((t (:foreground ,base03))))
+ `(company-preview ((t (:inherit highlight))))
  `(company-scrollbar-bg ((t (:background ,base03))))
  `(company-scrollbar-fg ((t (:background ,base05))))
  `(company-tooltip ((t (:foreground ,base05 :background ,base02))))
