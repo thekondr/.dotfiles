@@ -116,6 +116,9 @@ alias gBS='git bisect skip'
 
 alias pd='popd'
 
+# zsh show
+alias zsg='$PAGER ~/.zprezto/modules/git/alias.zsh'
+
 if [[ "$OSTYPE" != darwin* ]]; then
     eval $(dircolors ~/.dotfiles/shell/dircolors.base16.dark)
 fi
