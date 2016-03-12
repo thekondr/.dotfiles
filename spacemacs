@@ -515,7 +515,6 @@ layers configuration. You are free to put any user code."
                 (define-key term-raw-map (kbd "C-p") 'term-send-raw)
                 (define-key term-raw-map (kbd "C-n") 'term-send-raw)
                 (define-key term-raw-map (kbd "C-_") 'term-send-raw)
-                (define-key term-raw-map (kbd "M-Y") 'term-paste)
                 (define-key term-raw-map (kbd "M-f") 'term-send-raw-meta)
                 (define-key term-raw-map (kbd "M-b") 'term-send-raw-meta)
                 (define-key term-raw-map (kbd "M-d") 'term-send-raw-meta)
@@ -523,7 +522,9 @@ layers configuration. You are free to put any user code."
                 (define-key term-raw-map (kbd "M-n") 'term-send-raw-meta)
                 (define-key term-raw-map (kbd "M-j") 'term-send-raw-meta)
                 (define-key term-raw-map (kbd "M-k") 'term-send-raw-meta)
-                (define-key term-raw-map (kbd "M-l") 'term-send-raw-meta)) t))
+                (define-key term-raw-map (kbd "M-l") 'term-send-raw-meta)
+                (define-key term-raw-map (kbd (if (spacemacs/system-is-mac)
+                                                  "s-v" "C-V")) 'term-paste)) t))
 
   (setq hippie-expand-try-functions-list '(try-expand-dabbrev-closest-first
                                            try-complete-file-name
