@@ -33,6 +33,7 @@ values."
      javascript
      python
      ruby
+     yaml
      gtags
      ranger
      restclient
