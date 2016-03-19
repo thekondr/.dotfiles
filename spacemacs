@@ -23,6 +23,7 @@ values."
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t)
      syntax-checking
+     ycmd
      emacs-lisp
      (git :variables
           git-magit-status-fullscreen t)
@@ -64,7 +65,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(google-c-style flycheck-google-cpplint flymake-cursor)
+   dotspacemacs-additional-packages '(google-c-style flycheck-google-cpplint)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(evil-escape evil-search-highlight-persist vi-tilde-fringe)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -384,13 +385,12 @@ layers configuration. You are free to put any user code."
   (setq avy-background nil)
   (setq delete-by-moving-to-trash nil)
 
-  (defadvice flymake-display-warning (around tk/flymake-display-warning activate)
-    "Display a warning to the user, using message"
-    (message warning))
-
   (with-eval-after-load 'flycheck
     (require 'flycheck-google-cpplint)
     (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint))
+
+  (with-eval-after-load 'flycheck-ycmd
+    (flycheck-add-next-checker 'ycmd 'c/c++-cppcheck))
 
   ;; c++-mode
   (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
@@ -493,7 +493,6 @@ layers configuration. You are free to put any user code."
            (delete-window))
     "fm" 'helm-multi-files
     "ha" 'helm-apropos
-    ".f" 'flymake-mode
     "fec" (defun tk/find-color-theme ()
             (interactive)
             (find-file-existing (expand-file-name "~/.dotfiles/theme/base16-tomorrow-dark-theme.el")))
