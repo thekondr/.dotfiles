@@ -554,6 +554,7 @@
  `(company-preview ((t (:inherit highlight))))
  `(company-scrollbar-bg ((t (:background ,base03))))
  `(company-scrollbar-fg ((t (:background ,base05))))
+ `(company-template-field ((t (:foreground ,base01 :background ,base0A))))
  `(company-tooltip ((t (:foreground ,base05 :background ,base02))))
  `(company-tooltip-annotation ((t (:foreground ,base08))))
  `(company-tooltip-selection ((t (:foreground ,base01 :background ,base0C))))
