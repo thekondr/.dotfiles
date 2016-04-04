@@ -419,7 +419,10 @@ layers configuration. You are free to put any user code."
         (call-interactively 'compile)))
     (defun tk/find-file-in-project-from-kill ()
       (interactive)
-      (find-file (projectile-expand-root (current-kill 0))))
+      (let ((data (split-string (current-kill 0) ":" t)))
+        (find-file (projectile-expand-root (car data)))
+        (if (cdr data)
+            (goto-line (string-to-int (cadr data))))))
     (defun tk/projectile-show-and-copy-buffer-filename ()
       "Show the path to the current file from project root in the minibuffer."
       (interactive)
