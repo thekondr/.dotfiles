@@ -259,8 +259,6 @@ in `dotspacemacs/user-config'."
   (setq custom-theme-directory (expand-file-name "~/.dotfiles/theme"))
   (setq exec-path-from-shell-check-startup-files nil)
   (setq ido-use-faces nil)
-  (defadvice spacemacs/defface-micro-state-faces (around tk/defface-micro-state-faces activate))
-
   (with-eval-after-load "ediff"
     (add-hook 'ediff-keymap-setup-hook
               (lambda () (define-key ediff-mode-map (kbd "SPC") 'spacemacs-cmds)))
@@ -528,6 +526,10 @@ layers configuration. You are free to put any user code."
 
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
+
+  (advice-add 'spacemacs/defface-micro-state-faces
+              :override #'workaround/defface-micro-state-faces)
+  (workaround/defface-micro-state-faces)
 
   (let ((tk-private (expand-file-name "~/.dotfiles/emacs/private/private.el")))
     (when (file-readable-p tk-private)

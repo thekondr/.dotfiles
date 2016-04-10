@@ -575,8 +575,6 @@
  `(spacemacs-visual-face ((t (:foreground ,base01 :background ,base05))))
  `(spacemacs-helm-navigation-ms-face ((t (:foreground ,base0B))))
  `(spacemacs-ido-navigation-ms-face ((t (:foreground ,base0B))))
- `(spacemacs-micro-state-binding-face ((t (:foreground ,base0D))))
- `(spacemacs-micro-state-header-face ((t (:foreground ,base0B))))
  `(vhl/default-face ((t (:background ,base01))))
  `(eval-sexp-fu-flash ((t (:foreground ,base0B :background ,base01))))
  `(eval-sexp-fu-flash-error ((t (:foreground ,base08 :background ,base01))))
@@ -586,6 +584,17 @@
  `(ahs-plugin-whole-buffer-face ((t (:foreground ,base0A))))
  `(ahs-definition-face ((t (:foreground ,base0A :underline t))))
  )
+
+(defun workaround/defface-micro-state-faces ()
+  (set-face-attribute 'spacemacs-micro-state-header-face nil
+                      :background nil :foreground nil :bold nil :box nil)
+  (set-face-attribute 'spacemacs-micro-state-binding-face nil
+                      :background nil :foreground nil :bold nil :box nil)
+  (custom-theme-set-faces
+   'base16-tomorrow-dark
+
+   `(spacemacs-micro-state-binding-face ((t (:foreground ,base0D))))
+   `(spacemacs-micro-state-header-face ((t (:foreground ,base0B))))))
 
 (custom-theme-set-variables
  'base16-tomorrow-dark
