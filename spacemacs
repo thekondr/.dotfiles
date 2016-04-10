@@ -33,6 +33,7 @@ values."
      html
      java
      javascript
+     typescript
      python
      ruby
      yaml
@@ -278,6 +279,15 @@ layers configuration. You are free to put any user code."
   (setq-default indicate-empty-lines t)
   (setq-default fringe-indicator-alist '((truncation) (continuation)
                                          (empty-line . empty-line)))
+  (let ((offset 2))
+    (setq-default js2-basic-offset offset
+                  js2-strict-trailing-comma-warning nil
+                  web-mode-attr-indent-offset offset
+                  web-mode-css-indent-offset offset
+                  web-mode-markup-indent-offset offset
+                  web-mode-sql-indent-offset offset
+                  web-mode-code-indent-offset offset))
+
   (defun dotspacemacs/location ()
     (expand-file-name "~/.dotfiles/spacemacs"))
   (when (spacemacs/system-is-mac)
