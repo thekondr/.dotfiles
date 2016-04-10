@@ -33,7 +33,7 @@ echo 'source $HOME/.dotfiles/zsh/zlogin' >> ~/.zlogin
 echo 'source $HOME/.dotfiles/zsh/zprofile' >> ~/.zprofile
 echo 'source $HOME/.dotfiles/zsh/zshenv' >> ~/.zshenv
 echo 'source $HOME/.dotfiles/zsh/zshrc' >> ~/.zshrc
-echo 'source $HOME/.dotfiles/tmux.conf' >> ~/.tmux.conf
-echo '(load-file "$HOME/.dotfiles/spacemacs")' >> ~/.spacemacs
+echo 'source $HOME/.dotfiles/tmux/tmux.conf' >> ~/.tmux.conf
+echo '(load-file "$HOME/.dotfiles/emacs/spacemacs")' >> ~/.spacemacs
 
 chsh -s `which zsh`

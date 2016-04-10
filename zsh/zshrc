@@ -58,7 +58,7 @@ if [[ -n "$INSIDE_EMACS" ]] && [[ "$TERM" != dumb ]]; then
 fi
 
 function apply-color-theme {
-    source ~/.dotfiles/shell/base16-tomorrow.dark.sh
+    source ~/.dotfiles/zsh/base16-tomorrow.dark.sh
 }
 
 [[ -z "$INSIDE_EMACS" ]] \
@@ -120,5 +120,5 @@ alias pd='popd'
 alias zsg='$PAGER ~/.zprezto/modules/git/alias.zsh'
 
 if [[ "$OSTYPE" != darwin* ]]; then
-    eval $(dircolors ~/.dotfiles/shell/dircolors.base16.dark)
+    eval $(dircolors ~/.dotfiles/zsh/dircolors.base16.dark)
 fi
