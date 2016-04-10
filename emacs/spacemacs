@@ -2,6 +2,14 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+(defvar tk-private-configs '())
+
+(defun tk/eval-private-configs (template)
+  (dolist (config tk-private-configs)
+    (let ((config-func (intern (format template (symbol-name config)))))
+      (when (fboundp config-func)
+        (funcall config-func)))))
+
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -268,6 +276,8 @@ in `dotspacemacs/user-config'."
     (add-hook 'ediff-quit-hook
               (lambda ()
                 (jump-to-register :ediff-window-config)) 'append))
+
+  (tk/eval-private-configs "%s/user-init")
   )
 
 (defun dotspacemacs/user-config ()
@@ -531,9 +541,7 @@ layers configuration. You are free to put any user code."
               :override #'workaround/defface-micro-state-faces)
   (workaround/defface-micro-state-faces)
 
-  (let ((tk-private (expand-file-name "~/.dotfiles/emacs/private/private.el")))
-    (when (file-readable-p tk-private)
-      (load-file tk-private)))
+  (tk/eval-private-configs "%s/user-config")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
