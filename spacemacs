@@ -44,7 +44,6 @@ values."
      (version-control :variables
                       version-control-diff-tool 'diff-hl)
      ibuffer
-     vim-empty-lines
      (evil-snipe :variables
                  evil-snipe-enable-alternate-f-and-t-behaviors t)
      unimpaired
@@ -311,6 +310,9 @@ in `dotspacemacs/user-config'."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+  (setq-default indicate-empty-lines t)
+  (setq-default fringe-indicator-alist '((truncation) (continuation)
+                                         (empty-line . empty-line)))
   (defun dotspacemacs/location ()
     (expand-file-name "~/.dotfiles/spacemacs"))
   (when (spacemacs/system-is-mac)
@@ -548,9 +550,6 @@ layers configuration. You are free to put any user code."
           (let ((hippie-expand-try-functions-list '(try-expand-line-closest-first
                                                     try-expand-line-all-buffers)))
             (hippie-expand arg))))
-
-  (global-vim-empty-lines-mode -1)
-  (add-hook 'prog-mode-hook (lambda () (vim-empty-lines-mode 1)))
 
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
