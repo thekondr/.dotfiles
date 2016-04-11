@@ -296,8 +296,9 @@ layers configuration. You are free to put any user code."
                   web-mode-sql-indent-offset offset
                   web-mode-code-indent-offset offset))
 
-  (defun dotspacemacs/location ()
-    (expand-file-name "~/.dotfiles/emacs/spacemacs"))
+  (advice-add 'dotspacemacs/location :override
+              (lambda () (expand-file-name "~/.dotfiles/emacs/spacemacs")))
+
   (when (spacemacs/system-is-mac)
     (setq ns-use-srgb-colorspace nil))
   (setq paradox-github-token t)
