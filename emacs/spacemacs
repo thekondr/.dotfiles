@@ -380,15 +380,6 @@ layers configuration. You are free to put any user code."
   ;; c++-mode
   (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
 
-  (defadvice c-mark-function (after c-mark-function-ad activate)
-    (if (looking-back "\n\n")
-        (forward-line -1)))
-
-  (defun tk-c-mode-common-hook ()
-    (setq ac-sources '(ac-source-words-in-same-mode-buffers))
-    (local-set-key (kbd "C-c r a") 'tk-line-wf-args-switch))
-  (add-hook 'c-mode-common-hook 'tk-c-mode-common-hook)
-
   (with-eval-after-load "helm"
     (define-key helm-map (kbd "M-j") 'helm-follow-action-forward)
     (define-key helm-map (kbd "M-k") 'helm-follow-action-backward)
