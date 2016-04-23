@@ -45,7 +45,6 @@ values."
      python
      ruby
      yaml
-     gtags
      ranger
      restclient
      shell
