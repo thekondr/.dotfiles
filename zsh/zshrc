@@ -106,6 +106,7 @@ alias find='noglob find'
 
 # git aliases
 alias gfa='git fetch --all -p'
+alias gfcr='git clone --recursive'
 
 alias gB='git bisect'
 alias gBg='git bisect good'
