@@ -412,13 +412,25 @@ layers configuration. You are free to put any user code."
               (message file-name)
               (kill-new file-name))
           (error "Buffer not visiting a file"))))
+    (defun tk/show-and-copy-buffer-basename-and-line ()
+      "Show the path to the current file from project root in the minibuffer."
+      (interactive)
+      (let ((file-name (file-name-nondirectory (buffer-file-name))))
+        (if file-name
+            (progn
+              (setq file-name (concat file-name ":" (int-to-string (line-number-at-pos))))
+              (message file-name)
+              (kill-new file-name))
+          (error "Buffer not visiting a file"))))
     (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
     (helm-projectile-on)
     (define-key projectile-command-map (kbd "w") 'tk/find-file-in-project-from-kill)
     (define-key projectile-command-map (kbd "y") 'tk/projectile-show-and-copy-buffer-filename)
     (spacemacs/set-leader-keys
       "p" 'projectile-command-map
-      "\"" 'tk/default-pop-shell-in-project-root))
+      "\"" 'tk/default-pop-shell-in-project-root)
+    (spacemacs/set-leader-keys-for-major-mode 'c++-mode
+      "y" 'tk/show-and-copy-buffer-basename-and-line))
 
   (with-eval-after-load "helm-projectile"
     (defun spacemacs/helm-default-pop-shell (dir)
