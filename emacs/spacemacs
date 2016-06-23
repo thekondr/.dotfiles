@@ -504,6 +504,7 @@ layers configuration. You are free to put any user code."
     "g=" 'vc-version-ediff
     "gv" 'diff-hl-diff-goto-hunk
     "gu" 'vc-revert
+    "g~" 'vc-revision-other-window
     "sJ" 'helm-imenu-in-all-buffers)
 
   (with-eval-after-load "term"
