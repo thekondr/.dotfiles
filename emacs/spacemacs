@@ -402,13 +402,16 @@ layers configuration. You are free to put any user code."
             (error (concat "File '" file "' not found"))
           (find-file file)
           (if line (goto-line line)))))
+    (defun tk/projectile-buffer-file-name ()
+      (s-chop-prefix (projectile-project-root) (buffer-file-name)))
+    (defun tk/projectile-header-guard ()
+      (concat (replace-regexp-in-string "[/\.]" "_" (upcase (tk/projectile-buffer-file-name))) "_"))
     (defun tk/projectile-show-and-copy-buffer-filename ()
       "Show the path to the current file from project root in the minibuffer."
       (interactive)
-      (let ((file-name (buffer-file-name)))
+      (let ((file-name (tk/projectile-buffer-file-name)))
         (if file-name
             (progn
-              (setq file-name (s-chop-prefix (projectile-project-root) file-name))
               (message file-name)
               (kill-new file-name))
           (error "Buffer not visiting a file"))))
