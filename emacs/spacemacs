@@ -26,10 +26,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     (auto-completion :variables
-                      auto-completion-tab-key-behavior 'complete
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-sort-by-usage t)
+     auto-completion
      syntax-checking
      ycmd
      emacs-lisp
@@ -540,7 +537,8 @@ layers configuration. You are free to put any user code."
   (setq evil-complete-next-func
         (defun hippie-expand-lines (arg)
           (interactive)
-          (let ((hippie-expand-try-functions-list '(try-expand-line-closest-first
+          (let ((hippie-expand-try-functions-list '(yas-hippie-try-expand
+                                                    try-expand-line-closest-first
                                                     try-expand-line-all-buffers)))
             (hippie-expand arg))))
 
