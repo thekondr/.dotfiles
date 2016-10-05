@@ -583,18 +583,12 @@
  `(ahs-face ((t (:foreground ,base0A))))
  `(ahs-plugin-whole-buffer-face ((t (:foreground ,base0A))))
  `(ahs-definition-face ((t (:foreground ,base0A :underline t))))
+ `(hydra-face-red ((t (:foreground ,base08))))
+ `(hydra-face-blue ((t (:foreground ,base0D))))
+ `(hydra-face-pink ((t (:foreground ,base0E))))
+ `(hydra-face-teal ((t (:foreground ,base0C))))
+ `(hydra-face-amaranth ((t (:foreground ,base09))))
  )
-
-(defun workaround/defface-micro-state-faces ()
-  (set-face-attribute 'spacemacs-micro-state-header-face nil
-                      :background nil :foreground nil :bold nil :box nil)
-  (set-face-attribute 'spacemacs-micro-state-binding-face nil
-                      :background nil :foreground nil :bold nil :box nil)
-  (custom-theme-set-faces
-   'base16-tomorrow-dark
-
-   `(spacemacs-micro-state-binding-face ((t (:foreground ,base0D))))
-   `(spacemacs-micro-state-header-face ((t (:foreground ,base0B))))))
 
 (custom-theme-set-variables
  'base16-tomorrow-dark

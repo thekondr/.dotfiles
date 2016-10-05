@@ -603,10 +603,6 @@ you should place your code here."
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
 
-  (advice-add 'spacemacs/defface-micro-state-faces
-              :override #'workaround/defface-micro-state-faces)
-  (workaround/defface-micro-state-faces)
-
   (tk/eval-private-configs "%s/user-config")
   )
 
