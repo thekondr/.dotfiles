@@ -69,7 +69,6 @@ values."
 
      ;; tk
      c++-args
-     multiple-cursors
      mergetool
 
      ;; magnars
