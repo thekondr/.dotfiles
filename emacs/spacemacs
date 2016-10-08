@@ -428,6 +428,11 @@ you should place your code here."
     (require 'flycheck-google-cpplint)
     (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint))
 
+  (with-eval-after-load 'ycmd
+    (fset 'ycmd-command-map ycmd-command-map)
+    (spacemacs/set-leader-keys-for-major-mode 'c++-mode
+      "Y" 'ycmd-command-map))
+
   (with-eval-after-load 'flycheck-ycmd
     (flycheck-add-next-checker 'ycmd 'c/c++-cppcheck))
 
