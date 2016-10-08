@@ -317,7 +317,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (add-to-list 'load-path "~/.dotfiles/emacs/theme")
   (setq exec-path-from-shell-check-startup-files nil)
   (setq ido-use-faces nil)
-  (with-eval-after-load "ediff"
+  (with-eval-after-load 'ediff
     (add-hook 'ediff-keymap-setup-hook
               (lambda () (define-key ediff-mode-map (kbd "SPC") 'spacemacs-cmds)))
     (add-hook 'ediff-before-setup-hook
@@ -357,7 +357,7 @@ you should place your code here."
   (setq paradox-github-token t)
   (setq evil-want-fine-undo 'no)
 
-  (with-eval-after-load "with-editor"
+  (with-eval-after-load 'with-editor
     (add-hook 'with-editor-mode-hook 'evil-insert-state))
 
   (setq magit-delete-by-moving-to-trash nil)
@@ -369,7 +369,7 @@ you should place your code here."
                                     (auto-complete-mode 1)
                                     (ac-emacs-lisp-mode-setup)) t)
 
-  (with-eval-after-load "yasnippet"
+  (with-eval-after-load 'yasnippet
     (spacemacs/set-leader-keys-for-minor-mode 'yas-minor-mode
       "oyn" 'yas-new-snippet
       "oyv" 'yas-visit-snippet-file)
@@ -439,12 +439,12 @@ you should place your code here."
   ;; c++-mode
   (add-to-list 'auto-mode-alist '("\\.mm\\'" . c++-mode))
 
-  (with-eval-after-load "helm"
+  (with-eval-after-load 'helm
     (define-key helm-map (kbd "M-j") 'helm-follow-action-forward)
     (define-key helm-map (kbd "M-k") 'helm-follow-action-backward)
     (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents))
 
-  (with-eval-after-load "projectile"
+  (with-eval-after-load 'projectile
     (defadvice projectile-compile-project (around tk/projectile-compile-project activate)
       (let ((default-directory (projectile-project-root)))
         (call-interactively 'compile)))
@@ -490,7 +490,7 @@ you should place your code here."
     (spacemacs/set-leader-keys-for-major-mode 'c++-mode
       "y" 'tk/show-and-copy-buffer-basename-and-line))
 
-  (with-eval-after-load "helm-projectile"
+  (with-eval-after-load 'helm-projectile
     (defun spacemacs/helm-default-pop-shell (dir)
       (interactive)
       (let ((default-directory dir))
@@ -556,7 +556,7 @@ you should place your code here."
     "gu" 'vc-revert
     "g~" 'vc-revision-other-window)
 
-  (with-eval-after-load "term"
+  (with-eval-after-load 'term
     (add-hook 'term-mode-hook
               (defun tk/setup-term-map ()
                 (define-key term-raw-map (kbd "C-r") 'term-send-raw)
