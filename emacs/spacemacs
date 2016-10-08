@@ -154,7 +154,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(base16-tomorrow-dark)
+   dotspacemacs-themes '(base16-tomorrow-night)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state nil
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -314,6 +314,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq custom-theme-directory (expand-file-name "~/.dotfiles/emacs/theme"))
+  (add-to-list 'load-path "~/.dotfiles/emacs/theme")
   (setq exec-path-from-shell-check-startup-files nil)
   (setq ido-use-faces nil)
   (with-eval-after-load "ediff"
@@ -536,16 +537,13 @@ you should place your code here."
     "fm" 'helm-multi-files
     "fec" (defun tk/find-color-theme ()
             (interactive)
-            (find-file-existing (expand-file-name "~/.dotfiles/emacs/theme/base16-tomorrow-dark-theme.el")))
+            (find-file-existing (expand-file-name "~/.dotfiles/emacs/theme/base16-theme.el")))
     "fzd" (defun tk/find-zshrc ()
             (interactive)
             (find-file-existing (expand-file-name "~/.dotfiles/zsh/zshrc")))
     "fzc" (defun tk/find-zsh-prompt ()
             (interactive)
             (find-file-existing (expand-file-name "~/.dotfiles/zsh/functions/prompt_tk_setup")))
-    "Cr" (defun tk/reload-theme ()
-           (interactive)
-           (load-theme 'base16-tomorrow-dark t))
     "sm" 'helm-multi-swoop-current-mode
     "sM" 'spacemacs/helm-multi-swoop-current-mode-region-or-symbol
     "g=" 'vc-version-ediff
