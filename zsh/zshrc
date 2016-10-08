@@ -58,7 +58,7 @@ if [[ -n "$INSIDE_EMACS" ]] && [[ "$TERM" != dumb ]]; then
 fi
 
 function apply-color-theme {
-    source ~/.dotfiles/zsh/base16-tomorrow.dark.sh
+    source ~/.dotfiles/zsh/base16-tomorrow-night.sh
 }
 
 [[ -z "$INSIDE_EMACS" ]] \
