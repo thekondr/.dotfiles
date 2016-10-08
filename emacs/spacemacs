@@ -440,10 +440,6 @@ you should place your code here."
     (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents))
 
   (with-eval-after-load "projectile"
-    (defun tk/default-pop-shell-in-project-root ()
-      (interactive)
-      (let ((default-directory (projectile-project-root)))
-        (spacemacs/default-pop-shell)))
     (defadvice projectile-compile-project (around tk/projectile-compile-project activate)
       (let ((default-directory (projectile-project-root)))
         (call-interactively 'compile)))
@@ -485,7 +481,7 @@ you should place your code here."
     (define-key projectile-command-map (kbd "y") 'tk/projectile-show-and-copy-buffer-filename)
     (spacemacs/set-leader-keys
       "p" 'projectile-command-map
-      "\"" 'tk/default-pop-shell-in-project-root)
+      "\"" 'spacemacs/projectile-shell-pop)
     (spacemacs/set-leader-keys-for-major-mode 'c++-mode
       "y" 'tk/show-and-copy-buffer-basename-and-line))
 
