@@ -445,9 +445,6 @@ you should place your code here."
     (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents))
 
   (with-eval-after-load 'projectile
-    (defadvice projectile-compile-project (around tk/projectile-compile-project activate)
-      (let ((default-directory (projectile-project-root)))
-        (call-interactively 'compile)))
     (defun tk/find-file-in-project-from-kill ()
       (interactive)
       (let* ((data (split-string (current-kill 0) ":" t))
