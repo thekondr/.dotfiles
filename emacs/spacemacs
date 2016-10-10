@@ -492,7 +492,10 @@ you should place your code here."
     (define-key projectile-command-map (kbd "w") 'tk/find-file-in-project-from-kill)
     (define-key projectile-command-map (kbd "y") 'tk/projectile-show-and-copy-buffer-filename)
     (spacemacs/set-leader-keys
-      "p" 'projectile-command-map
+      "pg" 'projectile-find-file-dwim
+      "pG" 'projectile-find-file-dwim-other-window
+      "pA" 'projectile-find-implementation-or-test-other-window
+      "p C-g" nil
       "\"" 'spacemacs/projectile-shell-pop)
     (spacemacs/set-leader-keys-for-major-mode 'c++-mode
       "y" 'tk/show-and-copy-buffer-basename-and-line))
