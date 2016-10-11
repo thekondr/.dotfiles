@@ -489,12 +489,12 @@ you should place your code here."
           (error "Buffer not visiting a file"))))
     (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
     (helm-projectile-on)
-    (define-key projectile-command-map (kbd "w") 'tk/find-file-in-project-from-kill)
-    (define-key projectile-command-map (kbd "y") 'tk/projectile-show-and-copy-buffer-filename)
     (spacemacs/set-leader-keys
       "pg" 'projectile-find-file-dwim
       "pG" 'projectile-find-file-dwim-other-window
       "pA" 'projectile-find-implementation-or-test-other-window
+      "pw" 'tk/find-file-in-project-from-kill
+      "py" 'tk/projectile-show-and-copy-buffer-filename
       "p C-g" nil
       "\"" 'spacemacs/projectile-shell-pop)
     (spacemacs/set-leader-keys-for-major-mode 'c++-mode
