@@ -95,6 +95,7 @@ values."
    '(
      evil-escape
      evil-search-highlight-persist
+     spacemacs-theme
      vi-tilde-fringe
      )
    ;; Defines the behaviour of Spacemacs when installing packages.
