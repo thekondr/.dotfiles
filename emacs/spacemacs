@@ -356,6 +356,7 @@ you should place your code here."
     (setq-default js2-basic-offset offset
                   js2-strict-trailing-comma-warning nil
                   js-indent-level offset
+                  typescript-indent-level offset
                   web-mode-attr-indent-offset offset
                   web-mode-css-indent-offset offset
                   web-mode-markup-indent-offset offset
