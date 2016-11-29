@@ -61,6 +61,7 @@ values."
      restclient
      shell
      shell-scripts
+     docker
      (version-control :variables
                       version-control-diff-tool 'diff-hl)
      ibuffer
