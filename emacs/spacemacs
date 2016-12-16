@@ -357,6 +357,7 @@ you should place your code here."
                   js2-strict-trailing-comma-warning nil
                   js-indent-level offset
                   typescript-indent-level offset
+                  css-indent-offset offset
                   web-mode-attr-indent-offset offset
                   web-mode-css-indent-offset offset
                   web-mode-markup-indent-offset offset
