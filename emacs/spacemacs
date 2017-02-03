@@ -86,7 +86,9 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
-     flycheck-google-cpplint
+     (flycheck-google-cpplint :location
+                              (recipe :fetcher github
+                                      :repo "flycheck/flycheck-google-cpplint"))
      google-c-style
      )
    ;; A list of packages that cannot be updated.
