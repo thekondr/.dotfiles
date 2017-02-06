@@ -372,8 +372,6 @@ you should place your code here."
   (advice-add 'dotspacemacs/location :override
               (lambda () (expand-file-name "~/.dotfiles/emacs/spacemacs")))
 
-  (when (spacemacs/system-is-mac)
-    (setq ns-use-srgb-colorspace nil))
   (setq paradox-github-token t)
   (setq evil-want-fine-undo 'no)
 
