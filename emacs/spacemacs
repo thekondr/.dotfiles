@@ -429,7 +429,7 @@ you should place your code here."
     (cleanup-buffer-safe)
     (indent-region (point-min) (point-max)))
 
-  (setq powerline-default-separator 'arrow)
+  (setq powerline-default-separator nil)
   (unless (spacemacs/system-is-mswindows)
     (setq shell-command-switch "-ic"))
   (setq whitespace-style
