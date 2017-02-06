@@ -380,6 +380,10 @@ you should place your code here."
 
   (setq magit-delete-by-moving-to-trash nil)
 
+  ;; yasnippet causes "TAB" doesn't work in magit status buffer
+  (add-hook 'magit-status-mode-hook (defun tk/magit-status-mode-hook ()
+                                      (yas-minor-mode -1)))
+
   (setq ac-ignore-case 'smart
         ac-use-menu-map t)
   (add-hook 'emacs-lisp-mode-hook (defun tk/emacs-lisp-mode-hook ()
