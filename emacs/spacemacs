@@ -461,6 +461,10 @@ you should place your code here."
   ;; c++-mode
   (add-to-list 'auto-mode-alist '("\\.mm\\'" . c++-mode))
 
+  (delete '("\\.m\\'" . octave-mode) auto-mode-alist)
+  (delete '("\\(\\.m\\'\\)" lambda nil
+            (configuration-layer//auto-mode 'octave 'octave-mode)) auto-mode-alist)
+
   (with-eval-after-load 'helm
     (define-key helm-map (kbd "M-j") 'helm-follow-action-forward)
     (define-key helm-map (kbd "M-k") 'helm-follow-action-backward)
