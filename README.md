@@ -1,6 +1,6 @@
 # .dotfiles
 
-    sh -c "$(curl -fsSL http://git.io/tk-install.sh)"
+    sh -c "$(curl -fsSL https://git.io/tk-install.sh)"
 
 # .emacs.d
 
