@@ -333,6 +333,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq custom-theme-directory (expand-file-name "~/.dotfiles/emacs/theme"))
   (add-to-list 'load-path "~/.dotfiles/emacs/theme")
   (setq exec-path-from-shell-check-startup-files nil)
+  (setq winum-scope 'frame-local)
   (setq ido-use-faces nil)
   (with-eval-after-load 'ediff
     (add-hook 'ediff-keymap-setup-hook
