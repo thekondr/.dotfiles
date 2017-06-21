@@ -173,8 +173,9 @@ values."
    dotspacemacs-colorize-cursor-according-to-state nil
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font (cond ((listp 'tk/override-font) tk/override-font)
-                                   ((stringp tk/override-font) (list tk/override-font))
+   dotspacemacs-default-font (cond ((and (boundp 'tk/override-font)
+                                         (stringp tk/override-font))
+                                    (list tk/override-font))
                                    ((eq system-type 'windows-nt) '("Consolas" :size 14))
                                    (t '("Source Code Pro Medium" :size 14)))
    ;; The leader key
