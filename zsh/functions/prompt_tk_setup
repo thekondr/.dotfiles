@@ -6,9 +6,9 @@ function prompt_tk_git_info {
         if [[ -s "$_prompt_tk_precmd_async_data" ]]; then
             alias typeset='typeset -g'
             source "$_prompt_tk_precmd_async_data"
-            PROMPT='
+            PROMPT="
 ${base_info}${git_info:+${(e)git_info[status]}}
-${return_status} '
+${return_status} "
             unalias typeset
         fi
 
@@ -35,9 +35,9 @@ function prompt_tk_precmd {
     setopt LOCAL_OPTIONS
     unsetopt XTRACE KSH_ARRAYS
 
-    PROMPT='
+    PROMPT="
 ${base_info}
-${return_status} '
+${return_status} "
 
     # Kill the old process of slow commands if it is still running.
     if (( _prompt_tk_precmd_async_pid > 0 )); then
@@ -47,6 +47,19 @@ ${return_status} '
     trap prompt_tk_git_info WINCH
     prompt_tk_precmd_async &!
     _prompt_tk_precmd_async_pid=$!
+}
+
+function virtualenv_prompt_info {
+    if [ -n "$VIRTUAL_ENV" ]; then
+        if [ -f "$VIRTUAL_ENV/__name__" ]; then
+            local name=`cat $VIRTUAL_ENV/__name__`
+        elif [ `basename $VIRTUAL_ENV` = "__" ]; then
+            local name=$(basename $(dirname $VIRTUAL_ENV))
+        else
+            local name=$(basename $VIRTUAL_ENV)
+        fi
+        echo " %F{4}[$name]"
+    fi
 }
 
 function prompt_tk_setup {
@@ -83,7 +96,8 @@ function prompt_tk_setup {
     return_status='%B%(?:%F{2}:%F{1})%(!.#.$)%f%b'
     current_directory='%F{6}%c%f'
     current_machine='%F{2}%m%f'
-    base_info="%B${current_time} ${current_machine} ${current_directory}%b"
+    virtual_env='$(virtualenv_prompt_info)'
+    base_info="%B${current_time} ${current_machine}${virtual_env} ${current_directory}%b"
     SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
 
