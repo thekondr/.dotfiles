@@ -69,3 +69,8 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+
+export WORKON_HOME=~/.virtualenv
+if [[ "$(command -v virtualenvwrapper.sh)" ]]; then
+    source $(command -v virtualenvwrapper.sh)
+fi
