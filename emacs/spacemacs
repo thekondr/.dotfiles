@@ -455,7 +455,7 @@ you should place your code here."
   (with-eval-after-load 'ycmd
     (fset 'ycmd-command-map ycmd-command-map)
     (spacemacs/set-leader-keys-for-major-mode 'c++-mode
-      "Y" 'ycmd-command-map))
+      "," 'ycmd-command-map))
 
   (with-eval-after-load 'flycheck-ycmd
     (flycheck-add-next-checker 'ycmd 'c/c++-cppcheck))
