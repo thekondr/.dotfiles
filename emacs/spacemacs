@@ -62,6 +62,7 @@ values."
      restclient
      shell
      shell-scripts
+     windows-scripts
      docker
      (version-control :variables
                       version-control-diff-tool 'diff-hl)
