@@ -260,6 +260,7 @@ an alternate theme for use in the terminal.")
 
      ;; linum-mode
      (linum                                        :foreground base03 :background base01)
+     (linum-relative-current-face                  :foreground base0B :background base01 :weight bold)
 
      ;; Search
      (match                                        :foreground base0D :background base01 :inverse-video t)
