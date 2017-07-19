@@ -39,6 +39,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     nginx
      helm
      auto-completion
      syntax-checking
