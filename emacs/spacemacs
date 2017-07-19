@@ -50,6 +50,7 @@ values."
      markdown
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
+     swift
      html
      java
      javascript
