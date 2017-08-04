@@ -451,6 +451,9 @@ you should place your code here."
   (setq avy-background nil)
   (setq delete-by-moving-to-trash nil)
 
+  (setq js2-mode-show-parse-errors nil)
+  (setq js2-mode-show-strict-warnings nil)
+
   (with-eval-after-load 'flycheck
     (require 'flycheck-google-cpplint)
     (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint))
