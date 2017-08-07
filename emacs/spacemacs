@@ -451,8 +451,11 @@ you should place your code here."
   (setq avy-background nil)
   (setq delete-by-moving-to-trash nil)
 
-  (setq js2-mode-show-parse-errors nil)
-  (setq js2-mode-show-strict-warnings nil)
+  (with-eval-after-load 'js2-mode
+    (add-hook 'js2-mode-hook (lambda nil
+                               (setq js2-mode-show-parse-errors nil)
+                               (setq js2-mode-show-strict-warnings nil)
+                               (setq next-error-function nil))))
 
   (with-eval-after-load 'flycheck
     (require 'flycheck-google-cpplint)
