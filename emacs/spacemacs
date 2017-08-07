@@ -93,6 +93,7 @@ values."
                               (recipe :fetcher github
                                       :repo "flycheck/flycheck-google-cpplint"))
      google-c-style
+     flycheck-flow
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -459,7 +460,11 @@ you should place your code here."
 
   (with-eval-after-load 'flycheck
     (require 'flycheck-google-cpplint)
-    (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint))
+    (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint)
+    (require 'flycheck-flow)
+    (dolist (mode '(web-mode react-mode))
+      (flycheck-add-mode 'javascript-flow mode)
+      (flycheck-add-mode 'javascript-flow-coverage mode)))
 
   (with-eval-after-load 'ycmd
     (fset 'ycmd-command-map ycmd-command-map)
