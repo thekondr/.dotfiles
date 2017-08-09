@@ -51,7 +51,6 @@ values."
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
      swift
-     rust
      html
      java
      javascript
