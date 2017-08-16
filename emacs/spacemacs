@@ -381,6 +381,8 @@ you should place your code here."
   (setq paradox-github-token t)
   (setq evil-want-fine-undo 'no)
 
+  (setq neo-theme 'nerd)
+
   (with-eval-after-load 'with-editor
     (add-hook 'with-editor-mode-hook 'evil-insert-state))
 
