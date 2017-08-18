@@ -19,4 +19,4 @@ syntax on
 set runtimepath=~/.dotfiles/vim,$VIMRUNTIME
 let base16colorspace=256
 set background=dark
-colorscheme base16-tomorrow-night
+colorscheme base16

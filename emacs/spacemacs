@@ -172,7 +172,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(base16-tomorrow-night)
+   dotspacemacs-themes '(base16)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state nil
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -587,7 +587,7 @@ you should place your code here."
     "fm" 'helm-multi-files
     "fec" (defun tk/find-color-theme ()
             (interactive)
-            (find-file-existing (expand-file-name "~/.dotfiles/emacs/theme/base16-theme.el")))
+            (find-file-existing (expand-file-name "~/.dotfiles/emacs/theme/base16-theme-faces.el")))
     "fzd" (defun tk/find-zshrc ()
             (interactive)
             (find-file-existing (expand-file-name "~/.dotfiles/zsh/zshrc")))
