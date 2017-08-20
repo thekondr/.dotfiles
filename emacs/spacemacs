@@ -334,6 +334,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq base16-theme-256-color-source "base16-shell")
   (setq custom-theme-directory (expand-file-name "~/.dotfiles/emacs/theme"))
   (add-to-list 'load-path "~/.dotfiles/emacs/theme")
   (setq exec-path-from-shell-check-startup-files nil)
