@@ -39,7 +39,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     nginx
      helm
      auto-completion
      syntax-checking
@@ -50,21 +49,13 @@ values."
      markdown
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
-     swift
      html
-     java
      javascript
      typescript
      react
      python
-     ruby
-     yaml
-     ranger
-     restclient
      shell
      shell-scripts
-     windows-scripts
-     docker
      (version-control :variables
                       version-control-diff-tool 'diff-hl)
      ibuffer
@@ -72,14 +63,12 @@ values."
                  evil-snipe-enable-alternate-f-and-t-behaviors t)
 
      ;; tk
-     c++-args
      mergetool
 
      ;; magnars
      hippie-closest-first
 
      ;; bb
-     encoding
      evil-little-word
      no-dots
      )
