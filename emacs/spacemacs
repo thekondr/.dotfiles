@@ -635,6 +635,8 @@ you should place your code here."
                                                     try-expand-line-all-buffers)))
             (hippie-expand arg))))
 
+  (evil-snipe-mode 1)
+
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
 
