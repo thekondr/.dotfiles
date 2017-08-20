@@ -14,7 +14,7 @@
 (defvar tk-base16-colors
   '(:base00 "#2b303b"
     :base01 "#343d46"
-    :base02 "#4f5b66"
+    :base02 "#3f4b56"
     :base03 "#65737e"
     :base04 "#a7adba"
     :base05 "#c0c5ce"
