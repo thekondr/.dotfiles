@@ -539,11 +539,22 @@ you should place your code here."
       (interactive)
       (let ((default-directory dir))
         (spacemacs/default-pop-shell)))
+    (defun tk/helm-smart-do-search-with-dir (dir &optional default-inputp)
+      (interactive)
+      (funcall
+       (spacemacs//helm-do-search-find-tool "helm-files-do"
+                                            dotspacemacs-search-tools
+                                            default-inputp) dir))
     (define-key helm-projectile-projects-map
       (kbd "M-t")
       (lambda ()
         (interactive)
-        (helm-exit-and-execute-action 'spacemacs/helm-default-pop-shell))))
+        (helm-exit-and-execute-action 'spacemacs/helm-default-pop-shell)))
+    (define-key helm-projectile-projects-map
+      (kbd "C-s")
+      (lambda ()
+        (interactive)
+        (helm-exit-and-execute-action 'tk/helm-smart-do-search-with-dir))))
 
   (defmacro customize-helm-swoop (swoop-func)
     (let ((func-name (intern (format "spacemacs/%s-region-or-symbol" (symbol-name swoop-func))))
