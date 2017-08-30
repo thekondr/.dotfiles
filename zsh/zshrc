@@ -105,8 +105,15 @@ alias ta='tmux attach'
 alias find='noglob find'
 
 # git aliases
-alias gfa='git fetch --all -p'
-alias gfcr='git clone --recursive'
+alias gfpa='git fetch --all -p'
+alias gfp='git fetch -p'
+
+alias gcod='git checkout --detach'
+
+alias gW='git worktree'
+alias gWa='git worktree add'
+alias gWl='git worktree list'
+alias gWp='git worktree prune'
 
 alias gB='git bisect'
 alias gBg='git bisect good'
