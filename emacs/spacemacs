@@ -65,6 +65,7 @@ values."
      ;; tk
      mergetool
      tk-helm-search
+     tk-shell
 
      ;; magnars
      hippie-closest-first
@@ -430,8 +431,6 @@ you should place your code here."
   (setq-default require-final-newline t)
 
   (setq powerline-default-separator nil)
-  (unless (spacemacs/system-is-mswindows)
-    (setq shell-command-switch "-ic"))
   (setq whitespace-style
         '(face
           trailing
@@ -542,9 +541,6 @@ you should place your code here."
                               (setq-local global-hl-line-mode nil)
                               (clean-aindent-mode -1))
                             comint-hooks))
-  (evil-set-initial-state 'term-mode 'emacs)
-  (evil-set-initial-state 'eshell-mode 'emacs)
-  (add-hook 'eshell-mode-hook 'spacemacs//unset-scroll-margin)
 
   (spacemacs/set-leader-keys
     "oww" 'browse-url-at-point
@@ -562,25 +558,6 @@ you should place your code here."
     "gv" 'diff-hl-diff-goto-hunk
     "gu" 'vc-revert
     "g~" 'vc-revision-other-window)
-
-  (with-eval-after-load 'term
-    (add-hook 'term-mode-hook
-              (defun tk/setup-term-map ()
-                (define-key term-raw-map (kbd "C-r") 'term-send-raw)
-                (define-key term-raw-map (kbd "C-s") 'term-send-raw)
-                (define-key term-raw-map (kbd "C-p") 'term-send-raw)
-                (define-key term-raw-map (kbd "C-n") 'term-send-raw)
-                (define-key term-raw-map (kbd "C-_") 'term-send-raw)
-                (define-key term-raw-map (kbd "M-f") 'term-send-raw-meta)
-                (define-key term-raw-map (kbd "M-b") 'term-send-raw-meta)
-                (define-key term-raw-map (kbd "M-d") 'term-send-raw-meta)
-                (define-key term-raw-map (kbd "M-p") 'term-send-raw-meta)
-                (define-key term-raw-map (kbd "M-n") 'term-send-raw-meta)
-                (define-key term-raw-map (kbd "M-j") 'term-send-raw-meta)
-                (define-key term-raw-map (kbd "M-k") 'term-send-raw-meta)
-                (define-key term-raw-map (kbd "M-l") 'term-send-raw-meta)
-                (define-key term-raw-map (kbd (if (spacemacs/system-is-mac)
-                                                  "s-v" "C-V")) 'term-paste)) t))
 
   (setq hippie-expand-try-functions-list '(try-expand-dabbrev-closest-first
                                            try-complete-file-name
