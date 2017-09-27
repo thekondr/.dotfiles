@@ -368,6 +368,7 @@ you should place your code here."
                   js-indent-level offset
                   typescript-indent-level offset
                   css-indent-offset offset
+                  python-indent-offset offset
                   web-mode-attr-indent-offset offset
                   web-mode-css-indent-offset offset
                   web-mode-markup-indent-offset offset
