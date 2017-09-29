@@ -43,6 +43,7 @@ values."
      auto-completion
      syntax-checking
      ycmd
+     gtags
      emacs-lisp
      (git :variables
           git-magit-status-fullscreen t)
