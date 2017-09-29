@@ -49,6 +49,7 @@ values."
      markdown
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
+     clang-format
      html
      javascript
      typescript
@@ -85,7 +86,6 @@ values."
                               (recipe :fetcher github
                                       :repo "flycheck/flycheck-google-cpplint"))
      google-c-style
-     clang-format
      flycheck-flow
      )
    ;; A list of packages that cannot be updated.
@@ -368,14 +368,6 @@ you should place your code here."
 
   (require 'helm-bookmark)
   (require 'google-c-style)
-  (require 'clang-format)
-
-  (evil-define-operator tk/clang-format-operator (beg end)
-    "Formats code with clang-format"
-    (interactive "<r>")
-    (clang-format-region beg end))
-
-  (spacemacs/set-leader-keys "=" 'tk/clang-format-operator)
 
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (defun tk-c-mode-hook ()
