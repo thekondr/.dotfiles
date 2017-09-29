@@ -369,36 +369,12 @@ you should place your code here."
   (require 'google-c-style)
   (require 'clang-format)
 
-  (defun clang-format-line ()
-    (interactive)
-    (clang-format (line-beginning-position) (line-end-position)))
+  (evil-define-operator tk/clang-format-operator (beg end)
+    "Formats code with clang-format"
+    (interactive "<r>")
+    (clang-format-region beg end))
 
-  (defun clang-format-defun ()
-    "Indent the current top-level declaration or macro syntactically.
-In the macro case this also has the effect of realigning any line
-continuation backslashes, unless `c-auto-align-backslashes' is nil."
-    (interactive "*")
-    (let ((here (point-marker)) decl-limits case-fold-search)
-      (unwind-protect
-          (progn
-            (c-save-buffer-state nil
-                                 ;; We try to be line oriented, unless there are several
-                                 ;; declarations on the same line.
-                                 (if (looking-at c-syntactic-eol)
-                                     (c-backward-token-2 1 nil (c-point 'bol))
-                                   (c-forward-token-2 0 nil (c-point 'eol)))
-                                 (setq decl-limits (c-declaration-limits nil)))
-            (if decl-limits
-                (clang-format (car decl-limits)
-                              (cdr decl-limits))))
-        (goto-char here)
-        (set-marker here nil))))
-
-  (spacemacs/set-leader-keys-for-major-mode 'c++-mode
-    "ff" 'clang-format-line
-    "fr" 'clang-format-region
-    "fb" 'clang-format-buffer
-    "fq" 'clang-format-defun)
+  (spacemacs/set-leader-keys "=" 'tk/clang-format-operator)
 
   (add-hook 'c-mode-common-hook 'google-set-c-style)
   (defun tk-c-mode-hook ()
