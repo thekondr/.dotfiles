@@ -66,6 +66,7 @@ values."
      mergetool
      tk-helm-search
      tk-shell
+     evil-defun
 
      ;; magnars
      hippie-closest-first
