@@ -84,6 +84,7 @@ values."
                               (recipe :fetcher github
                                       :repo "flycheck/flycheck-google-cpplint"))
      google-c-style
+     clang-format
      flycheck-flow
      )
    ;; A list of packages that cannot be updated.
@@ -363,6 +364,48 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq linum-relative-format " %3s ")
+
+  (require 'google-c-style)
+  (require 'clang-format)
+
+  (defun clang-format-line ()
+    (interactive)
+    (clang-format (line-beginning-position) (line-end-position)))
+
+  (defun clang-format-defun ()
+    "Indent the current top-level declaration or macro syntactically.
+In the macro case this also has the effect of realigning any line
+continuation backslashes, unless `c-auto-align-backslashes' is nil."
+    (interactive "*")
+    (let ((here (point-marker)) decl-limits case-fold-search)
+      (unwind-protect
+          (progn
+            (c-save-buffer-state nil
+                                 ;; We try to be line oriented, unless there are several
+                                 ;; declarations on the same line.
+                                 (if (looking-at c-syntactic-eol)
+                                     (c-backward-token-2 1 nil (c-point 'bol))
+                                   (c-forward-token-2 0 nil (c-point 'eol)))
+                                 (setq decl-limits (c-declaration-limits nil)))
+            (if decl-limits
+                (clang-format (car decl-limits)
+                              (cdr decl-limits))))
+        (goto-char here)
+        (set-marker here nil))))
+
+  (spacemacs/set-leader-keys-for-major-mode 'c++-mode
+    "ff" 'clang-format-line
+    "fr" 'clang-format-region
+    "fb" 'clang-format-buffer
+    "fq" 'clang-format-defun)
+
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (defun tk-c-mode-hook ()
+    (setq flycheck-disabled-checkers '(c/c++-clang c/c++-gcc)))
+
+  (add-hook 'c-mode-hook 'tk-c-mode-hook)
+  (add-hook 'c++-mode-hook 'tk-c-mode-hook)
+
   (let ((offset 2))
     (setq-default js2-basic-offset offset
                   js2-strict-trailing-comma-warning nil
@@ -428,7 +471,8 @@ you should place your code here."
     (setq yas-also-auto-indent-first-line t))
 
   ;; basic
-  (setq-default require-final-newline t)
+  (setq-default require-final-newline t
+                compilation-scroll-output t)
 
   (setq powerline-default-separator nil)
   (setq whitespace-style
@@ -476,6 +520,10 @@ you should place your code here."
     (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents))
 
   (with-eval-after-load 'projectile
+    ;; add connection "h" - "cc"
+    (add-to-list 'projectile-other-file-alist '("h" "cc" "c" "cpp" "ipp" "hpp" "m" "mm"))
+    (add-to-list 'projectile-other-file-alist '("cc" "h" "hh"))
+
     (defun tk/find-file-in-project-from-kill ()
       (interactive)
       (let* ((data (split-string (current-kill 0) ":" t))
@@ -542,8 +590,55 @@ you should place your code here."
                               (clean-aindent-mode -1))
                             comint-hooks))
 
+  (defun open-github-url (&optional path)
+    (interactive)
+    (setq url (shell-command-to-string "git remote get-url origin"))
+    (setq url (replace-regexp-in-string
+               "git@\\(.*?\\):\\(.*\\)" "https://\\1/\\2" url))
+    (setq url (replace-regexp-in-string
+               "\\(.*?\\)\\(.git\\)?\\(\n\\|$\\)" "\\1" url))
+    (when (and path (string-prefix-p "https://chromium.googlesource.com" url t))
+      (setq path (replace-regexp-in-string "/commit/" "/+/" path))
+      (setq path (concat path "%5e%21")))
+    (browse-url (concat url path)))
+
+  (defun open-aws-github-current-commit ()
+    (interactive)
+    (let* ((vcs (git-messenger:find-vcs))
+           (file (buffer-file-name (buffer-base-buffer)))
+           (line (line-number-at-pos))
+           (commit-info (git-messenger:commit-info-at-line vcs file line))
+           (commit-id (car commit-info)))
+      (open-github-url (concat "/commit/" commit-id))))
+
+  (defun open-github-commit (&optional rev)
+    (interactive)
+    (open-github-url (concat "/commit/" rev)))
+
+  (with-eval-after-load 'git-messenger
+    (defun tk/git-messenger:open-aws-commit ()
+      (interactive)
+      (when git-messenger:last-commit-id
+        (open-github-commit git-messenger:last-commit-id))
+      (git-messenger:popup-close))
+    (define-key git-messenger-map (kbd "o") 'tk/git-messenger:open-aws-commit))
+
+  (with-eval-after-load 'ycmd
+    (setq ycmd-server-command `("python" ,(expand-file-name "~/.ycmd/ycmd")))
+    (setq ycmd-extra-conf-whitelist `(,(expand-file-name "~/Documents/*"))))
+
   (spacemacs/set-leader-keys
+    "ogr" 'open-github-url
+    "ogC" 'open-aws-github-current-commit
     "oww" 'browse-url-at-point
+    "ot" (defun tk/open-external-terminal ()
+           (interactive)
+           (when (spacemacs/system-is-linux)
+             (call-process-shell-command "gnome-terminal --maximize &"))
+           (when (spacemacs/system-is-mswindows)
+             (call-process-shell-command "cmd.exe /C start cmd.exe"))
+           (when (spacemacs/system-is-mac)
+             (call-process-shell-command "open /Applications/iTerm.app")))
     "fm" 'helm-multi-files
     "fec" (defun tk/find-color-theme ()
             (interactive)
@@ -576,6 +671,20 @@ you should place your code here."
             (hippie-expand arg))))
 
   (evil-snipe-mode 1)
+
+  (defun tk//compare-revisions (rev1 &optional rev2)
+    (setq rev2 (or rev2 ""))
+    (require 'ediff)
+    (ediff-load-version-control)
+    (ediff-vc-internal rev1 rev2 nil))
+
+  ;; Uncomment to disable tags in magit because they may slow down performance
+  ;; in big repositories.
+  ;; (with-eval-after-load 'magit
+  ;;   (setq magit-refs-sections-hook (delq 'magit-insert-tags
+  ;;                                        magit-refs-sections-hook)
+  ;;         magit-status-headers-hook (delq 'magit-insert-tags-header
+  ;;                                         magit-status-headers-hook)))
 
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
