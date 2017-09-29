@@ -365,6 +365,7 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq linum-relative-format " %3s ")
 
+  (require 'helm-bookmark)
   (require 'google-c-style)
   (require 'clang-format)
 
