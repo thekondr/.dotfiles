@@ -50,7 +50,6 @@ values."
      markdown
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
-     clang-format
      html
      javascript
      typescript
@@ -66,6 +65,7 @@ values."
 
      ;; tk
      mergetool
+     code-format
      tk-helm-search
      tk-shell
      evil-defun
