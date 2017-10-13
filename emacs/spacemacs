@@ -472,8 +472,9 @@ you should place your code here."
 
   (with-eval-after-load 'ycmd
     (fset 'ycmd-command-map ycmd-command-map)
-    (spacemacs/set-leader-keys-for-major-mode 'c++-mode
-      "," 'ycmd-command-map))
+    (setq ycmd-server-command `("python" ,(expand-file-name "~/.ycmd/ycmd"))
+          ycmd-extra-conf-whitelist `(,(expand-file-name "~/Documents/*")))
+    (spacemacs/set-leader-keys-for-major-mode 'c++-mode "," 'ycmd-command-map))
 
   (with-eval-after-load 'flycheck-ycmd
     (flycheck-add-next-checker 'ycmd 'c/c++-cppcheck))
@@ -594,10 +595,6 @@ you should place your code here."
         (open-github-commit git-messenger:last-commit-id))
       (git-messenger:popup-close))
     (define-key git-messenger-map (kbd "o") 'tk/git-messenger:open-aws-commit))
-
-  (with-eval-after-load 'ycmd
-    (setq ycmd-server-command `("python" ,(expand-file-name "~/.ycmd/ycmd")))
-    (setq ycmd-extra-conf-whitelist `(,(expand-file-name "~/Documents/*"))))
 
   (spacemacs/set-leader-keys
     "ogr" 'open-github-url
