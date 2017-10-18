@@ -553,15 +553,15 @@ you should place your code here."
         (interactive)
         (helm-exit-and-execute-action 'spacemacs/helm-default-pop-shell))))
 
-  (let ((comint-hooks '(eshell-mode-hook
-                        term-mode-hook
-                        messages-buffer-mode-hook
-                        comint-mode-hook)))
-    (spacemacs/add-to-hooks (defun tk/setup-comint-modes ()
-                              (setq-local evil-move-cursor-back nil)
-                              (setq-local global-hl-line-mode nil)
-                              (clean-aindent-mode -1))
-                            comint-hooks))
+  (defun tk/setup-comint-modes ()
+    (setq-local evil-move-cursor-back nil)
+    (setq-local global-hl-line-mode nil)
+    (clean-aindent-mode -1))
+  (spacemacs/add-to-hooks 'tk/setup-comint-modes
+                          '(eshell-mode-hook
+                            term-mode-hook
+                            messages-buffer-mode-hook
+                            comint-mode-hook))
 
   (defun open-github-url (&optional path)
     (interactive)
