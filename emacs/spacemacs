@@ -493,10 +493,6 @@ you should place your code here."
     (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents))
 
   (with-eval-after-load 'projectile
-    ;; add connection "h" - "cc"
-    (add-to-list 'projectile-other-file-alist '("h" "cc" "c" "cpp" "ipp" "hpp" "m" "mm"))
-    (add-to-list 'projectile-other-file-alist '("cc" "h" "hh"))
-
     (defun tk/find-file-in-project-from-kill ()
       (interactive)
       (let* ((data (split-string (current-kill 0) ":" t))
