@@ -538,7 +538,7 @@ before packages are loaded."
             (configuration-layer//auto-mode 'octave 'octave-mode)) auto-mode-alist)
 
   (with-eval-after-load 'helm
-    (setq helm-switch-to-buffer-ow-vertically t)
+    (setq helm-window-prefer-horizontal-split t)
     (define-key helm-map (kbd "M-j") 'helm-follow-action-forward)
     (define-key helm-map (kbd "M-k") 'helm-follow-action-backward)
     (define-key helm-map (kbd "M-K") 'helm-delete-minibuffer-contents))
