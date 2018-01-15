@@ -450,6 +450,7 @@ before packages are loaded."
   (setq evil-want-fine-undo 'no)
 
   (setq neo-theme 'nerd)
+  (add-to-list 'evil-motion-state-modes 'diff-mode)
 
   (with-eval-after-load 'with-editor
     (add-hook 'with-editor-mode-hook 'evil-insert-state))
