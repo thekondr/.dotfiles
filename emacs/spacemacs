@@ -397,6 +397,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq exec-path-from-shell-check-startup-files nil)
   (setq winum-scope 'frame-local)
   (setq ido-use-faces nil)
+  (setq evil-snipe-repeat-keys nil)
   (with-eval-after-load 'ediff
     (add-hook 'ediff-keymap-setup-hook
               (lambda () (define-key ediff-mode-map (kbd "SPC") 'spacemacs-cmds)))
