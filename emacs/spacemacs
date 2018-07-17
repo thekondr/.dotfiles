@@ -48,7 +48,6 @@ This function should only modify configuration layer settings."
      (git :variables
           git-magit-status-fullscreen t)
      markdown
-     neotree
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
      html
