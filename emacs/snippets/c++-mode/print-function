@@ -1,0 +1,4 @@
+# key: pf
+# name: print function
+# --
+std::cout << __func__ << ':' << __LINE__ << '\n';

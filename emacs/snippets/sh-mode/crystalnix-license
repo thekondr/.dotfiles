@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Crystalnix License
+# key: cl
+# --
+# Copyright (c) `(format-time-string "%Y")` Crystalnix LLC. All rights reserved.

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: member
+# key: m_
+# --
+$1_($1)
