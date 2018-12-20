@@ -435,6 +435,7 @@ before packages are loaded."
     (setq-default js2-basic-offset offset
                   js2-strict-trailing-comma-warning nil
                   js-indent-level offset
+                  js-switch-indent-offset offset
                   typescript-indent-level offset
                   css-indent-offset offset
                   python-indent-offset offset
