@@ -83,9 +83,9 @@ This function should only modify configuration layer settings."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
-     (flycheck-google-cpplint :location
-                              (recipe :fetcher github
-                                      :repo "flycheck/flycheck-google-cpplint"))
+     ;; (flycheck-google-cpplint :location
+     ;;                          (recipe :fetcher github
+     ;;                                  :repo "flycheck/flycheck-google-cpplint"))
      google-c-style
      flycheck-flow
      company-flow
@@ -546,8 +546,8 @@ before packages are loaded."
                                (setq next-error-function nil))))
 
   (with-eval-after-load 'flycheck
-    (require 'flycheck-google-cpplint)
-    (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint)
+    ;; (require 'flycheck-google-cpplint)
+    ;; (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint)
     (require 'flycheck-flow)
     (flycheck-add-next-checker 'javascript-flow 'javascript-eslint)
     (dolist (mode '(web-mode react-mode))
