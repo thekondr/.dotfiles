@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: make-class-component
+# key: mc
+# --
+// @flow
+
+import React from 'react'
+import injectSheet from 'react-jss'
+
+const styles = {
+  root: {
+    width: 100,
+    height: 100,
+    backgroundColor: 'red',
+  },
+}
+
+type Props = {
+  classes: any,
+}
+
+type State = {
+
+}
+
+export class $1 extends React.Component<Props, State> {
+  state: State = {
+
+  }
+
+  render() {
+    const { classes } = this.props
+
+    return (
+      <div className={classes.root}></div>
+    )
+  }
+}
+
+export default injectSheet(styles)($1)
