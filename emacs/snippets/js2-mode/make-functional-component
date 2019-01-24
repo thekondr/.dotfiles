@@ -19,9 +19,9 @@ type Props = {
   classes: any,
 }
 
-export function $1({ classes }: Props) {
+export function ${1:`(file-name-base)`}({ classes }: Props) {
   return (
-    <div className={classes.root}></div>
+    <div className={classes.root}>$0</div>
   )
 }
 

@@ -701,6 +701,10 @@ before packages are loaded."
     "fzc" (defun tk/find-zsh-prompt ()
             (interactive)
             (find-file-existing (expand-file-name "~/.dotfiles/zsh/functions/prompt_tk_setup")))
+    "ic" 'aya-create
+    "ie" 'aya-expand
+    "iw" 'aya-persist-snippet
+    "io" 'aya-create-one-line
     "g=" 'vc-version-ediff
     "gv" 'diff-hl-diff-goto-hunk
     "gu" 'vc-revert
