@@ -469,6 +469,7 @@ before packages are loaded."
         ac-use-menu-map t)
 
   (add-to-list 'company-backends-js2-mode '(company-flow company-tern))
+  (add-to-list 'company-backends-react-mode '(company-flow))
 
   (with-eval-after-load 'company-flow
     (defun company-flow--parse-output (output)
@@ -563,6 +564,8 @@ before packages are loaded."
 
   (with-eval-after-load 'flycheck-ycmd
     (flycheck-add-next-checker 'ycmd 'c/c++-cppcheck))
+
+  (add-hook 'react-mode-hook (lambda () (setq-local company-minimum-prefix-length 2)))
 
   ;; c++-mode
   (add-to-list 'auto-mode-alist '("\\.mm\\'" . c++-mode))
