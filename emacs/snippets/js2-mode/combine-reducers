@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: combine reducers
+# key: cr
+# --
+// @flow
+
+import { combineReducers } from 'redux'
+
+$1
+$0
+${1:$(generate-imports (split-imports yas-text))}
+
+${1:$(generate-actions-states (split-imports yas-text))}
+
+const reducers = {
+${1:$(generate-reducers (split-imports yas-text))}
+}
+
+export type Action =
+${1:$(generate-actions (split-imports yas-text))}
+
+export type State = {
+${1:$(generate-states (split-imports yas-text))}
+}
+
+export default combineReducers<typeof reducers, Action>(reducers)
