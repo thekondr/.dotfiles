@@ -748,6 +748,7 @@ before packages are loaded."
   ;;         magit-status-headers-hook (delq 'magit-insert-tags-header
   ;;                                         magit-status-headers-hook)))
 
+  (setq magit-refs-pad-commit-counts t)
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
 
