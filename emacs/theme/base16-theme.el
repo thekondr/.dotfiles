@@ -804,6 +804,13 @@ in the terminal.")
      (slime-repl-result-face                       :foreground base0B)
      (slime-repl-output-face                       :foreground base0D :background base01)
 
+     (smerge-base :background nil)
+     (smerge-markers :inherit region)
+     (smerge-mine :background nil)
+     (smerge-other :background nil)
+     (smerge-refined-removed :foreground base00 :background base08)
+     (smerge-refined-added :foreground base00 :background base0B)
+
 ;;;; spaceline
      (spaceline-evil-emacs                         :foreground base01 :background base0D)
      (spaceline-evil-insert                        :foreground base01 :background base0D)
@@ -826,6 +833,8 @@ in the terminal.")
      (term-color-cyan                              :foreground base0C :background base0C)
      (term-color-blue                              :foreground base0D :background base0D)
      (term-color-magenta                           :foreground base0E :background base0E)
+
+     (typescript-jsdoc-value :foreground base05)
 
 ;;;; tuareg-mode
      (tuareg-font-lock-governing-face              :weight bold :inherit font-lock-keyword-face)
