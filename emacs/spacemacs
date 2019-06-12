@@ -64,7 +64,6 @@ This function should only modify configuration layer settings."
                  evil-snipe-enable-alternate-f-and-t-behaviors t)
 
      ;; tk
-     mergetool
      code-format
      tk-helm-search
      tk-shell
