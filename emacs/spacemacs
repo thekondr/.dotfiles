@@ -648,6 +648,9 @@ before packages are loaded."
                             messages-buffer-mode-hook
                             comint-mode-hook))
 
+  (setq git-messenger:show-detail t
+        git-messenger:use-magit-popup t)
+
   (defun open-github-url (&optional path)
     (interactive)
     (setq url (shell-command-to-string "git remote get-url origin"))
