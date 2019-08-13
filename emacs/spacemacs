@@ -62,6 +62,7 @@ This function should only modify configuration layer settings."
      ibuffer
      (evil-snipe :variables
                  evil-snipe-enable-alternate-f-and-t-behaviors t)
+     restclient
 
      ;; tk
      code-format
