@@ -574,6 +574,8 @@ before packages are loaded."
   (delete '("\\(\\.m\\'\\)" lambda nil
             (configuration-layer//auto-mode 'octave 'octave-mode)) auto-mode-alist)
 
+  (setq mac-command-modifier 'control)
+
   (with-eval-after-load 'helm
     (setq helm-window-prefer-horizontal-split t)
     (define-key helm-map (kbd "M-j") 'helm-follow-action-forward)
