@@ -1,0 +1,21 @@
+[github]
+	user = thekondr
+[push]
+	default = current
+[core]
+	autocrlf = input
+	filemode = false
+[color]
+	ui = true
+[magit]
+	hideCampaign = true
+[commit]
+	gpgsign = false
+[fetch]
+	prune = true
+[pull]
+	rebase = true
+[remote]
+	pushDefault = origin
+[merge]
+	conflictStyle = diff3
