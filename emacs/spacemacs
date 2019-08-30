@@ -753,6 +753,7 @@ before packages are loaded."
 
   (setq magit-refs-pad-commit-counts t)
   (setq magit-revision-show-gravatars nil)
+  (setq magit-section-visibility-indicator nil)
   (spacemacs/toggle-mode-line-major-mode-off)
   (spacemacs/toggle-mode-line-minor-modes-off)
 
