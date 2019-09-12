@@ -48,7 +48,7 @@ bindkey -s '\el' 'ls\n'
 bindkey -s '\ej' 'gws\n'
 bindkey -s '\ek' 'gwd\n'
 
-if [[ -n "$INSIDE_EMACS" ]] && [[ "$TERM" != dumb ]]; then
+if [[ "$INSIDE_EMACS" =~ ".*,term.*" ]] && [[ "$TERM" != dumb ]]; then
     function multi-term-chpwd {
         print -P "\033AnSiTc %d"
     }
@@ -61,7 +61,7 @@ function apply-color-theme {
     source ~/.dotfiles/zsh/base16.sh
 }
 
-[[ -z "$INSIDE_EMACS" ]] \
+[[ ! ( "$INSIDE_EMACS" =~ ".*,term.*" ) ]] \
     && [[ "$TERM" != dumb ]] \
     && apply-color-theme
 
