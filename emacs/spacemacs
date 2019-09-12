@@ -89,6 +89,7 @@ This function should only modify configuration layer settings."
      google-c-style
      flycheck-flow
      company-flow
+     flow-js2-mode
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -545,7 +546,9 @@ before packages are loaded."
     (add-hook 'js2-mode-hook (lambda nil
                                (setq js2-mode-show-parse-errors nil)
                                (setq js2-mode-show-strict-warnings nil)
-                               (setq next-error-function nil))))
+                               (setq next-error-function nil)
+                               (flow-js2-mode 1)
+                               (flow-minor-mode 1))))
 
   (with-eval-after-load 'flycheck
     ;; (require 'flycheck-google-cpplint)
