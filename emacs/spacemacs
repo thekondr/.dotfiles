@@ -634,6 +634,9 @@ before packages are loaded."
       "y" 'tk/show-and-copy-buffer-basename-and-line))
 
   (with-eval-after-load 'helm-projectile
+    (setq helm-source-projectile-projects-actions
+          (append helm-source-projectile-projects-actions
+                  '(("Smart Search in Project" . spacemacs/helm-project-smart-do-search-in-dir))))
     (defun spacemacs/helm-default-pop-shell (dir)
       (interactive)
       (let ((default-directory dir))
