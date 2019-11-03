@@ -636,16 +636,7 @@ before packages are loaded."
   (with-eval-after-load 'helm-projectile
     (setq helm-source-projectile-projects-actions
           (append helm-source-projectile-projects-actions
-                  '(("Smart Search in Project" . spacemacs/helm-project-smart-do-search-in-dir))))
-    (defun spacemacs/helm-default-pop-shell (dir)
-      (interactive)
-      (let ((default-directory dir))
-        (spacemacs/default-pop-shell)))
-    (define-key helm-projectile-projects-map
-      (kbd "M-t")
-      (lambda ()
-        (interactive)
-        (helm-exit-and-execute-action 'spacemacs/helm-default-pop-shell))))
+                  '(("Smart Search in Project" . spacemacs/helm-project-smart-do-search-in-dir)))))
 
   (defun tk/setup-comint-modes ()
     (setq-local evil-move-cursor-back nil)
