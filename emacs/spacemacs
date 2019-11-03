@@ -54,6 +54,7 @@ This function should only modify configuration layer settings."
      javascript
      typescript
      react
+     rust
      python
      shell
      shell-scripts
