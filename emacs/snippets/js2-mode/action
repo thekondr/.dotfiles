@@ -1,8 +1,4 @@
-# key: act
-# name: action
+# key: ca
+# name: create-action
 # --
-export const ${1:$$(s-upcase (s-replace " " "_" yas-text))} = '$1'
-
-export function ${1:$(s-lower-camel-case yas-text)}($3) {
-  return { type: $1${3:$(if (s-blank? yas-text) "" (concat ", " yas-text))} }
-}
+export const $1 = createAction<string, $2>('${1:$(s-upcase (s-snake-case yas-text))}')
