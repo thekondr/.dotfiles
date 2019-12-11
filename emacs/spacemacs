@@ -559,6 +559,9 @@ before packages are loaded."
     ;; (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint)
     (require 'flycheck-flow)
     (flycheck-add-next-checker 'javascript-flow 'javascript-eslint)
+    (defun flycheck-flow-tag-present-p ()
+      (string-match-p "^\\(//+[@a-zA-Z ]*@flow\\|/\\**[@a-zA-Z ]*@flow\\)"
+                      (buffer-substring-no-properties (point-min) (point-max))))
     (dolist (mode '(web-mode react-mode))
       (flycheck-add-mode 'javascript-flow mode)
       (flycheck-add-mode 'javascript-flow-coverage mode)))
