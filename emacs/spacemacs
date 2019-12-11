@@ -691,6 +691,16 @@ before packages are loaded."
       (git-messenger:popup-close))
     (define-key git-messenger-map (kbd "o") 'tk/git-messenger:open-aws-commit))
 
+  (with-eval-after-load 'popup
+    (defun popup-vertical-motion (column direction)
+      "A portable version of `vertical-motion'."
+      (if (functionp 'line-number-display-width)
+          (setq column (- column (line-number-display-width 'columns))))
+      (if (>= emacs-major-version 23)
+          (vertical-motion (cons column direction))
+        (vertical-motion direction)
+        (move-to-column (+ (current-column) column)))))
+
   (spacemacs/set-leader-keys
     "ogr" 'open-github-url
     "ogC" 'open-aws-github-current-commit
