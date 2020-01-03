@@ -665,31 +665,19 @@ before packages are loaded."
                "git@\\(.*?\\):\\(.*\\)" "https://\\1/\\2" url))
     (setq url (replace-regexp-in-string
                "\\(.*?\\)\\(.git\\)?\\(\n\\|$\\)" "\\1" url))
-    (when (and path (string-prefix-p "https://chromium.googlesource.com" url t))
-      (setq path (replace-regexp-in-string "/commit/" "/+/" path))
-      (setq path (concat path "%5e%21")))
     (browse-url (concat url path)))
-
-  (defun open-aws-github-current-commit ()
-    (interactive)
-    (let* ((vcs (git-messenger:find-vcs))
-           (file (buffer-file-name (buffer-base-buffer)))
-           (line (line-number-at-pos))
-           (commit-info (git-messenger:commit-info-at-line vcs file line))
-           (commit-id (car commit-info)))
-      (open-github-url (concat "/commit/" commit-id))))
 
   (defun open-github-commit (&optional rev)
     (interactive)
     (open-github-url (concat "/commit/" rev)))
 
   (with-eval-after-load 'git-messenger
-    (defun tk/git-messenger:open-aws-commit ()
+    (defun tk/git-messenger:open-commit ()
       (interactive)
       (when git-messenger:last-commit-id
         (open-github-commit git-messenger:last-commit-id))
       (git-messenger:popup-close))
-    (define-key git-messenger-map (kbd "o") 'tk/git-messenger:open-aws-commit))
+    (define-key git-messenger-map (kbd "o") 'tk/git-messenger:open-commit))
 
   (with-eval-after-load 'popup
     (defun popup-vertical-motion (column direction)
@@ -702,17 +690,7 @@ before packages are loaded."
         (move-to-column (+ (current-column) column)))))
 
   (spacemacs/set-leader-keys
-    "ogr" 'open-github-url
-    "ogC" 'open-aws-github-current-commit
     "oww" 'browse-url-at-point
-    "ot" (defun tk/open-external-terminal ()
-           (interactive)
-           (when (spacemacs/system-is-linux)
-             (call-process-shell-command "gnome-terminal --maximize &"))
-           (when (spacemacs/system-is-mswindows)
-             (call-process-shell-command "cmd.exe /C start cmd.exe"))
-           (when (spacemacs/system-is-mac)
-             (call-process-shell-command "open /Applications/iTerm.app")))
     "fm" 'helm-multi-files
     "fec" (defun tk/find-color-theme ()
             (interactive)
@@ -752,12 +730,6 @@ before packages are loaded."
             (hippie-expand arg))))
 
   (evil-snipe-mode 1)
-
-  (defun tk//compare-revisions (rev1 &optional rev2)
-    (setq rev2 (or rev2 ""))
-    (require 'ediff)
-    (ediff-load-version-control)
-    (ediff-vc-internal rev1 rev2 nil))
 
   ;; Uncomment to disable tags in magit because they may slow down performance
   ;; in big repositories.
