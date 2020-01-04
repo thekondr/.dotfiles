@@ -340,7 +340,7 @@ in the terminal.")
      (isearch-fail                                 :background base01 :inverse-video t :inherit font-lock-warning-face)
 
 ;;;; line-numbers
-     (line-number                                  :foreground base03 :background base01)
+     (line-number                                  :foreground base03)
      (line-number-current-line                     :inverse-video t)
 
 ;;;; mode-line
@@ -863,7 +863,11 @@ in the terminal.")
      (whitespace-space-after-tab                   :foreground base08 :background base0A)
      (whitespace-space-before-tab                  :foreground base08 :background base09)
      (whitespace-tab                               :foreground base03 :background base01)
-     (whitespace-trailing                          :foreground base0A :background base08)))
+     (whitespace-trailing                          :foreground base0A :background base08)
+
+     (doom-modeline-buffer-path                    :foreground base04 :weight bold)
+     (doom-modeline-buffer-major-mode              :foreground base0A :weight bold)
+     ))
 
   ;; Anything leftover that doesn't fall neatly into a face goes here.
   (let ((base00 (plist-get theme-colors :base00))

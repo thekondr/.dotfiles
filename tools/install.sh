@@ -35,5 +35,6 @@ echo 'source $HOME/.dotfiles/zsh/zshenv' >> ~/.zshenv
 echo 'source $HOME/.dotfiles/zsh/zshrc' >> ~/.zshrc
 echo 'source $HOME/.dotfiles/tmux/tmux.conf' >> ~/.tmux.conf
 echo '(load-file "$HOME/.dotfiles/emacs/spacemacs")' >> ~/.spacemacs
+ln -s "$HOME/.dotfiles/emacs/doom" "$HOME/.doom.d"
 
 chsh -s `which zsh`
