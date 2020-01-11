@@ -62,7 +62,9 @@
       :n "/" #'+default/search-project
       :n "jw" #'evil-ace-jump-word-mode
       :n "TAB" #'evil-switch-to-windows-last-buffer
-      :n ";" #'evilnc-comment-operator)
+      :n ";" #'evilnc-comment-operator
+      :n "en" #'flycheck-next-error
+      )
 
 (map! :map doom-leader-project-map
       "v" #'projectile-vc)
