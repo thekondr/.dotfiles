@@ -713,6 +713,8 @@ before packages are loaded."
     "gu" 'vc-revert
     "g~" 'vc-revision-other-window)
 
+  (define-key evil-insert-state-map (kbd "C-.") 'company-complete)
+
   (setq hippie-expand-try-functions-list '(try-expand-dabbrev-closest-first
                                            try-complete-file-name
                                            try-expand-dabbrev-all-buffers
