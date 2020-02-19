@@ -66,8 +66,14 @@
       :n "en" #'flycheck-next-error
       )
 
-(map! :map doom-leader-project-map
-      "v" #'projectile-vc)
+(defun tk-counsel-projectile-vc ()
+  (interactive)
+  (require 'counsel-projectile)
+  (counsel-projectile-switch-project #'counsel-projectile-switch-project-action-vc))
+
+(map! (:map doom-leader-project-map
+            "p" #'tk-counsel-projectile-vc
+            "v" #'projectile-vc))
 
 (map! :map counsel-find-file-map
       "C-h" #'counsel-up-directory)
@@ -82,3 +88,13 @@
 (setq magit-refs-pad-commit-counts t)
 (setq magit-revision-show-gravatars nil)
 (setq magit-section-visibility-indicator nil)
+
+(set-popup-rules! '(("\\*cargo"
+                     :side right
+                     :size 0.5
+                     :select t)))
+
+(set-popup-rules! '(("\\*rust"
+                     :side right
+                     :size 0.5
+                     :select t)))
