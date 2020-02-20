@@ -1,3 +1,10 @@
+(defun tk/capitalize (s)
+  "Convert the first character to upper case and leave the rest the same in S."
+  (declare (side-effect-free t))
+  (if (s-blank? s)
+      ""
+    (concat (upcase (substring s 0 1)) (substring s 1))))
+
 (defun split-imports (string)
   (mapcar 's-trim (s-split "," string t)))
 
