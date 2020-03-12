@@ -423,6 +423,7 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq display-line-numbers-type 'relative)
   (setq display-line-numbers-width-start t)
+  (setq split-window-preferred-function 'split-window-horizontally)
   (add-hook 'text-mode-hook 'display-line-numbers-mode)
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
