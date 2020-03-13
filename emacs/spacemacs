@@ -510,7 +510,9 @@ before packages are loaded."
       "oyn" 'yas-new-snippet
       "oyv" 'yas-visit-snippet-file)
     (evil-set-initial-state 'snippet-mode 'insert)
-    (setq yas-snippet-dirs (list (expand-file-name "~/.dotfiles/emacs/snippets")))
+    (setq yas-snippet-dirs (list
+                            (expand-file-name "~/.dotfiles/emacs/snippets")
+                            (expand-file-name "~/.emacs.d/private/snippets")))
     (load (concat (expand-file-name "~/.dotfiles/emacs/snippets") "/utils.el"))
     (define-key yas-minor-mode-map (kbd "TAB") 'yas-expand)
     (define-key yas-minor-mode-map (kbd "<tab>") 'yas-expand)
