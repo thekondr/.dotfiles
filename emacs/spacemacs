@@ -725,7 +725,8 @@ before packages are loaded."
     "g=" 'vc-version-ediff
     "gv" 'diff-hl-diff-goto-hunk
     "gu" 'vc-revert
-    "g~" 'vc-revision-other-window)
+    "g~" 'vc-revision-other-window
+    "gm" 'git-messenger:popup-message)
 
   (define-key evil-insert-state-map (kbd "C-.") 'company-complete)
 
