@@ -549,6 +549,28 @@ before packages are loaded."
   (setq avy-background nil)
   (setq delete-by-moving-to-trash nil)
 
+  (with-eval-after-load 'flow-minor-mode
+    (defun flow-minor-jump-to-definition-other-window ()
+      (interactive)
+      (let ((flow-minor-jump-other-window t))
+        (flow-minor-jump-to-definition)))
+    (spacemacs/set-leader-keys-for-minor-mode 'flow-minor-mode
+      "fs" 'flow-minor-status
+      "ff" 'flow-minor-jump-to-definition
+      "fF" 'flow-minor-jump-to-definition-other-window)
+    (defun flow-minor-eldoc-sentinel (process _event)
+      (when (eq (process-status process) 'exit)
+        (if (eq (process-exit-status process) 0)
+            (with-current-buffer "*Flow Eldoc*"
+              (let ((message (if (string-equal (s-trim-right (buffer-string)) "(unknown)")
+                                 "(unknown)"
+                               (goto-char (point-max))
+                               (forward-line -1)
+                               (delete-region (point) (point-max))
+                               (flow-minor-colorize-buffer)
+                               (buffer-substring (point-min) (- (point-max) 1)))))
+                (eldoc-message message)))))))
+
   (with-eval-after-load 'js2-mode
     (add-hook 'js2-mode-hook (lambda nil
                                (setq js2-mode-show-parse-errors nil)
