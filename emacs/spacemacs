@@ -92,6 +92,7 @@ This function should only modify configuration layer settings."
      flycheck-flow
      company-flow
      flow-js2-mode
+     prettier-js
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -572,6 +573,9 @@ before packages are loaded."
                 (eldoc-message message)))))))
 
   (with-eval-after-load 'js2-mode
+    (add-hook 'js2-mode-hook 'prettier-js-mode)
+    (spacemacs/set-leader-keys-for-major-mode 'js2-mode
+      "," 'prettier-js)
     (add-hook 'js2-mode-hook (lambda nil
                                (setq js2-mode-show-parse-errors nil)
                                (setq js2-mode-show-strict-warnings nil)
@@ -591,6 +595,14 @@ before packages are loaded."
       (flycheck-add-mode 'javascript-flow mode)
       (flycheck-add-mode 'javascript-flow-coverage mode)))
 
+  (with-eval-after-load 'typescript-mode
+    (add-hook 'typescript-mode-hook 'prettier-js-mode)
+    (spacemacs/set-leader-keys-for-major-mode 'typescript-mode
+      "," 'prettier-js)
+    (with-eval-after-load 'tide
+      (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)))
+
+  (add-to-list 'auto-mode-alist '("\\.tsx$" . typescript-mode))
   (with-eval-after-load 'ycmd
     (fset 'ycmd-command-map ycmd-command-map)
     (setq ycmd-server-command `("python" ,(expand-file-name "~/.ycmd/ycmd"))
