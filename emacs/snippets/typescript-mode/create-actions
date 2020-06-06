@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: create actions
+# key: cas
+# --
+import { createAction } from 'redux-actions'
+
+ca

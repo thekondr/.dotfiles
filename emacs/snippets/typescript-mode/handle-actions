@@ -1,0 +1,10 @@
+# key: has
+# name: handle-actions
+# --
+import { handleActions, type ActionType } from 'redux-actions'
+
+export type State = $1
+
+export default handleActions<State, any>({
+  ha$0
+}, $2)

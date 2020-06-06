@@ -1,0 +1,7 @@
+# key: ha
+# name: handle-action
+# --
+[$1.toString()]: (
+  state: State,
+  { payload }: ActionType<typeof $1>
+): State =>

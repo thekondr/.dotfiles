@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: saga-generator
+# key: gs
+# --
+function* $1($2): Saga<void> {
+  $0
+}

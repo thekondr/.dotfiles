@@ -16,17 +16,14 @@
 
 (defun generate-action-state (import)
   (format
-   "import type { Action as %sAction, State as %sState } from './%s'"
-   (s-upper-camel-case import) (s-upper-camel-case import) import))
+   "import type { State as %sState } from './%s'"
+   (s-upper-camel-case import) import))
 
 (defun generate-actions-states (imports)
   (s-join "\n" (mapcar 'generate-action-state imports)))
 
 (defun generate-reducers (imports)
   (s-join "\n" (mapcar '(lambda (i) (format "%s," i)) imports)))
-
-(defun generate-actions (imports)
-  (s-join "\n" (mapcar '(lambda (i) (format "| %sAction" (s-upper-camel-case i))) imports)))
 
 (defun generate-states (imports)
   (s-join "\n" (mapcar '(lambda (i) (format "%s: %sState," i (s-upper-camel-case i))) imports)))

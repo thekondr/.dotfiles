@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: make-story
+# key: ms
+# --
+// @flow
+
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
+
+import $1 from './$1'
+
+const stories = storiesOf('$2', module)
+
+stories.add('$1', () => (
+  <$1 />
+))
