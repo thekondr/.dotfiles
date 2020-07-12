@@ -135,7 +135,7 @@ in the terminal.")
 ;;; Built-in
 ;;;; tk overrides
      (cursor                                       :background base05)
-     (fringe                                       :background base01)
+     (fringe                                       :background base00)
      (show-paren-match                             :foreground base08)
      (show-paren-mismatch                          :background base09 :foreground base03)
      (diff-hl-change                               :foreground base0E :background base0E)
