@@ -583,6 +583,9 @@ before packages are loaded."
                                (flow-js2-mode 1)
                                (flow-minor-mode 1))))
 
+  (with-eval-after-load 'helm-ag
+    (setq helm-ag-base-command "rg --color never --no-heading"))
+
   (with-eval-after-load 'flycheck
     ;; (require 'flycheck-google-cpplint)
     ;; (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint)
