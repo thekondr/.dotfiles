@@ -2,6 +2,6 @@
 # name: saga-generator
 # key: gs
 # --
-function* $1($2): Saga<void> {
+function* $1($2): SagaIterator {
   $0
 }

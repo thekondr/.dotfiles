@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: expect-error
+# key: ee
+# --
+/* @ts-expect-error */
