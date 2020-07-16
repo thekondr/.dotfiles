@@ -105,6 +105,7 @@ This function should only modify configuration layer settings."
      vi-tilde-fringe
      tk-base16-theme
      magit-gitflow
+     company-tern
      )
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
