@@ -78,6 +78,9 @@
 (map! :map counsel-find-file-map
       "C-h" #'counsel-up-directory)
 
+(map! :map ivy-minibuffer-map
+      "C-h" #'doom/delete-backward-word)
+
 (setq base16-theme-256-color-source "base16-shell")
 (setq custom-theme-directory (expand-file-name "~/.dotfiles/emacs/theme"))
 (add-to-list 'load-path "~/.dotfiles/emacs/theme")
