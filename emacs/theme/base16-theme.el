@@ -682,6 +682,8 @@ in the terminal.")
 ;;;; linum-mode
      (linum                                        :foreground base03 :background base01)
 
+     (lsp-ui-sideline-code-action :foreground base0A)
+
 ;;;; mark-multiple
      (mm/master-face                               :foreground nil :background nil :inherit region)
      (mm/mirror-face                               :foreground nil :background nil :inherit region)
