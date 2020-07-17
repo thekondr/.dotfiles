@@ -60,7 +60,7 @@
 
 (map! :leader
       :n "/" #'+default/search-project
-      :n "jw" #'evil-ace-jump-word-mode
+      :n "jw" #'evil-avy-goto-word-or-subword-1
       :n "TAB" #'evil-switch-to-windows-last-buffer
       :n ";" #'evilnc-comment-operator
       :n "en" #'flycheck-next-error
