@@ -58,28 +58,10 @@
         (setq column (- column (line-number-display-width 'columns))))
     (vertical-motion (cons column direction))))
 
-(map! :leader
-      :n "/" #'+default/search-project
-      :n "jw" #'evil-avy-goto-word-or-subword-1
-      :n "TAB" #'evil-switch-to-windows-last-buffer
-      :n ";" #'evilnc-comment-operator
-      :n "en" #'flycheck-next-error
-      )
-
 (defun tk-counsel-projectile-vc ()
   (interactive)
   (require 'counsel-projectile)
   (counsel-projectile-switch-project #'counsel-projectile-switch-project-action-vc))
-
-(map! (:map doom-leader-project-map
-            "p" #'tk-counsel-projectile-vc
-            "v" #'projectile-vc))
-
-(map! :map counsel-find-file-map
-      "C-h" #'counsel-up-directory)
-
-(map! :map ivy-minibuffer-map
-      "C-h" #'doom/delete-backward-word)
 
 (setq base16-theme-256-color-source "base16-shell")
 (setq custom-theme-directory (expand-file-name "~/.dotfiles/emacs/theme"))
@@ -92,12 +74,38 @@
 (setq magit-revision-show-gravatars nil)
 (setq magit-section-visibility-indicator nil)
 
-(set-popup-rules! '(("\\*cargo"
-                     :side right
-                     :size 0.5
-                     :select t)))
+(set-popup-rules! '(("*" :side right :size 0.5 :select t)))
 
-(set-popup-rules! '(("\\*rust"
-                     :side right
-                     :size 0.5
-                     :select t)))
+(map! (:leader
+       :n "1" #'winum-select-window-1
+       :n "2" #'winum-select-window-2
+       :n "3" #'winum-select-window-3
+       :n "4" #'winum-select-window-4
+       :n "5" #'winum-select-window-5
+       :n "6" #'winum-select-window-6
+       :n "7" #'winum-select-window-7
+       :n "8" #'winum-select-window-8
+       :n "9" #'winum-select-window-9
+       :n "0" #'winum-select-window-0
+       :n "/" #'+default/search-project
+       :n "j" #'evil-avy-goto-word-or-subword-1
+       :n "TAB" #'evil-switch-to-windows-last-buffer
+       :n ";" #'evilnc-comment-operator
+       :n "en" #'flycheck-next-error
+       :n "ep" #'flycheck-previous-error)
+
+      (:map doom-leader-project-map
+       "p" #'tk-counsel-projectile-vc
+       "v" #'projectile-vc)
+
+      (:map counsel-find-file-map
+       "C-h" #'counsel-up-directory)
+
+      (:map ivy-minibuffer-map
+       "M-J" #'ivy-yank-word
+       "M-K" #'kill-sentence
+       "M-j" #'ivy-next-line-and-call
+       "M-k" #'ivy-previous-line-and-call
+       "M-l" #'ivy-call
+       "C-h" #'doom/delete-backward-word
+       "C-S-h" help-map))
