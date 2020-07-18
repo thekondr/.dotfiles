@@ -472,6 +472,8 @@ in the terminal.")
 
 ;;;; evil-mode
      (evil-search-highlight-persist-highlight-face :background base01 :inverse-video t :inherit font-lock-warning-face)
+     (evil-ex-search :foreground base0A :background base01 :inverse-video t)
+     (evil-ex-lazy-highlight :foreground base0C :background base01 :inverse-video t)
 
 ;;;; flycheck-mode
      (flycheck-error                               :underline (:style wave :color base08))
