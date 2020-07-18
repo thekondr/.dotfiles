@@ -49,8 +49,6 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
-(set-frame-parameter nil 'fullscreen 'maximized)
-
 (after! popup
   (defun popup-vertical-motion (column direction)
     "A portable version of `vertical-motion'."
