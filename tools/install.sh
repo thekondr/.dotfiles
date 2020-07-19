@@ -25,7 +25,6 @@ install_repo() {
 }
 
 install_repo https://github.com/thekondr/.dotfiles ~/.dotfiles
-install_repo https://github.com/syl20bnr/spacemacs ~/.emacs.d
 install_repo https://github.com/sorin-ionescu/prezto ~/.zprezto
 
 echo 'source $HOME/.dotfiles/vim/vimrc' >> ~/.vimrc
@@ -34,7 +33,6 @@ echo 'source $HOME/.dotfiles/zsh/zprofile' >> ~/.zprofile
 echo 'source $HOME/.dotfiles/zsh/zshenv' >> ~/.zshenv
 echo 'source $HOME/.dotfiles/zsh/zshrc' >> ~/.zshrc
 echo 'source $HOME/.dotfiles/tmux/tmux.conf' >> ~/.tmux.conf
-echo '(load-file "$HOME/.dotfiles/emacs/spacemacs")' >> ~/.spacemacs
 ln -s "$HOME/.dotfiles/emacs/doom" "$HOME/.doom.d"
 
 chsh -s `which zsh`
