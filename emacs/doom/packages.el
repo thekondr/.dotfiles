@@ -52,3 +52,9 @@
 ;(package! builtin-package :recipe (:branch "develop"))
 
 (package! git-messenger :pin "2d64e62e33be9f881ebb019afc183caac9c62eda")
+(package! flow-js2-mode)
+(package! flycheck-flow)
+(package! company-flow)
+(package! prettier-js)
+
+(package! company-prescient :disable t)
