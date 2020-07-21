@@ -144,8 +144,8 @@
 
 (defvar tk/private-configs
   (list
-   "~/.zshrc"
    "~/.dotfiles/emacs/doom/config.el"
+   "~/.zshrc"
    "~/.dotfiles/emacs/doom/init.el"
    "~/.dotfiles/emacs/doom/packages.el"
    "~/.dotfiles/zsh/zshrc"
