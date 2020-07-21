@@ -159,6 +159,13 @@
                         (when file
                           (find-file (expand-file-name file)))))))
 
+(defadvice! tk--ivy-next-previous-line-and-call-a (orig-fn &rest args)
+  :around #'ivy-next-line-and-call
+  :around #'ivy-previous-line-and-call
+  (if (memq last-command '(ivy-call ivy-next-line-and-call ivy-previous-line-and-call))
+      (apply orig-fn args)
+    (ivy-call)))
+
 (map! (:leader
        :n "1" #'winum-select-window-1
        :n "2" #'winum-select-window-2
