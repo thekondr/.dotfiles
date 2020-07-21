@@ -340,18 +340,26 @@
   (after! tide
     (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)))
 
-;; (after! projectile
-;;   (defun tk/find-file-in-project-from-kill ()
-;;     (interactive)
-;;     (let* ((data (split-string (current-kill 0) ":" t))
-;;            (file (projectile-expand-root (replace-regexp-in-string "\\\\" "/" (car data))))
-;;            (line (if (cdr data) (string-to-number (cadr data))))
-;;            (column (if (cddr data) (string-to-number (caddr data)))))
-;;       (if (not (file-readable-p file))
-;;           (error (concat "File '" file "' not found"))
-;;         (find-file file)
-;;         (if line (goto-line line))
-;;         (if column (move-to-column (- column 1))))))
+(after! projectile
+  (defun tk/find-file-in-project-from-kill ()
+    (interactive)
+    (let* ((data (split-string (current-kill 0) ":" t))
+           (base-file (replace-regexp-in-string "\\\\" "/" (car data)))
+           (file (projectile-expand-root base-file))
+           (line (if (cdr data) (string-to-number (cadr data))))
+           (column (if (cddr data) (string-to-number (caddr data)))))
+      (find-file (if (file-readable-p file)
+                     file
+                   (projectile-expand-root
+                    (projectile-completing-read
+                     "Find file: "
+                     (projectile-project-files (projectile-ensure-project (projectile-project-root)))
+                     :initial-input base-file))))
+      (when line (goto-char (point-min)) (forward-line (1- line)))
+      (when column (forward-char (1- column)))))
+
+  (map! :leader
+        :n "pw" #'tk/find-file-in-project-from-kill)
 ;;   (defun tk/projectile-buffer-file-name ()
 ;;     (s-chop-prefix (projectile-project-root) (buffer-file-name)))
 ;;   (defun tk/projectile-header-guard ()
@@ -385,7 +393,8 @@
 ;;    "p C-g" nil
 ;;    "\"" 'spacemacs/projectile-shell-pop)
 ;;   (spacemacs/set-leader-keys-for-major-mode 'c++-mode
-;;                                             "y" 'tk/show-and-copy-buffer-basename-and-line))
+;;                                             "y" 'tk/show-and-copy-buffer-basename-and-line)
+  )
 
 (evil-define-text-object evil-a-defun (count &optional beg end type)
   "Select a defun."
