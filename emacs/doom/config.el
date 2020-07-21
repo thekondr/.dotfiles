@@ -322,6 +322,7 @@
 (after! flycheck
   ;; (require 'flycheck-google-cpplint)
   ;; (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint)
+  (setq flycheck-popup-tip-error-prefix "")
   (require 'flycheck-flow)
   (flycheck-add-next-checker 'javascript-flow 'javascript-eslint)
   (defun flycheck-flow-tag-present-p ()
