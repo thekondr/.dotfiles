@@ -198,6 +198,10 @@
        :v "J" (concat ":m '>+1" (kbd "RET") "gv=gv")
        :v "K" (concat ":m '<-2" (kbd "RET") "gv=gv"))
 
+      (:after magit
+       (:map magit-mode-map
+        :nv "z" nil))
+
       (:map doom-leader-project-map
        "p" #'tk-counsel-projectile-vc
        "v" #'projectile-vc)
