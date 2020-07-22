@@ -204,7 +204,11 @@
 
       (:map doom-leader-project-map
        "p" #'tk-counsel-projectile-vc
-       "v" #'projectile-vc)
+       "v" #'projectile-vc
+       "g" #'projectile-find-file-dwim
+       "G" #'projectile-find-file-dwim-other-window
+       "t" #'projectile-find-implementation-or-test-other-window
+       "T" #'magit-todos-list)
 
       (:map counsel-find-file-map
        "C-h" #'counsel-up-directory)
@@ -363,43 +367,49 @@
       (when line (goto-char (point-min)) (forward-line (1- line)))
       (when column (forward-char (1- column)))))
 
-  (map! :leader
-        :n "pw" #'tk/find-file-in-project-from-kill)
-;;   (defun tk/projectile-buffer-file-name ()
-;;     (s-chop-prefix (projectile-project-root) (buffer-file-name)))
-;;   (defun tk/projectile-header-guard ()
-;;     (concat (replace-regexp-in-string "[/\.]" "_" (upcase (tk/projectile-buffer-file-name))) "_"))
-;;   (defun tk/projectile-show-and-copy-buffer-filename ()
-;;     "Show the path to the current file from project root in the minibuffer."
-;;     (interactive)
-;;     (let ((file-name (tk/projectile-buffer-file-name)))
-;;       (if file-name
-;;           (progn
-;;             (message file-name)
-;;             (kill-new file-name))
-;;         (error "Buffer not visiting a file"))))
-;;   (defun tk/show-and-copy-buffer-basename-and-line ()
-;;     "Show the path to the current file from project root in the minibuffer."
-;;     (interactive)
-;;     (let ((file-name (file-name-nondirectory (buffer-file-name))))
-;;       (if file-name
-;;           (progn
-;;             (setq file-name (concat file-name ":" (int-to-string (line-number-at-pos))))
-;;             (message file-name)
-;;             (kill-new file-name))
-;;         (error "Buffer not visiting a file"))))
-;;   (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
-;;   (spacemacs/set-leader-keys
-;;    "pg" 'projectile-find-file-dwim
-;;    "pG" 'projectile-find-file-dwim-other-window
-;;    "pA" 'projectile-find-implementation-or-test-other-window
-;;    "pw" 'tk/find-file-in-project-from-kill
-;;    "py" 'tk/projectile-show-and-copy-buffer-filename
-;;    "p C-g" nil
-;;    "\"" 'spacemacs/projectile-shell-pop)
-;;   (spacemacs/set-leader-keys-for-major-mode 'c++-mode
-;;                                             "y" 'tk/show-and-copy-buffer-basename-and-line)
-  )
+  (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
+  (setq projectile-create-missing-test-files t)
+
+  (projectile-register-project-type 'npm '("package.json")
+                                    :project-file "package.json"
+                                    :compile "npm start"
+                                    :test "npm test"
+                                    :test-dir "src/"
+                                    :test-suffix ".test")
+
+  (defun tk/projectile-buffer-file-name ()
+    (s-chop-prefix (projectile-project-root) (buffer-file-name)))
+
+  (defun tk/projectile-header-guard ()
+    (concat (replace-regexp-in-string "[/\.]" "_" (upcase (tk/projectile-buffer-file-name))) "_"))
+
+  (defun tk/projectile-show-and-copy-buffer-filename ()
+    "Show the path to the current file from project root in the minibuffer."
+    (interactive)
+    (let ((file-name (tk/projectile-buffer-file-name)))
+      (if file-name
+          (progn
+            (message file-name)
+            (kill-new file-name))
+        (error "Buffer not visiting a file"))))
+
+  (defun tk/show-and-copy-buffer-basename-and-line ()
+    "Show the path to the current file from project root in the minibuffer."
+    (interactive)
+    (let ((file-name (file-name-nondirectory (buffer-file-name))))
+      (if file-name
+          (progn
+            (setq file-name (concat file-name ":" (int-to-string (line-number-at-pos))))
+            (message file-name)
+            (kill-new file-name))
+        (error "Buffer not visiting a file"))))
+
+  (map! (:map doom-leader-project-map
+         :n "y" #'tk/projectile-show-and-copy-buffer-filename
+         :n "w" #'tk/find-file-in-project-from-kill)
+
+        (:leader
+         :n "\"" #'+vterm/here)))
 
 (evil-define-text-object evil-a-defun (count &optional beg end type)
   "Select a defun."
