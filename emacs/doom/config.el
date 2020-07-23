@@ -181,6 +181,7 @@
        :n "j" #'evil-avy-goto-word-or-subword-1
        :n "TAB" #'evil-switch-to-windows-last-buffer
        :n ";" #'evilnc-comment-operator
+       :n "cr" #'recompile
        :n "en" #'flycheck-next-error
        :n "ep" #'flycheck-previous-error
 
