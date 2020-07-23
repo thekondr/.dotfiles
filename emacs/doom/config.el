@@ -331,7 +331,6 @@
 (after! flycheck
   ;; (require 'flycheck-google-cpplint)
   ;; (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint)
-  (setq flycheck-popup-tip-error-prefix "")
   (require 'flycheck-flow)
   (flycheck-add-next-checker 'javascript-flow 'javascript-eslint)
   (defun flycheck-flow-tag-present-p ()
@@ -340,6 +339,9 @@
   (dolist (mode '(web-mode react-mode))
     (flycheck-add-mode 'javascript-flow mode)
     (flycheck-add-mode 'javascript-flow-coverage mode)))
+
+(after! flycheck-popup-tip
+  (setq flycheck-popup-tip-error-prefix ""))
 
 (after! typescript-mode
   (add-hook 'typescript-mode-hook 'prettier-js-mode)
