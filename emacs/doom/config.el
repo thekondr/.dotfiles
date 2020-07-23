@@ -408,8 +408,8 @@
         (error "Buffer not visiting a file"))))
 
   (map! (:map doom-leader-project-map
-         :n "y" #'tk/projectile-show-and-copy-buffer-filename
-         :n "w" #'tk/find-file-in-project-from-kill)
+         "y" #'tk/projectile-show-and-copy-buffer-filename
+         "w" #'tk/find-file-in-project-from-kill)
 
         (:leader
          :n "\"" #'+vterm/here)))
