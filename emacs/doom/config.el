@@ -53,6 +53,7 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
+(setq doom-modeline-buffer-file-name-style 'file-name)
 (setq mac-command-modifier 'control)
 (setq winum-scope 'frame-local)
 (setq evil-want-fine-undo 'no)
@@ -370,7 +371,6 @@
       (when line (goto-char (point-min)) (forward-line (1- line)))
       (when column (forward-char (1- column)))))
 
-  (setq projectile-mode-line '(:eval (format " [%s]" (projectile-project-name))))
   (setq projectile-create-missing-test-files t)
 
   (projectile-register-project-type 'npm '("package.json")
