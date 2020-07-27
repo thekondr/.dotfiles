@@ -56,5 +56,3 @@
 (package! flycheck-flow)
 (package! company-flow)
 (package! prettier-js)
-
-(package! company-prescient :disable t)
