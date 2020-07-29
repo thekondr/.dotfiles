@@ -220,7 +220,10 @@
        "M-K" #'kill-sentence
        "M-j" #'ivy-next-line-and-call
        "M-k" #'ivy-previous-line-and-call
-       "M-l" #'ivy-call
+       "M-h" #'backward-char
+       "M-l" #'ivy-forward-char
+       "C-f" #'ivy-scroll-up-command
+       "C-b" #'ivy-scroll-down-command
        "C-h" #'doom/delete-backward-word
        "C-S-h" help-map))
 
