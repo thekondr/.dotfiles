@@ -168,6 +168,7 @@
     (ivy-call)))
 
 (map! (:leader
+       :n "SPC" #'counsel-M-x
        :n "1" #'winum-select-window-1
        :n "2" #'winum-select-window-2
        :n "3" #'winum-select-window-3
