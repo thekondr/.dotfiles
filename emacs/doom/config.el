@@ -53,6 +53,7 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
+(setq diff-font-lock-syntax nil)
 (setq doom-modeline-buffer-file-name-style 'file-name)
 (setq mac-command-modifier 'control)
 (setq winum-scope 'frame-local)

@@ -405,8 +405,11 @@ in the terminal.")
 
 ;;;; diff-mode
      (diff-added                                   :foreground base0B)
+     (diff-indicator-added :inherit diff-added)
      (diff-changed                                 :foreground base0E)
+     (diff-indicator-changed :inherit diff-changed)
      (diff-removed                                 :foreground base08)
+     (diff-indicator-removed :inherit diff-removed)
      (diff-header                                  :background base01)
      (diff-file-header                             :background base02)
      (diff-hunk-header                             :foreground base0E :background base01)
