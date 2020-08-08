@@ -688,6 +688,7 @@ in the terminal.")
      (linum                                        :foreground base03 :background base01)
 
      (lsp-ui-sideline-code-action :foreground base0A)
+     (lsp-modeline-code-actions-face :foreground base0C)
 
 ;;;; mark-multiple
      (mm/master-face                               :foreground nil :background nil :inherit region)
