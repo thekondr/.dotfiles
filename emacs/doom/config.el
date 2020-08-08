@@ -191,6 +191,7 @@
        :n "g=" #'vc-version-ediff
        :n "oww" #'browse-url-at-point
        :n "fp" #'tk/find-private
+       :n "gfh" #'magit-log-buffer-file
        :n "gv" #'diff-hl-diff-goto-hunk
        :n "gu" #'vc-revert
        :n "g~" #'vc-revision-other-window
