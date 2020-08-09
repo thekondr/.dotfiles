@@ -61,21 +61,23 @@
 (add-to-list 'evil-motion-state-modes 'diff-mode)
 (setq magit-delete-by-moving-to-trash nil)
 
-;; (setq hippie-expand-try-functions-list '(try-expand-dabbrev-closest-first
-;;                                          try-complete-file-name
-;;                                          try-expand-dabbrev-all-buffers
-;;                                          try-expand-dabbrev-from-kill
-;;                                          try-expand-all-abbrevs
-;;                                          try-complete-lisp-symbol-partially
-;;                                          try-complete-lisp-symbol))
+(require 'try-closest)
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev-closest-first
+                                         try-complete-file-name
+                                         try-expand-dabbrev-all-buffers
+                                         try-expand-dabbrev-from-kill
+                                         try-expand-all-abbrevs
+                                         try-complete-lisp-symbol-partially
+                                         try-complete-lisp-symbol))
 
-;; (setq evil-complete-next-func
-;;       (defun hippie-expand-lines (arg)
-;;         (interactive)
-;;         (let ((hippie-expand-try-functions-list '(yas-hippie-try-expand
-;;                                                   try-expand-line-closest-first
-;;                                                   try-expand-line-all-buffers)))
-;;           (hippie-expand arg))))
+(setq evil-complete-next-func
+      (defun hippie-expand-lines (arg)
+        (interactive)
+        (let ((hippie-expand-try-functions-list '(yas-hippie-try-expand
+                                                  try-expand-line-closest-first
+                                                  try-expand-line-all-buffers)))
+          (hippie-expand arg))))
+
 (require 'diff-hl)
 
 (after! popup
