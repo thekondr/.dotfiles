@@ -340,8 +340,6 @@
                                (flow-minor-mode 1))))
 
 (after! flycheck
-  ;; (require 'flycheck-google-cpplint)
-  ;; (flycheck-add-next-checker 'c/c++-cppcheck 'c/c++-googlelint)
   (require 'flycheck-flow)
   (flycheck-add-next-checker 'javascript-flow 'javascript-eslint)
   (defun flycheck-flow-tag-present-p ()
