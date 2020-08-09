@@ -428,28 +428,20 @@
   "Select inner defun."
   (evil-select-inner-object 'evil-defun beg end type count t))
 
-(defun evil-defun/init-evil-defun ()
-  (use-package evil-defun
-    :commands (evil-inner-defun
-               evil-a-defun)
-    :init
-    (progn
-      (define-key evil-outer-text-objects-map (kbd "d") 'evil-a-defun)
-      (define-key evil-inner-text-objects-map (kbd "d") 'evil-inner-defun))))
+(use-package evil-defun
+  :commands (evil-inner-defun
+             evil-a-defun)
+  :init
+  (map! (:map evil-outer-text-objects-map "d" #'evil-a-defun)
+        (:map evil-inner-text-objects-map "d" #'evil-inner-defun)))
 
-
-;; (use-package! evil-little-word
-;;   :commands (evil-forward-little-word-begin
-;;              evil-backward-little-word-begin
-;;              evil-forward-little-word-end
-;;              evil-backward-little-word-end
-;;              evil-a-little-word
-;;              evil-inner-little-word)
-;;   :init
-;;   (map! (:m "glw" #'evil-forward-little
-;;          :m "glw" #'evil-forward-little-word-begin
-;;          :m "glb" #'evil-backward-little-word-begin
-;;          :m "glW" #'evil-forward-little-word-end
-;;          :m "glB" #'evil-backward-little-word-end)
-;;         (:map evil-outer-text-objects-map "lw" #'evil-a-little-word)
-;;         (:map evil-inner-text-objects-map "lw" #'evil-inner-little-word)))
+(use-package! evil-little-word
+  :commands (evil-forward-little-word-begin
+             evil-backward-little-word-begin
+             evil-forward-little-word-end
+             evil-backward-little-word-end
+             evil-a-little-word
+             evil-inner-little-word)
+  :init
+  (map! (:map evil-outer-text-objects-map "lw" #'evil-a-little-word)
+        (:map evil-inner-text-objects-map "lw" #'evil-inner-little-word)))
