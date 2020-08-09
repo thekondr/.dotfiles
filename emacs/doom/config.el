@@ -168,6 +168,12 @@
       (apply orig-fn args)
     (ivy-call)))
 
+(defadvice! tk--evil-visualstar/begin-search (orig-fn &rest args)
+  :around #'evil-visualstar/begin-search-backward
+  :around #'evil-visualstar/begin-search-forward
+  (let ((evil-ex-search-vim-style-regexp nil))
+      (apply orig-fn args)))
+
 (map! (:leader
        :n "SPC" #'counsel-M-x
        :n "1" #'winum-select-window-1
