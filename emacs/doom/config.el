@@ -245,32 +245,33 @@
 ;; (after! flycheck-ycmd
 ;;   (flycheck-add-next-checker 'ycmd 'c/c++-cppcheck))
 
-;; (after! company
-;;   (add-to-list 'company-backends-js2-mode '(company-flow))
-;;   (add-to-list 'company-backends-react-mode '(company-flow)))
+(use-package! company-flow
+  :after js2-mode
+  :config
+  (set-company-backend! 'js2-mode 'company-flow)
 
-;; (after! company-flow
-;;   (defun company-flow--parse-output (output)
-;;     (when (not (or (equal output "Error: not enough type information to autocomplete\n")
-;;                    (equal output "Error: autocomplete on possibly null or undefined value\n")))
-;;       (mapcar 'company-flow--make-candidate
-;;               (split-string output "\n"))))
-;;   (defun company-flow--candidates-query (prefix callback)
-;;     (let* ((line (line-number-at-pos (point)))
-;;            (col (+ 1 (current-column)))
-;;            (command (list (executable-find company-flow-executable)
-;;                           "autocomplete"
-;;                           "--quiet"
-;;                           buffer-file-name
-;;                           (number-to-string line)
-;;                           (number-to-string col)))
-;;            (process-connection-type nil)
-;;            (process (apply 'start-process "company-flow" nil command)))
-;;       (set-process-sentinel process #'company-flow--handle-signal)
-;;       (set-process-filter process #'company-flow--receive-checker-output)
-;;       (process-put process 'company-flow-callback callback)
-;;       (process-put process 'company-flow-prefix prefix)
-;;       (company-flow--process-send-buffer process))))
+  (defun company-flow--parse-output (output)
+    (when (not (or (equal output "Error: not enough type information to autocomplete\n")
+                   (equal output "Error: autocomplete on possibly null or undefined value\n")))
+      (mapcar 'company-flow--make-candidate
+              (split-string output "\n"))))
+
+  (defun company-flow--candidates-query (prefix callback)
+    (let* ((line (line-number-at-pos (point)))
+           (col (+ 1 (current-column)))
+           (command (list (executable-find company-flow-executable)
+                          "autocomplete"
+                          "--quiet"
+                          buffer-file-name
+                          (number-to-string line)
+                          (number-to-string col)))
+           (process-connection-type nil)
+           (process (apply 'start-process "company-flow" nil command)))
+      (set-process-sentinel process #'company-flow--handle-signal)
+      (set-process-filter process #'company-flow--receive-checker-output)
+      (process-put process 'company-flow-callback callback)
+      (process-put process 'company-flow-prefix prefix)
+      (company-flow--process-send-buffer process))))
 
 (after! yasnippet
   (evil-set-initial-state 'snippet-mode 'insert)
@@ -315,10 +316,13 @@
     (interactive)
     (let ((flow-minor-jump-other-window t))
       (flow-minor-jump-to-definition)))
-  ;; (spacemacs/set-leader-keys-for-minor-mode 'flow-minor-mode
-  ;;                                           "fs" 'flow-minor-status
-  ;;                                           "ff" 'flow-minor-jump-to-definition
-  ;;                                           "fF" 'flow-minor-jump-to-definition-other-window)
+
+  (map! :mode flow-minor-mode
+        :localleader
+        "fs" 'flow-minor-status
+        "ff" 'flow-minor-jump-to-definition
+        "fF" 'flow-minor-jump-to-definition-other-window)
+
   (defun flow-minor-eldoc-sentinel (process _event)
     (when (eq (process-status process) 'exit)
       (if (eq (process-exit-status process) 0)
@@ -333,6 +337,7 @@
               (eldoc-message message)))))))
 
 (after! js2-mode
+  (remove-hook 'js2-mode-local-vars-hook #'+javascript-init-lsp-or-tide-maybe-h)
   (add-hook 'js2-mode-hook #'(lambda ()
                                (setq js2-mode-show-parse-errors nil)
                                (setq js2-mode-show-strict-warnings nil)
