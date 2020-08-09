@@ -236,15 +236,6 @@
        "C-h" #'doom/delete-backward-word
        "C-S-h" help-map))
 
-;; (after! ycmd
-;;   (fset 'ycmd-command-map ycmd-command-map)
-;;   (setq ycmd-server-command `("python" ,(expand-file-name "~/.ycmd/ycmd"))
-;;         ycmd-extra-conf-whitelist `(,(expand-file-name "~/Documents/*")))
-;;   (spacemacs/set-leader-keys-for-major-mode 'c++-mode "," 'ycmd-command-map))
-
-;; (after! flycheck-ycmd
-;;   (flycheck-add-next-checker 'ycmd 'c/c++-cppcheck))
-
 (use-package! company-flow
   :after js2-mode
   :config
