@@ -354,10 +354,6 @@
 
 (after! typescript-mode
   (add-hook 'typescript-mode-hook 'prettier-js-mode)
-  ;; (spacemacs/set-leader-keys-for-major-mode 'typescript-mode
-  ;;                                           "," 'prettier-js
-  ;;                                           "f" 'tide-jump-to-definition
-  ;;                                           "d" 'tide-documentation-at-point)
   (after! tide
     (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)))
 
