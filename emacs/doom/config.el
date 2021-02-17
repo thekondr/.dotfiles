@@ -60,6 +60,7 @@
 (setq evil-want-fine-undo 'no)
 (add-to-list 'evil-motion-state-modes 'diff-mode)
 (setq magit-delete-by-moving-to-trash nil)
+(setq confirm-kill-emacs nil)
 
 (require 'try-closest)
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev-closest-first
