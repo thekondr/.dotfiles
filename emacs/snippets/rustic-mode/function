@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: function
+# key: f
+# --
+fn $1($2) -> $3 {
+$0
+}
