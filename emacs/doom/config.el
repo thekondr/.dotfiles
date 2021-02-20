@@ -444,3 +444,10 @@
   :init
   (map! (:map evil-outer-text-objects-map "lw" #'evil-a-little-word)
         (:map evil-inner-text-objects-map "lw" #'evil-inner-little-word)))
+
+(defun flutter-chrome ()
+  "Start `flutter run` or hot-reload if already running."
+  (interactive)
+  (if (flutter--running-p)
+      (flutter-hot-reload)
+    (flutter-run "-d chrome")))
