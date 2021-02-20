@@ -451,3 +451,6 @@
   (if (flutter--running-p)
       (flutter-hot-reload)
     (flutter-run "-d chrome")))
+
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer))
