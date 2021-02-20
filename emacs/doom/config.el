@@ -58,7 +58,13 @@
 
 (setq diff-font-lock-syntax nil)
 (setq doom-modeline-buffer-file-name-style 'file-name)
-(setq mac-command-modifier 'control)
+
+(if IS-LINUX
+    (setq doom-modeline-height 32))
+
+(if IS-MAC
+    (setq mac-command-modifier 'control))
+
 (setq winum-scope 'frame-local)
 (setq evil-want-fine-undo 'no)
 (add-to-list 'evil-motion-state-modes 'diff-mode)
