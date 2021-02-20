@@ -21,7 +21,7 @@ install_repo() {
         echo "\033[32m$dir -> $dir.old\033[0m"
         mv $dir $dir.old
     fi
-    env git clone --depth=1 --recursive $url $dir
+    env git clone --recursive $url $dir
 }
 
 install_repo https://github.com/thekondr/.dotfiles ~/.dotfiles
