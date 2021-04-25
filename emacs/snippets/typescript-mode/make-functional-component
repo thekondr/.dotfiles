@@ -2,8 +2,6 @@
 # name: make-functional-component
 # key: mf
 # --
-// @flow
-
 import React from 'react'
 import makeStyles from '@material-ui/styles/makeStyles'
 

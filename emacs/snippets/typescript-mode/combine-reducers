@@ -2,8 +2,6 @@
 # name: combine reducers
 # key: cr
 # --
-// @flow
-
 import { combineReducers } from 'redux'
 
 $1
