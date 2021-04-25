@@ -1,7 +1,7 @@
 # key: has
 # name: handle-actions
 # --
-import { handleActions, type ActionType } from 'redux-actions'
+import { handleActions } from 'redux-actions'
 
 export type State = $1
 
