@@ -401,3 +401,43 @@
 
 (after! rustic
   (setq rustic-lsp-server 'rust-analyzer))
+
+(evil-define-command +multiple-cursors/evil-mc-toggle-cursor-here ()
+  "Create a cursor at point. If in visual block or line mode, then create
+cursors on each line of the selection, on the column of the cursor. Otherwise
+pauses cursors."
+  :repeat nil
+  :keep-visual nil
+  :evil-mc t
+  (interactive)
+  (cond ((and (evil-mc-has-cursors-p)
+              (evil-normal-state-p)
+              (let* ((pos (point))
+                     (cursor (cl-find-if (lambda (cursor)
+                                           (eq pos (evil-mc-get-cursor-start cursor)))
+                                         evil-mc-cursor-list)))
+                (when cursor
+                  (evil-mc-delete-cursor cursor)
+                  (setq evil-mc-cursor-list (delq cursor evil-mc-cursor-list))
+                  t))))
+
+        ((and (boundp 'iedit-occurrences-overlays)
+              iedit-occurrences-overlays)
+         (let* ((ov (iedit-find-current-occurrence-overlay))
+                (offset (- (point) (overlay-start ov)))
+                (master (point)))
+           (evil-mc-run-cursors-before)
+           (dolist (occurrence iedit-occurrences-overlays)
+             (let ((pos (+ (overlay-start occurrence) offset)))
+               (unless (= master pos)
+                 (evil-mc-make-cursor-at-pos pos))))
+           (evil-multiedit-abort)))
+
+        ((memq evil-this-type '(line block))
+         (evil-mc-make-cursor-in-visual-selection-beg)
+         (evil-mc-execute-for-all-cursors #'evil-normal-state))
+
+        (t
+         (evil-mc-pause-cursors)
+         ;; I assume I don't want the cursors to move yet
+         (evil-mc-make-cursor-here))))
