@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pass-prop
+# key: pp
+# --
+$1={${2:$1}}

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: export-default-async-function
+# key: edaf
+# --
+export default async function $1($2) {
+  $3
+}
