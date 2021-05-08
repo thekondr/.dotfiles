@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: import from
+# name: import-from
 # key: imf
 # --
-import { $2 } from '$1'
+import ${2:\{ $3 \}} from '$1'

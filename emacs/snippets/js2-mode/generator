@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: generator
+# key: g
+# --
+function* $1($2) {
+  $3
+}

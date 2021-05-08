@@ -2,4 +2,4 @@
 # name: const
 # key: k
 # --
-const $1 = 
+const ${2:\{ $3 \}} = $1
