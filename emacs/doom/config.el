@@ -441,3 +441,10 @@ pauses cursors."
          (evil-mc-pause-cursors)
          ;; I assume I don't want the cursors to move yet
          (evil-mc-make-cursor-here))))
+
+(after! tide
+  (defadvice! tide-no-save (orig-fn &rest args)
+    :around #'tide-apply-code-edits
+    :around #'tide-rename-symbol-at-location
+    (cl-letf (((symbol-function 'basic-save-buffer) #'ignore))
+      (apply orig-fn args))))
