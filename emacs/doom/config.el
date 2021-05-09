@@ -203,8 +203,6 @@
        :n "TAB" #'evil-switch-to-windows-last-buffer
        :n ";" #'evilnc-comment-operator
        :n "cr" #'recompile
-       :n "en" #'flycheck-next-error
-       :n "ep" #'flycheck-previous-error
 
        :n "g=" #'vc-version-ediff
        :n "oww" #'browse-url-at-point
@@ -216,8 +214,6 @@
        :n "gm" #'git-messenger:popup-message)
 
       (:i "C-." #'company-complete
-       :i "C-," #'aya-expand
-       :n "C-," #'aya-create
        :v "J" (concat ":m '>+1" (kbd "RET") "gv=gv")
        :v "K" (concat ":m '<-2" (kbd "RET") "gv=gv"))
 
