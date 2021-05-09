@@ -71,22 +71,28 @@
 (setq magit-delete-by-moving-to-trash nil)
 (setq confirm-kill-emacs nil)
 
-(require 'try-closest)
-(setq hippie-expand-try-functions-list '(try-expand-dabbrev-closest-first
-                                         try-complete-file-name
-                                         try-expand-dabbrev-all-buffers
-                                         try-expand-dabbrev-from-kill
-                                         try-expand-all-abbrevs
-                                         try-complete-lisp-symbol-partially
-                                         try-complete-lisp-symbol))
+;; (require 'try-closest)
 
-(setq evil-complete-next-func
-      (defun hippie-expand-lines (arg)
-        (interactive)
-        (let ((hippie-expand-try-functions-list '(yas-hippie-try-expand
-                                                  try-expand-line-closest-first
-                                                  try-expand-line-all-buffers)))
-          (hippie-expand arg))))
+;; (setq hippie-expand-try-functions-list '(try-expand-dabbrev-closest-first
+;;                                          try-complete-file-name
+;;                                          try-expand-dabbrev-all-buffers
+;;                                          try-expand-dabbrev-from-kill
+;;                                          try-expand-all-abbrevs
+;;                                          try-complete-lisp-symbol-partially
+;;                                          try-complete-lisp-symbol))
+
+;; (setq evil-complete-previous-line-func
+;;       (defun hippie-expand-lines (arg)
+;;         (interactive)
+;;         (let ((hippie-expand-try-functions-list '(yas-hippie-try-expand
+;;                                                   try-expand-line-closest-first
+;;                                                   try-expand-line-all-buffers)))
+;;           (hippie-expand arg))))
+
+;; (setq evil-complete-next-line-func
+;;       (make-hippie-expand-function '(yas-hippie-try-expand
+;;                                      try-expand-line-closest-first
+;;                                      try-expand-line-all-buffers)))
 
 (require 'diff-hl)
 
@@ -214,6 +220,7 @@
        :n "gm" #'git-messenger:popup-message)
 
       (:i "C-." #'company-complete
+       :i "C-n" #'evil-complete-next-line
        :v "J" (concat ":m '>+1" (kbd "RET") "gv=gv")
        :v "K" (concat ":m '<-2" (kbd "RET") "gv=gv"))
 
