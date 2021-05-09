@@ -444,3 +444,7 @@ pauses cursors."
     :around #'tide-rename-symbol-at-location
     (cl-letf (((symbol-function 'basic-save-buffer) #'ignore))
       (apply orig-fn args))))
+
+(after! smartparens
+  (ad-disable-advice #'hippie-expand 'after #'sp-auto-complete-advice)
+  (ad-activate #'hippie-expand))
