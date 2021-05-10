@@ -59,11 +59,13 @@
 (setq diff-font-lock-syntax nil)
 (setq doom-modeline-buffer-file-name-style 'file-name)
 
-(if IS-LINUX
+(when IS-LINUX
     (setq doom-modeline-height 32))
 
-(if IS-MAC
-    (setq mac-command-modifier 'control))
+(when IS-MAC
+  (setq mac-command-modifier 'control)
+  (setq ns-command-modifier 'control)
+  (setq ns-right-option-modifier 'left))
 
 (setq winum-scope 'frame-local)
 (setq evil-want-fine-undo 'no)
@@ -160,12 +162,25 @@
 
   (define-key git-messenger-map (kbd "o") 'tk/git-messenger:open-commit))
 
+(defun tk/visit-pull-request-url ()
+  "Visit the current branch's PR on Github."
+  (interactive)
+  (browse-url
+    (format "https://github.com/%s/pull/new/%s"
+      (replace-regexp-in-string
+        "\\`.+github\\.com:\\(.+\\)\\.git\\'" "\\1"
+        (magit-get "remote"
+          (magit-get-current-remote)
+          "url"))
+      (magit-get-current-branch))))
+
 (set-popup-rules! '(("*" :side right :size 0.5 :select t)))
 
 (defvar tk/private-configs
   (list
    "~/.dotfiles/emacs/doom/config.el"
    "~/.zshrc"
+   "~/.alacritty.yml"
    "~/.dotfiles/emacs/doom/init.el"
    "~/.dotfiles/emacs/doom/packages.el"
    "~/.dotfiles/zsh/zshrc"
@@ -204,9 +219,7 @@
        :n "8" #'winum-select-window-8
        :n "9" #'winum-select-window-9
        :n "0" #'winum-select-window-0
-       :n "/" #'+default/search-project
        :n "j" #'evil-avy-goto-word-or-subword-1
-       :n "TAB" #'evil-switch-to-windows-last-buffer
        :n ";" #'evilnc-comment-operator
        :n "cr" #'recompile
 
@@ -221,11 +234,23 @@
 
       (:i "C-." #'company-complete
        :i "C-n" #'evil-complete-next-line
+       :i "C-a" #'evil-paste-last-insertion
        :v "J" (concat ":m '>+1" (kbd "RET") "gv=gv")
        :v "K" (concat ":m '<-2" (kbd "RET") "gv=gv"))
 
+  (:after tide
+    (:map tide-mode-map
+      :localleader
+      "f" #'tide-fix
+      "r" #'tide-refactor
+      "q" #'tide-restart-server
+      "i" #'tide-organize-imports
+      "s" #'tide-nav
+      "c" #'tide-rename-symbol))
+
       (:after magit
        (:map magit-mode-map
+        :n "V" #'tk/visit-pull-request-url
         :nv "z" nil))
 
       (:map doom-leader-project-map
@@ -244,10 +269,8 @@
        "M-K" #'kill-sentence
        "M-j" #'ivy-next-line-and-call
        "M-k" #'ivy-previous-line-and-call
-       "M-h" #'backward-char
-       "M-l" #'ivy-forward-char
-       "C-f" #'ivy-scroll-up-command
-       "C-b" #'ivy-scroll-down-command
+       "C-v" #'ivy-scroll-up-command
+       "M-v" #'ivy-scroll-down-command
        "C-h" #'doom/delete-backward-word
        "C-S-h" help-map))
 
@@ -293,7 +316,6 @@
 (setq delete-by-moving-to-trash nil)
 
 (after! js2-mode
-  (remove-hook 'js2-mode-local-vars-hook #'+javascript-init-lsp-or-tide-maybe-h)
   (add-hook 'js2-mode-hook #'(lambda ()
                                (setq js2-mode-show-parse-errors nil)
                                (setq js2-mode-show-strict-warnings nil)
@@ -455,3 +477,5 @@ pauses cursors."
 (after! smartparens
   (ad-disable-advice #'hippie-expand 'after #'sp-auto-complete-advice)
   (ad-activate #'hippie-expand))
+
+(set-frame-parameter (selected-frame) 'alpha 90)
