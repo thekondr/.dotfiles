@@ -52,3 +52,5 @@
 (package! git-messenger :pin "2d64e62e33be9f881ebb019afc183caac9c62eda")
 (package! prettier-js)
 (package! protobuf-mode)
+
+(package! evil-escape :disable t)
