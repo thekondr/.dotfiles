@@ -235,6 +235,8 @@
       (:i "C-." #'company-complete
        :i "C-n" #'evil-complete-next-line
        :i "C-a" #'evil-paste-last-insertion
+       :i "C-," #'aya-expand
+       :n "C-," #'aya-create
        :v "J" #'drag-stuff-down
        :v "K" #'drag-stuff-up)
 
