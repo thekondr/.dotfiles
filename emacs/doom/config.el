@@ -235,8 +235,8 @@
       (:i "C-." #'company-complete
        :i "C-n" #'evil-complete-next-line
        :i "C-a" #'evil-paste-last-insertion
-       :v "J" (concat ":m '>+1" (kbd "RET") "gv=gv")
-       :v "K" (concat ":m '<-2" (kbd "RET") "gv=gv"))
+       :v "J" #'drag-stuff-down
+       :v "K" #'drag-stuff-up)
 
   (:after tide
     (:map tide-mode-map
