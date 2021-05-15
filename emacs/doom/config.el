@@ -233,8 +233,8 @@
        :n "g~" #'vc-revision-other-window
        :n "gm" #'git-messenger:popup-message)
 
-      (:i "C-." #'company-complete
-       :i "C-n" #'evil-complete-next-line
+      (:i "C-n" #'+company/whole-lines
+       :i "C-p" #'+company/dabbrev
        :i "C-a" #'evil-paste-last-insertion
        :i "C-," #'aya-expand
        :n "C-," #'aya-create
@@ -281,6 +281,10 @@
     :after #'yas--move-to-field
     (when (yas--field-modified-p field)
       (goto-char (yas--field-end field))))
+
+(after! company
+  (setq company-idle-delay 0.2)
+  (setq company-tooltip-maximum-width 60))
 
 (after! yasnippet
   (evil-set-initial-state 'snippet-mode 'insert)
