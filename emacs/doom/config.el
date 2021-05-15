@@ -338,6 +338,7 @@
 
 (after! typescript-mode
   (add-hook 'typescript-mode-hook 'prettier-js-mode)
+  (add-hook 'typescript-mode-hook 'tide-hl-identifier-mode)
   (after! tide
     (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)))
 
