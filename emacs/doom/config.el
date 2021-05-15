@@ -72,6 +72,7 @@
 (add-to-list 'evil-motion-state-modes 'diff-mode)
 (setq magit-delete-by-moving-to-trash nil)
 (setq confirm-kill-emacs nil)
+(setq +snippets-dir (expand-file-name "~/.dotfiles/emacs/snippets"))
 
 ;; (require 'try-closest)
 
@@ -280,7 +281,7 @@
   (evil-set-initial-state 'snippet-mode 'insert)
   (setq yas-triggers-in-field t
         yas-snippet-dirs (list
-                          (expand-file-name "~/.dotfiles/emacs/snippets")
+                          +snippets-dir
                           (expand-file-name "~/.emacs.d/private/snippets")))
   (load (concat (expand-file-name "~/.dotfiles/emacs/snippets") "/utils.el"))
   (define-key yas-minor-mode-map (kbd "TAB") 'yas-expand)
@@ -303,6 +304,9 @@
 
   (setq yas-prompt-functions '(yas-popup-prompt))
   (setq yas-also-auto-indent-first-line t))
+
+(after! auto-yasnippet
+  (setq aya-create-with-newline t))
 
 ;; basic
 (setq-default require-final-newline t
