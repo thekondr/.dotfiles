@@ -277,6 +277,11 @@
        "C-h" #'doom/delete-backward-word
        "C-S-h" help-map))
 
+  (defadvice! yas--move-to-field-end (_snippet field)
+    :after #'yas--move-to-field
+    (when (yas--field-modified-p field)
+      (goto-char (yas--field-end field))))
+
 (after! yasnippet
   (evil-set-initial-state 'snippet-mode 'insert)
   (setq yas-triggers-in-field t
