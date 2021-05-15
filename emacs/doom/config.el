@@ -468,3 +468,14 @@ pauses cursors."
       (apply orig-fn args))))
 
 (set-frame-parameter (selected-frame) 'alpha 90)
+
+(after! company
+  (when (featurep! :completion company +childframe)
+    (add-hook! 'evil-normal-state-entry-hook
+      (defun +company-abort-h ()
+        ;; HACK `company-abort' doesn't no-op if company isn't active; causing
+        ;;      unwanted side-effects, like the suppression of messages in the
+        ;;      echo-area.
+        ;; REVIEW Revisit this to refactor; shouldn't be necessary!
+        (when company-candidates
+          (company-abort))))))
