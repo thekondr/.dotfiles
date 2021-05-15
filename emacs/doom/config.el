@@ -74,29 +74,6 @@
 (setq confirm-kill-emacs nil)
 (setq +snippets-dir (expand-file-name "~/.dotfiles/emacs/snippets"))
 
-;; (require 'try-closest)
-
-;; (setq hippie-expand-try-functions-list '(try-expand-dabbrev-closest-first
-;;                                          try-complete-file-name
-;;                                          try-expand-dabbrev-all-buffers
-;;                                          try-expand-dabbrev-from-kill
-;;                                          try-expand-all-abbrevs
-;;                                          try-complete-lisp-symbol-partially
-;;                                          try-complete-lisp-symbol))
-
-;; (setq evil-complete-previous-line-func
-;;       (defun hippie-expand-lines (arg)
-;;         (interactive)
-;;         (let ((hippie-expand-try-functions-list '(yas-hippie-try-expand
-;;                                                   try-expand-line-closest-first
-;;                                                   try-expand-line-all-buffers)))
-;;           (hippie-expand arg))))
-
-;; (setq evil-complete-next-line-func
-;;       (make-hippie-expand-function '(yas-hippie-try-expand
-;;                                      try-expand-line-closest-first
-;;                                      try-expand-line-all-buffers)))
-
 (require 'diff-hl)
 
 (after! popup
@@ -489,9 +466,5 @@ pauses cursors."
     :around #'tide-rename-symbol-at-location
     (cl-letf (((symbol-function 'basic-save-buffer) #'ignore))
       (apply orig-fn args))))
-
-(after! smartparens
-  (ad-disable-advice #'hippie-expand 'after #'sp-auto-complete-advice)
-  (ad-activate #'hippie-expand))
 
 (set-frame-parameter (selected-frame) 'alpha 90)
