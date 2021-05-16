@@ -270,30 +270,14 @@
 (after! yasnippet
   (evil-set-initial-state 'snippet-mode 'insert)
   (setq yas-triggers-in-field t
+        yas-also-auto-indent-first-line t
         yas-snippet-dirs (list
                           +snippets-dir
                           (expand-file-name "~/.emacs.d/private/snippets")))
-  (load (concat (expand-file-name "~/.dotfiles/emacs/snippets") "/utils.el"))
+  (load (concat +snippets-dir "/utils.el"))
   (define-key yas-minor-mode-map (kbd "TAB") 'yas-expand)
   (define-key yas-minor-mode-map (kbd "<tab>") 'yas-expand)
-  (require 'popup)
-  (define-key popup-menu-keymap (kbd "C-j") 'popup-next)
-  (define-key popup-menu-keymap (kbd "C-k") 'popup-previous)
-
-  (add-hook 'snippet-mode-hook #'(lambda () (ws-butler-mode -1)))
-
-  (defun yas-popup-prompt (prompt choices &optional display-fn)
-    (popup-menu*
-     (mapcar
-      (lambda (choice)
-        (popup-make-item
-         (or (and display-fn (funcall display-fn choice))
-             choice)
-         :value choice))
-      choices)))
-
-  (setq yas-prompt-functions '(yas-popup-prompt))
-  (setq yas-also-auto-indent-first-line t))
+  (add-hook 'snippet-mode-hook #'(lambda () (ws-butler-mode -1))))
 
 (after! auto-yasnippet
   (setq aya-create-with-newline t))
