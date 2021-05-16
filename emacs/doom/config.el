@@ -275,8 +275,6 @@
                           +snippets-dir
                           (expand-file-name "~/.emacs.d/private/snippets")))
   (load (concat +snippets-dir "/utils.el"))
-  (define-key yas-minor-mode-map (kbd "TAB") 'yas-expand)
-  (define-key yas-minor-mode-map (kbd "<tab>") 'yas-expand)
   (add-hook 'snippet-mode-hook #'(lambda () (ws-butler-mode -1))))
 
 (after! auto-yasnippet
