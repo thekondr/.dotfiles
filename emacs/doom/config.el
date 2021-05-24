@@ -218,6 +218,9 @@
        :v "J" #'drag-stuff-down
        :v "K" #'drag-stuff-up)
 
+       :n "]e" #'flycheck-next-error
+       :n "[p" #'flycheck-previous-error
+
   (:after tide
     (:map tide-mode-map
       :localleader
@@ -226,7 +229,8 @@
       "q" #'tide-restart-server
       "i" #'tide-organize-imports
       "s" #'tide-nav
-      "c" #'tide-rename-symbol))
+      "c" #'tide-rename-symbol
+      "m" #'tide-rename-file))
 
       (:after magit
        (:map magit-mode-map
