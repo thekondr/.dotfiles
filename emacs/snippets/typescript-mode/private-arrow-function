@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: private-arrow-function
+# key: pj
+# --
+private ${1:constructor} = ($2) => ${3:\{
+  $4
+\}}

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: private-async-method
-# key: pam
+# name: private-async-function
+# key: paf
 # --
 private async ${1:constructor}($2) {
   $3

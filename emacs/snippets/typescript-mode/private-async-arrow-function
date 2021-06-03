@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: private-async-arrow-function
+# key: paj
+# --
+private ${1:constructor} = async ($2) => ${3:\{
+  $4
+\}}
