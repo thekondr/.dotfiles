@@ -275,7 +275,9 @@
                           +snippets-dir
                           (expand-file-name "~/.emacs.d/private/snippets")))
   (load (concat +snippets-dir "/utils.el"))
-  (add-hook 'snippet-mode-hook #'(lambda () (ws-butler-mode -1))))
+  (add-hook 'snippet-mode-hook #'(lambda ()
+                                   (ws-butler-mode -1)
+                                   (setq require-final-newline nil))))
 
 (after! auto-yasnippet
   (setq aya-create-with-newline t))
