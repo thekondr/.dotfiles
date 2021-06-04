@@ -219,7 +219,7 @@
        :v "K" #'drag-stuff-up)
 
        :n "]e" #'flycheck-next-error
-       :n "[p" #'flycheck-previous-error
+       :n "[e" #'flycheck-previous-error
 
   (:after tide
     (:map tide-mode-map
