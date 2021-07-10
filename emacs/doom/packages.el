@@ -54,3 +54,4 @@
 (package! protobuf-mode)
 
 (package! evil-escape :disable t)
+(package! doom-snippets :disable t)
