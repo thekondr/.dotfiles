@@ -2,7 +2,7 @@
 # name: constructor
 # key: cn
 # --
-constructor() {
+constructor($1) {
   super()
-  $1
+  $2
 }
