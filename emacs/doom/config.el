@@ -457,6 +457,7 @@ pauses cursors."
       (apply orig-fn args))))
 
 (set-frame-parameter (selected-frame) 'alpha 90)
+(global-visual-line-mode 1)
 
 (after! company
   (when (featurep! :completion company +childframe)
