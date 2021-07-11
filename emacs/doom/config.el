@@ -271,6 +271,7 @@
   (evil-set-initial-state 'snippet-mode 'insert)
   (setq yas-triggers-in-field t
         yas-also-auto-indent-first-line t
+        yas-choose-keys-first t
         yas-snippet-dirs (list
                           +snippets-dir
                           (expand-file-name "~/.emacs.d/private/snippets")))
