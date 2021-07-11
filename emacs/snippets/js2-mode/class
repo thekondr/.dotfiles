@@ -2,6 +2,6 @@
 # name: class
 # key: c
 # --
-class $1${2: extends $3} {
-  $4
+class $1 {
+  $2
 }
