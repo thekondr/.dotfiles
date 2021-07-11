@@ -242,7 +242,7 @@
        "v" #'projectile-vc
        "g" #'projectile-find-file-dwim
        "G" #'projectile-find-file-dwim-other-window
-       "t" #'projectile-find-implementation-or-test-other-window
+       "t" #'projectile-toggle-between-implementation-and-test
        "T" #'magit-todos-list)
 
       (:map counsel-find-file-map
