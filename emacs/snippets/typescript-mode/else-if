@@ -1,9 +1,7 @@
 # -*- mode: snippet -*-
-# name: if-else
-# key: ie
+# name: else-if
+# key: ei
 # --
-if ($1) {
+else if ($1) {
   `yas-selected-text`$2
-} else {
-  $3
 }

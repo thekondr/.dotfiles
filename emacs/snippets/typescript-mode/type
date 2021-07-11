@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: type
-# key: ty
+# key: s
 # --
 type $1 = {
   $2

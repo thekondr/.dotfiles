@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: private-generator
+# key: pg
+# --
+private *${1:newGenerator}($2): Generator<$3> {
+  $4
+}

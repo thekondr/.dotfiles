@@ -2,6 +2,6 @@
 # name: private-arrow-function
 # key: pj
 # --
-private ${1:constructor} = ($2) => ${3:\{
+private ${1:newFunction} = ($2) => ${3:\{
   $4
 \}}

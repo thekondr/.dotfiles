@@ -2,6 +2,6 @@
 # name: method
 # key: m
 # --
-${1:constructor}($2) {
+${1:newFunction}($2) {
   $3
 }

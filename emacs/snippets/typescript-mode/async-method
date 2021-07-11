@@ -2,6 +2,6 @@
 # name: async-method
 # key: am
 # --
-async ${1:constructor}($2) {
+async ${1:newFunction}($2) {
   $3
 }

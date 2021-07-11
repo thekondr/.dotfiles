@@ -2,6 +2,6 @@
 # name: private-async-function
 # key: paf
 # --
-private async ${1:constructor}($2) {
-  $3
+private async ${1:newFunction}($2): Promise<${3:void}> {
+  $4
 }

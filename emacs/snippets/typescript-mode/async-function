@@ -2,6 +2,6 @@
 # name: async-function
 # key: af
 # --
-async function $1($2) {
-  $3
+async function ${1:newFunction}($2): Promise<${3:void}> {
+  $4
 }
