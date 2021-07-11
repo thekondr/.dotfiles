@@ -2,6 +2,6 @@
 # name: async-function
 # key: af
 # --
-async function $1($2) {
+async function ${1:newFunction}($2) {
   $3
 }

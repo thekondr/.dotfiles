@@ -3,5 +3,5 @@
 # key: fo
 # --
 for (const ${2:\{ $3 \}} of $1) {
-  $4
+  `yas-selected-text`$4
 }
