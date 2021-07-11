@@ -3,5 +3,5 @@
 # key: f
 # --
 function ${1:newFunction}($2): ${3:void} {
-  $4
+  ${4:return $5}
 }

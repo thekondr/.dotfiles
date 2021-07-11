@@ -3,5 +3,5 @@
 # key: af
 # --
 async function ${1:newFunction}($2): Promise<${3:void}> {
-  $4
+  ${4:return $5}
 }

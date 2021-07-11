@@ -3,5 +3,5 @@
 # key: af
 # --
 async function ${1:newFunction}($2) {
-  $3
+  ${3:return $4}
 }
