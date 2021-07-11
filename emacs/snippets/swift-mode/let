@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: let
+# key: k
+# --
+let ${2:($3)} = $1

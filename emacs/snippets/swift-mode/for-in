@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: for-of
+# key: fo
+# --
+for ${2:($3)} in $1 {
+  `yas-selected-text`$4
+}

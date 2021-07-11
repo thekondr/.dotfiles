@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: var
+# key: l
+# --
+var ${2:($3)} = $1

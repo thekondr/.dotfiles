@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: function
+# key: f
+# --
+func ${1:newFunction}($2) throws${3: -> ${4:Void}} {
+  $5
+}

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: async-function
+# key: af
+# --
+func ${1:newFunction}($2) async throws${3: -> ${4:Void}} {
+  $5
+}
