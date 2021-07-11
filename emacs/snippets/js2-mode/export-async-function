@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: export-async-function
-# key: eaf
-# --
-export async function $1($2) {
-  $3
-}
