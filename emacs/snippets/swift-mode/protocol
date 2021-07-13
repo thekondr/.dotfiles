@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: protocol
+# key: i
+# --
+protocol $1 {
+  $2
+}
