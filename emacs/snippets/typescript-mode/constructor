@@ -3,6 +3,5 @@
 # key: cn
 # --
 constructor($1) {
-  super()
   $2
 }
