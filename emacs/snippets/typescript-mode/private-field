@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: private-field
+# key: p
+# --
+private readonly 
