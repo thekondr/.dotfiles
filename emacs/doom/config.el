@@ -74,6 +74,9 @@
 (setq confirm-kill-emacs nil)
 (setq +snippets-dir (expand-file-name "~/.dotfiles/emacs/snippets"))
 
+(after! counsel
+  (setq counsel-find-file-ignore-regexp nil))
+
 (require 'diff-hl)
 
 (after! popup
