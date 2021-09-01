@@ -459,7 +459,7 @@ pauses cursors."
     (cl-letf (((symbol-function 'basic-save-buffer) #'ignore))
       (apply orig-fn args))))
 
-(set-frame-parameter (selected-frame) 'alpha 90)
+;; (set-frame-parameter (selected-frame) 'alpha 90)
 (global-visual-line-mode 1)
 
 (after! company
