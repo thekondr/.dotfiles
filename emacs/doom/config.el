@@ -272,13 +272,12 @@
 
 (after! yasnippet
   (evil-set-initial-state 'snippet-mode 'insert)
+  (load (concat +snippets-dir "/utils.el"))
   (setq yas-triggers-in-field t
         yas-also-auto-indent-first-line t
-        yas-choose-keys-first t
-        yas-snippet-dirs (list
-                          +snippets-dir
-                          (expand-file-name "~/.emacs.d/private/snippets")))
-  (load (concat +snippets-dir "/utils.el"))
+        yas-choose-keys-first t)
+  (add-to-list 'yas-snippet-dirs (expand-file-name "~/.emacs.d/private/snippets") t)
+  (yas-reload-all)
   (add-hook 'snippet-mode-hook #'(lambda ()
                                    (ws-butler-mode -1)
                                    (setq require-final-newline nil))))
