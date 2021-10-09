@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: async-function
+# key: af
+# --
+async fn ${1:new_function}($2) -> ${3:()} {
+  $4
+}

@@ -3,6 +3,6 @@
 # key: t
 # --
 #[test]
-fn $1() {
-$0
+fn ${1:new_test}() {
+  $2
 }

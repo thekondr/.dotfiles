@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: test-async
+# key: ta
+# --
+#[tokio::test]
+async fn ${1:new_test}() {
+  $2
+}

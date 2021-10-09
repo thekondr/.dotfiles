@@ -2,6 +2,6 @@
 # name: function
 # key: f
 # --
-fn $1($2) -> $3 {
-$0
+fn ${1:new_function}($2) -> ${3:()} {
+  $4
 }
