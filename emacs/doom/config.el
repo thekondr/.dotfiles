@@ -480,3 +480,6 @@ pauses cursors."
         ;; REVIEW Revisit this to refactor; shouldn't be necessary!
         (when company-candidates
           (company-abort))))))
+
+(after! lsp-ui
+  (setq lsp-ui-doc-enable nil))
