@@ -417,9 +417,6 @@
       (flutter-hot-reload)
     (flutter-run "-d chrome")))
 
-(after! rustic
-  (setq rustic-lsp-server 'rust-analyzer))
-
 (evil-define-command +multiple-cursors/evil-mc-toggle-cursor-here ()
   "Create a cursor at point. If in visual block or line mode, then create
 cursors on each line of the selection, on the column of the cursor. Otherwise
