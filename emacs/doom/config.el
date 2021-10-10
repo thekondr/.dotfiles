@@ -251,6 +251,15 @@
       (:map counsel-find-file-map
        "C-h" #'counsel-up-directory)
 
+      (:after company
+        (:map company-active-map
+          "<tab>" yas-maybe-expand))
+
+      (:after yasnippet
+        (:map yas-keymap
+          "<tab>" #'yas-next-field-or-maybe-expand
+          "<backtab>" #'yas-prev-field))
+
       (:map ivy-minibuffer-map
        "M-J" #'ivy-yank-word
        "M-K" #'kill-sentence
