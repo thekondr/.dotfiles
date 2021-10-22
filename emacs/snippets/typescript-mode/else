@@ -3,5 +3,5 @@
 # key: el
 # --
 else {
-  $1
+  `yas-selected-text`$1
 }
