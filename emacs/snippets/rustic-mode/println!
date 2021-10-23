@@ -2,4 +2,4 @@
 # name: println!
 # key: cl
 # --
-println!($1)
+println!("($1): {:#?}", ($1))
