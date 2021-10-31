@@ -251,11 +251,11 @@
       (:map counsel-find-file-map
        "C-h" #'counsel-up-directory)
 
-      (:after company
-        (:map company-active-map
-          "<tab>" yas-maybe-expand))
-
       (:after yasnippet
+        (:after company
+          (:map company-active-map
+            "<tab>" yas-maybe-expand))
+
         (:map yas-keymap
           "<tab>" #'yas-next-field-or-maybe-expand
           "<backtab>" #'yas-prev-field))
