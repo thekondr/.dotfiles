@@ -188,6 +188,19 @@
   (let ((evil-ex-search-vim-style-regexp nil))
       (apply orig-fn args)))
 
+(defadvice! tk--+lookup--xref-show (fn identifier &optional show-fn)
+  :override #'+lookup--xref-show
+  (let ((xrefs (funcall fn
+                        (xref-find-backend)
+                        identifier)))
+    (when xrefs
+      (funcall (or show-fn #'xref--show-defs)
+               (lambda () xrefs)
+               nil)
+      (if (cdr xrefs)
+          'deferred
+        t))))
+
 (map! (:leader
        :n "SPC" #'counsel-M-x
        :n "1" #'winum-select-window-1
