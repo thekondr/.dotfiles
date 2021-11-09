@@ -493,3 +493,7 @@ pauses cursors."
 
 (after! lsp-ui
   (setq lsp-ui-doc-enable nil))
+
+(after! ivy-prescient
+  (add-to-list 'ivy-prescient-sort-commands 'ivy-xref-show-xrefs t)
+  (add-to-list 'ivy-prescient-sort-commands 'ivy-xref-show-defs t))
