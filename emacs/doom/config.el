@@ -64,6 +64,7 @@
 
 (when IS-MAC
   (setq mac-command-modifier 'control)
+  (setq mac-right-option-modifier 'left)
   (setq ns-command-modifier 'control)
   (setq ns-right-option-modifier 'left))
 
