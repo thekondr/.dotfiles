@@ -50,7 +50,7 @@
 ;(unpin! t)
 
 (package! git-messenger :pin "2d64e62e33be9f881ebb019afc183caac9c62eda")
-(package! prettier-js)
+(package! prettier-js :pin "e9b73e81d3e1642aec682195f127a42dfb0b5774")
 (package! protobuf-mode :pin "1ab7789f384472b84872a885d998a7a7ef411acc")
 
 (package! evil-escape :disable t)
