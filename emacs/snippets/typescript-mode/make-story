@@ -2,14 +2,7 @@
 # name: make-story
 # key: ms
 # --
-import React from 'react'
-import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
-
-import $1 from './$1'
-
-const stories = storiesOf('$2', module)
-
-stories.add('$1', () => (
-  <$1 />
-))
+export const $1 = Template.bind({})
+$1.args = {
+  $0
+}
