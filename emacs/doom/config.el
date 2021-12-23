@@ -481,6 +481,11 @@ pauses cursors."
         (when company-candidates
           (company-abort))))))
 
+(after! lsp-mode
+  (setq lsp-lens-enable nil)
+  (add-hook! '(lsp-mode-hook)
+    (add-hook 'before-save-hook #'lsp-format-buffer nil 'local)))
+
 (after! lsp-ui
   (setq lsp-ui-doc-enable nil))
 
