@@ -290,6 +290,7 @@
   (yas-reload-all)
   (add-hook 'snippet-mode-hook #'(lambda ()
                                    (ws-butler-mode -1)
+                                   (whitespace-mode -1)
                                    (setq delete-trailing-lines nil)
                                    (setq require-final-newline nil))))
 
