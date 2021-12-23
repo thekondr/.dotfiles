@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: auto
+# key: l
+# --
+auto ${2:new_variable} = $1
