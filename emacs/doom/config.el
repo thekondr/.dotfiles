@@ -493,3 +493,28 @@ pauses cursors."
   (add-to-list 'ivy-re-builders-alist '(counsel-rg . ivy--regex-plus))
   (add-to-list 'ivy-prescient-sort-commands 'ivy-xref-show-xrefs t)
   (add-to-list 'ivy-prescient-sort-commands 'ivy-xref-show-defs t))
+
+;; Added xref-tide into the list for (thing-at-point 'symbol t)
+(defadvice! tk--doom-thing-at-point-or-region (&optional thing prompt)
+  :override #'doom-thing-at-point-or-region
+  (declare (side-effect-free t))
+  (cond ((stringp thing)
+         thing)
+        ((doom-region-active-p)
+         (buffer-substring-no-properties
+          (doom-region-beginning)
+          (doom-region-end)))
+        (thing
+         (thing-at-point thing t))
+        ((require 'xref nil t)
+         ;; Eglot, nox (a fork of eglot), and elpy implementations for
+         ;; `xref-backend-identifier-at-point' betray the documented purpose of
+         ;; the interface. Eglot/nox return a hardcoded string and elpy prepends
+         ;; the line number to the symbol.
+         (if (memq (xref-find-backend) '(eglot elpy nox xref-tide))
+             (thing-at-point 'symbol t)
+           ;; A little smarter than using `symbol-at-point', though in most
+           ;; cases, xref ends up using `symbol-at-point' anyway.
+           (xref-backend-identifier-at-point (xref-find-backend))))
+        (prompt
+         (read-string (if (stringp prompt) prompt "")))))
