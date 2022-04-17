@@ -490,5 +490,6 @@ pauses cursors."
   (setq lsp-ui-doc-enable nil))
 
 (after! ivy-prescient
+  (add-to-list 'ivy-re-builders-alist '(counsel-rg . ivy--regex-plus))
   (add-to-list 'ivy-prescient-sort-commands 'ivy-xref-show-xrefs t)
   (add-to-list 'ivy-prescient-sort-commands 'ivy-xref-show-defs t))
