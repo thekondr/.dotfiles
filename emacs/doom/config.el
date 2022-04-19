@@ -518,3 +518,36 @@ pauses cursors."
            (xref-backend-identifier-at-point (xref-find-backend))))
         (prompt
          (read-string (if (stringp prompt) prompt "")))))
+
+(defcustom add-node-modules-max-depth 20
+  "Max depth to look for node_modules."
+  :type 'integer
+  :group 'add-node-modules-path)
+
+(defadvice! tk--add-node-modules-path ()
+  :override #'add-node-modules-path
+  (interactive)
+  (let* ((default-dir (expand-file-name default-directory))
+         (file (or (buffer-file-name) default-dir))
+         (home (expand-file-name "~"))
+         (iterations add-node-modules-max-depth)
+         (root (directory-file-name (or (and (buffer-file-name) (file-name-directory (buffer-file-name))) default-dir)))
+         (roots '()))
+    (while (and root (> iterations 0))
+      (setq iterations (1- iterations))
+      (let ((bindir (expand-file-name "node_modules/.bin/" root)))
+        (when (file-directory-p bindir)
+          (add-to-list 'roots bindir)))
+      (if (string= root home)
+          (setq root nil)
+        (setq root (directory-file-name (file-name-directory root)))))
+    (if roots
+        (progn
+          (make-local-variable 'exec-path)
+          (while roots
+            (add-to-list 'exec-path (car roots))
+            (when add-node-modules-path-debug
+              (message (concat "added " (car roots) " to exec-path")))
+            (setq roots (cdr roots))))
+      (when add-node-modules-path-debug
+        (message (concat "node_modules/.bin not found for " file))))))
