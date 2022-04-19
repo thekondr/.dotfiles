@@ -234,7 +234,8 @@
       "i" #'tide-organize-imports
       "s" #'tide-nav
       "c" #'tide-rename-symbol
-      "m" #'tide-rename-file))
+      "m" #'tide-rename-file
+      "l" #'tide-add-eslint-disable-next-line))
 
       (:after magit
        (:map magit-mode-map
