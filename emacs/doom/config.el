@@ -551,3 +551,46 @@ pauses cursors."
             (setq roots (cdr roots))))
       (when add-node-modules-path-debug
         (message (concat "node_modules/.bin not found for " file))))))
+
+(after! prettier-js
+  (defun tk-eslint-fix ()
+    (interactive)
+    (let* ((temporary-file-directory (file-name-directory buffer-file-name))
+            (ext (file-name-extension buffer-file-name t))
+            (bufferfile (make-temp-file "eslint" nil ext))
+            (errorfile (make-temp-file "eslint" nil ext))
+            (errbuf (if prettier-js-show-errors (get-buffer-create "*eslint errors*")))
+            (patchbuf (get-buffer-create "*eslint patch*"))
+            (coding-system-for-read 'utf-8)
+            (coding-system-for-write 'utf-8))
+      (unwind-protect
+        (save-restriction
+          (widen)
+          (write-region nil nil bufferfile)
+          (if errbuf
+            (with-current-buffer errbuf
+              (setq buffer-read-only nil)
+              (erase-buffer)))
+          (with-current-buffer patchbuf
+            (erase-buffer))
+          (if (zerop (apply 'call-process
+                       "eslint" nil (list nil errorfile)
+                       nil (list "--fix" bufferfile)))
+            (progn
+              (call-process-region (point-min) (point-max) "diff" nil patchbuf nil "-n" "--strip-trailing-cr" "-"
+                bufferfile)
+              (prettier-js--apply-rcs-patch patchbuf)
+              (if errbuf (prettier-js--kill-error-buffer errbuf)))
+            (message "Could not apply eslint")
+            (if errbuf
+              (prettier-js--process-errors (buffer-file-name) errorfile errbuf))
+            ))
+        (kill-buffer patchbuf)
+        (delete-file errorfile)
+        (delete-file bufferfile))))
+
+  (add-hook 'prettier-js-mode-hook
+    #'(lambda ()
+        (add-hook 'before-save-hook 'tk-eslint-fix nil 'local)
+        (add-hook 'before-save-hook 'tide-organize-imports nil 'local)
+        )))
