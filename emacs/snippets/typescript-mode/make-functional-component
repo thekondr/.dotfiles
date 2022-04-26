@@ -2,8 +2,18 @@
 # name: make-functional-component
 # key: mf
 # --
-import React from 'react'
-import makeStyles from '@material-ui/styles/makeStyles'
+import React, { ReactNode } from 'react'
+
+import { makeStyles } from '@material-ui/core/styles'
+
+type Props = {
+  children: ReactNode
+}
+
+export function ${1:`(file-name-base)`}({ children }: Props) {
+  const classes = useStyles()
+  return <div className={classes.root}>${0:\{children\}}</div>
+}
 
 const useStyles = makeStyles({
   root: {
@@ -12,16 +22,3 @@ const useStyles = makeStyles({
     backgroundColor: 'red',
   },
 })
-
-type Props = {
-
-}
-
-export default function ${1:`(file-name-base)`}({
-
-}: Props) {
-  const classes = useStyles()
-  return (
-    <div className={classes.root}>$0</div>
-  )
-}
