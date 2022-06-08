@@ -2,6 +2,6 @@
 # name: class
 # key: c
 # --
-class $1 {
+class ${1:`(file-name-base)`} {
   $2
 }
