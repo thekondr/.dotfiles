@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: eslint-disable
-# key: ed
-# --
-/* eslint-disable $1 */
-/* eslint-enable $1 */

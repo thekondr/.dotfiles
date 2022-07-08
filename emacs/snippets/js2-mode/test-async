@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: test-async
-# key: ta
-# --
-test("$1", async () => {
-  $0
-})

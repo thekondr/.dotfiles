@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: useMemo
-# key: um
-# --
-const $1 = useMemo(() => $2, [])

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: useDispatch
-# key: ud
+# key: udd
 # --
 const dispatch = useDispatch()

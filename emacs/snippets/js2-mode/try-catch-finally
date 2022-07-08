@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: try-catch-finally
-# key: try
-# --
-try {
-  $1
-} catch (error) {
-  $2
-}

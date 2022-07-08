@@ -2,5 +2,4 @@
 # name: useSagas
 # key: uss
 # --
-import { useSagas } from 'utils/CommonProviders'
 const sagas = useSagas()

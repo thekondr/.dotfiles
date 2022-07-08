@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: useCallback
-# key: uc
-# --
-useCallback(() => $1, [])

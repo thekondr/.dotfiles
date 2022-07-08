@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: const
-# key: k
-# --
-const ${2:\{ $3 \}} = $1

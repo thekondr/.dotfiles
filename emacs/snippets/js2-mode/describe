@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: describe
-# key: d
-# --
-describe("$1", () => {
-  t$0
-})
