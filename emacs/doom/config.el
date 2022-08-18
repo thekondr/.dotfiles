@@ -321,6 +321,7 @@
   (setq flycheck-popup-tip-error-prefix ""))
 
 (after! typescript-mode
+  (add-hook 'typescript-mode-hook 'tk/import-sort-mode)
   (add-hook 'typescript-mode-hook 'prettier-js-mode)
   (after! tide
     (add-hook 'typescript-mode-hook 'tide-hl-identifier-mode)
@@ -552,45 +553,59 @@ pauses cursors."
       (when add-node-modules-path-debug
         (message (concat "node_modules/.bin not found for " file))))))
 
-(after! prettier-js
-  (defun tk-eslint-fix ()
-    (interactive)
-    (let* ((temporary-file-directory (file-name-directory buffer-file-name))
-            (ext (file-name-extension buffer-file-name t))
-            (bufferfile (make-temp-file "eslint" nil ext))
-            (errorfile (make-temp-file "eslint" nil ext))
-            (errbuf (if prettier-js-show-errors (get-buffer-create "*eslint errors*")))
-            (patchbuf (get-buffer-create "*eslint patch*"))
-            (coding-system-for-read 'utf-8)
-            (coding-system-for-write 'utf-8))
-      (unwind-protect
-        (save-restriction
-          (widen)
-          (write-region nil nil bufferfile)
-          (if errbuf
-            (with-current-buffer errbuf
-              (setq buffer-read-only nil)
-              (erase-buffer)))
-          (with-current-buffer patchbuf
-            (erase-buffer))
-          (if (zerop (apply 'call-process
-                       "eslint" nil (list nil errorfile)
-                       nil (list "--fix" bufferfile)))
-            (progn
-              (call-process-region (point-min) (point-max) "diff" nil patchbuf nil "-n" "--strip-trailing-cr" "-"
-                bufferfile)
-              (prettier-js--apply-rcs-patch patchbuf)
-              (if errbuf (prettier-js--kill-error-buffer errbuf)))
-            (message "Could not apply eslint")
-            (if errbuf
-              (prettier-js--process-errors (buffer-file-name) errorfile errbuf))
-            ))
-        (kill-buffer patchbuf)
-        (delete-file errorfile)
-        (delete-file bufferfile))))
+(define-minor-mode tk/import-sort-mode
+  "Sorts imports on file save when this mode is turned on"
+  :lighter " Import Sort"
+  :global nil
+  (if tk/import-sort-mode
+    (add-hook 'before-save-hook 'tk/sort-imports nil 'local)
+    (remove-hook 'before-save-hook 'tk/sort-imports 'local)))
 
-  (add-hook 'prettier-js-mode-hook
-    #'(lambda ()
-        (add-hook 'before-save-hook 'tk-eslint-fix nil 'local)
-        (add-hook 'before-save-hook 'tide-organize-imports nil 'local)
-        )))
+(defun tk/sort-imports ()
+  (interactive)
+  (let* ((eslintbuf (get-buffer-create "*eslint*")))
+    (unwind-protect
+      (save-restriction
+        (widen)
+        (if (zerop (apply 'call-process-region
+                     (point-min) (point-max) "eslint" nil eslintbuf nil
+                     (append tk/eslint-rules-to-disable (list "--format" "json" "--ext" ".js,.ts,.tsx" "--fix-dry-run" "--stdin" "--stdin-filename" buffer-file-name))))
+          (progn
+            (if (with-current-buffer eslintbuf
+                  (let ((output (gethash "output" (aref (json-parse-string (buffer-string)) 0))))
+                    (when output
+                      (erase-buffer)
+                      (insert output)
+                      t)))
+              (replace-buffer-contents eslintbuf)))
+          (message "Could not apply eslint")))
+      (kill-buffer eslintbuf)))
+  (ignore-errors
+    (tide-organize-imports)))
+
+(defadvice! tk--prettier-js ()
+  :override #'prettier-js
+  (interactive)
+  (let* ((prettierbuf (get-buffer-create "*prettier*")))
+    (unwind-protect
+      (save-restriction
+        (widen)
+        (if (zerop (apply 'call-process-region
+                     (point-min) (point-max) "prettier" nil prettierbuf nil
+                     (list "--stdin-filepath" buffer-file-name)))
+          (replace-buffer-contents prettierbuf)
+          (message "Could not apply prettier")))
+      (kill-buffer prettierbuf))))
+
+(after! flycheck
+  (setq flycheck-eslint-args tk/eslint-rules-to-disable))
+
+(defvar tk/eslint-rules-to-disable
+  (mapcan #'(lambda (rule) (list "--rule" (concat rule ": off")))
+    (list "import/no-cycle" "import/namespace")))
+
+(defun tk/without-last-newline (text)
+  (s-chop-suffix "\n" text))
+
+(defun tk/just-last-newline (text)
+  (s-shared-end "\n" text))
