@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: struct-props
+# key: sp
+# --
+type Props = {
+  $1
+}

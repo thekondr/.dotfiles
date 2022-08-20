@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: method
-# key: m
+# key: h
 # --
-${1:newFunction}($2) {
+${1:constructor}($2) {
   $3
 }

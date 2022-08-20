@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: useSelector
+# key: usl
+# --
+const ${4:\{ $5 \}} = useSelector(${1:(state: State) => ${2:\{
+  $3
+\}}})

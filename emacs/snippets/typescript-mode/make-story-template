@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: make-story-template
-# key: mst
+# key: mstt
 # --
 import React, { ComponentProps } from 'react'
 

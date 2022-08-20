@@ -2,6 +2,6 @@
 # name: generator
 # key: g
 # --
-function* ${1:newGenerator}($2): Generator<$3> {
-  $4
+function* ${1:`(file-name-base)`}($2) {
+  ${3:return $4}
 }

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: private-async-function
-# key: paf
-# --
-private async ${1:newFunction}($2): Promise<${3:void}> {
-  ${4:return $5}
-}

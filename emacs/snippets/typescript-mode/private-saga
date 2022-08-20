@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: private-saga
-# key: psg
-# --
-private *${1:newSaga}($2): SagaIterator {
-  $3
-}

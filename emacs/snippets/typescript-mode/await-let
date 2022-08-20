@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: await-let
+# key: al
+# --
+let ${2:\{ $3 \}} = await $1

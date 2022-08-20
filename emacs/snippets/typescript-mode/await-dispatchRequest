@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: await-dispatchRequest
+# key: adr
+# --
+${2:const ${3:\{ $4 \}} = }await dispatchRequest(sagas, $1)

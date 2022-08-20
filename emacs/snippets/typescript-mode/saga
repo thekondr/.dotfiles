@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: saga
-# key: sg
-# --
-function* ${1:newSaga}($2): SagaIterator {
-  $3
-}

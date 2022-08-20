@@ -3,5 +3,5 @@
 # key: ei
 # --
 else if ($1) {
-  `yas-selected-text`$2
-}
+  ${2:`(tk/yas-selected-text-i)`}
+}$0`(tk/yas-selected-text-o)`

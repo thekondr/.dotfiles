@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: make-story
-# key: ms
+# key: mst
 # --
 export const ${1:Default} = Template.bind({})
 $1.args = {

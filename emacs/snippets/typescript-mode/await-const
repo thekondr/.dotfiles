@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: await-const
+# key: ak
+# --
+const ${2:\{ $3 \}} = await $1

@@ -3,5 +3,5 @@
 # key: cgc
 # --
 console.groupCollapsed($1)
-  ${2:`(tk/without-last-newline yas-selected-text)`}
-console.groupEnd()$0`(tk/just-last-newline yas-selected-text)`
+  ${2:`(tk/yas-selected-text-i)`}
+console.groupEnd()$0`(tk/yas-selected-text-o)`

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: private-async-arrow-function
-# key: paj
-# --
-private ${1:newFunction} = async ($2) => ${3:\{
-  $4
-\}}

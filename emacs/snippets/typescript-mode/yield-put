@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: yield-put
+# key: yp
+# --
+yield* put($1)

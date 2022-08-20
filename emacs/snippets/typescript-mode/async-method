@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: async-method
-# key: am
-# --
-async ${1:newFunction}($2) {
-  $3
-}

@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: describe
-# key: d
+# key: td
 # --
 describe("$1", () => {
-  t$0
+  tt$0
 })

@@ -2,4 +2,6 @@
 # name: useMemo
 # key: um
 # --
-const $1 = useMemo(() => $2, [])
+const ${3:value} = useMemo(() => {
+  $1
+}, [$2])

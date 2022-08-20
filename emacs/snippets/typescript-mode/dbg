@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: debug
+# key: dbg
+# --
+((x) => (console.log(x), x))(`yas-selected-text`)

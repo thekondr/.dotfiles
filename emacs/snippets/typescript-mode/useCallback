@@ -2,4 +2,6 @@
 # name: useCallback
 # key: uc
 # --
-useCallback(() => $1, [])
+const ${3:callback} = useCallback(() => {
+  $1
+}, [$2])

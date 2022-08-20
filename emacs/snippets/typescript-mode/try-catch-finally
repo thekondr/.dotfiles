@@ -1,9 +1,11 @@
 # -*- mode: snippet -*-
 # name: try-catch-finally
-# key: try
+# key: tcf
 # --
 try {
-  `yas-selected-text`$1
+  ${1:`(tk/yas-selected-text-i)`}
 } catch (error) {
   $2
-}
+} finally {
+  $3
+}$0`(tk/yas-selected-text-o)`

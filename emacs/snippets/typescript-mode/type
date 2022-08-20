@@ -1,7 +1,5 @@
 # -*- mode: snippet -*-
 # name: type
-# key: s
+# key: t
 # --
-type $1 = {
-  $2
-}
+type ${1:`(file-name-base)`} = 

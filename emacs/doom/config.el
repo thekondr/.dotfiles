@@ -606,8 +606,8 @@ pauses cursors."
   (mapcan #'(lambda (rule) (list "--rule" (concat rule ": off")))
     (list "import/no-cycle" "import/namespace")))
 
-(defun tk/without-last-newline (text)
-  (s-chop-suffix "\n" text))
+(defun tk/yas-selected-text-i ()
+  (s-chop-suffix "\n" yas-selected-text))
 
-(defun tk/just-last-newline (text)
-  (s-shared-end "\n" text))
+(defun tk/yas-selected-text-o ()
+  (s-shared-end "\n" yas-selected-text))

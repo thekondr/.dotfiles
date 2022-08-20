@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: yield-call
+# key: yc
+# --
+${4:const ${5:\{ $6 \}} = }yield* call(${1:() => ${2:\{
+  $3
+\}}})

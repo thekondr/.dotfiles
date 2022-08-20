@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: useLayoutEffect
+# key: ule
+# --
+useLayoutEffect(() => {
+  $1
+
+  ${2:return () => \{
+    $3
+  \}}
+}, [$4])

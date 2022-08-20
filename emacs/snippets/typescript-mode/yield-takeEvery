@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: yield-takeEvery
+# key: yte
+# --
+yield* takeEvery($1, ${2:function* $1Impl(\{ payload \}) \{
+  $3
+\}})

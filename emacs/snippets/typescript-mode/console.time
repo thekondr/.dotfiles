@@ -3,4 +3,5 @@
 # key: ct
 # --
 console.time('$1')
-`yas-selected-text`console.timeEnd('$1')
+${2:`(tk/yas-selected-text-i)`}
+console.timeEnd('$1')$0`(tk/yas-selected-text-o)`

@@ -1,7 +1,9 @@
 # -*- mode: snippet -*-
-# name: else
-# key: el
+# name: try-catch
+# key: tc
 # --
-else {
+try {
   ${1:`(tk/yas-selected-text-i)`}
+} catch (error) {
+  $2
 }$0`(tk/yas-selected-text-o)`

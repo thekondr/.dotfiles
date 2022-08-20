@@ -2,6 +2,6 @@
 # name: async-function
 # key: af
 # --
-async function ${1:newFunction}($2): Promise<${3:void}> {
-  ${4:return $5}
+async function ${1:`(file-name-base)`}($2) {
+  ${3:return $4}
 }
