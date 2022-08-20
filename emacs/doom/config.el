@@ -270,6 +270,8 @@
        "C-v" #'ivy-scroll-up-command
        "M-v" #'ivy-scroll-down-command
        "C-h" #'doom/delete-backward-word
+       "<left>" #'doom/delete-backward-word
+       "<right>" #'ivy-alt-done
        "C-S-h" help-map))
 
   (defadvice! yas--move-to-field-end (_snippet field)
