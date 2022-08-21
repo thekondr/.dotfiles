@@ -289,7 +289,17 @@
   (setq yas-triggers-in-field t
         yas-also-auto-indent-first-line t
         yas-choose-keys-first t)
-  (add-to-list 'yas-snippet-dirs (expand-file-name "~/.emacs.d/private/snippets") t)
+
+  (defadvice! tk/+file-templates--expand (orig-fn &rest args)
+    :around #'+file-templates--expand
+    (let ((yas-choose-keys-first nil))
+      (apply orig-fn args)))
+
+  (setq +file-templates-dir (expand-file-name "~/.dotfiles/private/templates"))
+  (set-file-templates!
+   '("\\.ts$" :trigger "__ts" :mode typescript-mode)
+   '("\\.tsx$" :trigger "__tsx" :mode typescript-mode))
+
   (yas-reload-all)
   (add-hook 'snippet-mode-hook #'(lambda ()
                                    (ws-butler-mode -1)
