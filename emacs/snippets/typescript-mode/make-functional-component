@@ -3,9 +3,13 @@
 # key: mf
 # --
 
-type Props = {}
+type Props = {
+  $2
+}
 
-export function ${1:`(file-name-base)`}({}: Props) {
+export function ${1:`(file-name-base)`}({
+  ${2:$(s-join ",\n" (mapcar #'(lambda (prop) () (car (s-split "[?:]" prop))) (s-split "\n" yas-text)))}
+}: Props) {
   return (
     <div>
       $0
