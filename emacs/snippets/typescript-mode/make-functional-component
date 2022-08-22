@@ -10,9 +10,5 @@ type Props = {
 export function ${1:`(file-name-base)`}({
   ${2:$(s-join ",\n" (mapcar #'(lambda (prop) () (car (s-split "[?:]" prop))) (s-split "\n" yas-text)))}
 }: Props) {
-  return (
-    <div>
-      $0
-    </div>
-  )
+  return (${3:<div>$4</div>})
 }
