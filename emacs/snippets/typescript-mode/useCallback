@@ -2,6 +2,4 @@
 # name: useCallback
 # key: uc
 # --
-const ${3:callback} = useCallback(() => {
-  $1
-}, [$2])
+const ${3:callback} = useCallback(${1:`yas-selected-text`}, [$2])
