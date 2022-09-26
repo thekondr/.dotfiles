@@ -205,6 +205,11 @@
        :n ";" #'evilnc-comment-operator
        :n "cr" #'recompile
 
+       :n "fs" #'(lambda ()
+                   (interactive)
+                   (set-buffer-modified-p t)
+                   (save-buffer))
+
        :n "g=" #'vc-version-ediff
        :n "oww" #'browse-url-at-point
        :n "fp" #'tk/find-private
