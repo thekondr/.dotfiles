@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: schema
+# key: sc
+# --
+const $1Schema = ${2:z.object(\{
+  $3
+\})}
+
+type $1 = z.infer<typeof $1Schema>

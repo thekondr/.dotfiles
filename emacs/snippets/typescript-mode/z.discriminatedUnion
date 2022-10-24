@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: z.discriminatedUnion
+# key: zdu
+# --
+z.discriminatedUnion("${1:type}", [
+  $2
+])
