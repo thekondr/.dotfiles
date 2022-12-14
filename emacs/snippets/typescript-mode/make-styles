@@ -5,8 +5,7 @@
 
 const useStyles = makeStyles({
   `(s-lower-camel-case (file-name-base))`: {
-    ${1:display: 'flex',
-    flexDirection: 'column',
+    ${1:display: 'grid',
     $2}
   },
 })
