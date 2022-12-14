@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: expect-equal
+# key: ee
+# --
+expect($1).${2:toEqual($0)}
