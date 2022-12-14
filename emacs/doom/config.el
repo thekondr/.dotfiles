@@ -598,7 +598,10 @@ pauses cursors."
           (message "Could not apply eslint")))
       (kill-buffer eslintbuf)))
   (ignore-errors
-    (tide-organize-imports)))
+    (let ((response (tide-send-command-sync "organizeImports" `(:mode "RemoveUnused" :scope (:type "file" :args (:file ,(tide-buffer-file-name)))))))
+      (tide-on-response-success response (:min-version "4.9")
+        (-when-let (changes (plist-get response :body))
+          (tide-apply-code-edits changes))))))
 
 (defadvice! tk--prettier-js ()
   :override #'prettier-js
