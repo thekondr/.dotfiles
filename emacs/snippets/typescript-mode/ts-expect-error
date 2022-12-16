@@ -2,4 +2,4 @@
 # name: ts-expect-error
 # key: tsee
 # --
-/* @ts-expect-error */
+// @ts-expect-error 
