@@ -2,6 +2,6 @@
 # name: describe
 # key: td
 # --
-describe("$1", () => {
+describe(\`$1\`, () => {
   tt$0
 })
