@@ -2,4 +2,4 @@
 # name: throw-error
 # key: te
 # --
-throw new ${1:Error('$2')}
+throw new ${1:Error(\`$2\`)}
