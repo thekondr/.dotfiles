@@ -3,5 +3,5 @@
 # key: g
 # --
 function* ${1:`(file-name-base)`}($2) {
-  ${3:return $4}
+  $0
 }
