@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: console.time-finally
+# key: ctf
+# --
+try {
+  console.time('$1')
+  ${2:`(tk/yas-selected-text-i)`}
+} finally {
+  console.timeEnd('$1')$0
+}`(tk/yas-selected-text-o)`
