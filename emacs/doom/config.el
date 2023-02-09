@@ -236,7 +236,8 @@
       "f" #'tide-fix
       "r" #'tide-refactor
       "q" #'tide-restart-server
-      "i" #'tide-organize-imports
+      "i" #'tk/sort-imports
+      "I" #'tide-organize-imports
       "s" #'tide-nav
       "c" #'tide-rename-symbol
       "m" #'tide-rename-file
@@ -338,7 +339,7 @@
   (setq flycheck-popup-tip-error-prefix ""))
 
 (after! typescript-mode
-  (add-hook 'typescript-mode-hook 'tk/import-sort-mode)
+  ;; (add-hook 'typescript-mode-hook 'tk/import-sort-mode)
   (add-hook 'typescript-mode-hook 'prettier-js-mode)
   (after! tide
     (add-hook 'typescript-mode-hook 'tide-hl-identifier-mode)
