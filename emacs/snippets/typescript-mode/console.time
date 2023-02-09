@@ -2,6 +2,6 @@
 # name: console.time
 # key: ct
 # --
-console.time('$1')
+console.time(\`$1\`)
 ${2:`(tk/yas-selected-text-i)`}
-console.timeEnd('$1')$0`(tk/yas-selected-text-o)`
+console.timeEnd(\`$1\`)$0`(tk/yas-selected-text-o)`
