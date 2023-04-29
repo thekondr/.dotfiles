@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: struct
-# key: s
-# --
-type ${1:`(file-name-base)`} = {
-  $2
-}

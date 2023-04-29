@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: className-object
-# key: cno
-# --
-{
-  [${1:classes.${2:`(s-lower-camel-case (file-name-base))`}}]: ${3:false},
-}

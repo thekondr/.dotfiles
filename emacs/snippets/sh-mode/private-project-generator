@@ -1,6 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: private-project-generator
-# key: ppg
-# --
-echo '(load-file (expand-file-name "~/.$1/$1.el"))' >> ~/.dotfiles/emacs/private/private.el
-echo '. ~/.$1/$1.zsh' >> ~/.dotfiles/zsh/private/private.zsh

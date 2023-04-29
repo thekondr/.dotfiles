@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: println!
-# key: cl
-# --
-println!("($1): {:#?}", ($1))

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: trait
-# key: i
-# --
-trait $1 {
-  $2
-}

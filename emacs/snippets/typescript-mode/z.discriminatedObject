@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: z.discriminatedObject
-# key: zdo
-# --
-z.object({
-  ${1:type}: z.literal('$2'),
-  $3
-})

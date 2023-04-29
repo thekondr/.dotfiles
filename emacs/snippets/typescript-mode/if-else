@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: if-else
-# key: ie
-# --
-if ($1) {
-  ${2:`(tk/yas-selected-text-i)`}
-} else {
-  $3
-}$0`(tk/yas-selected-text-o)`

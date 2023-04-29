@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: test
-# key: tt
-# --
-test(\`$1\`, async () => {
-  $0
-})

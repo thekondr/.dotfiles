@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: z.object
-# key: zo
-# --
-z.object({
-  $1
-})

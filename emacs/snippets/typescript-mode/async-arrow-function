@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: async-arrow-function
-# key: aj
-# --
-async ($1) => ${2:\{
-  $3
-\}}

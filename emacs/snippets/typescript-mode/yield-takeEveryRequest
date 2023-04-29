@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: yield-takeEveryRequest
-# key: ytr
-# --
-yield* takeEveryRequest($1, ${2:(\{ payload \}) => ${3:\{
-  $4
-\}}})

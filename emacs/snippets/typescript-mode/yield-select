@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: yield-select
-# key: ys
-# --
-const ${4:\{ $5 \}} = yield* select(${1:(state: State) => ${2:\{
-  $3
-\}}})

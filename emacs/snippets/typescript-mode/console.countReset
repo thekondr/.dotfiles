@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: console.countReset
-# key: ccr
-# --
-console.countReset($1)

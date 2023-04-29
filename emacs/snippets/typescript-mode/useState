@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: useState
-# key: us
-# --
-const [$1, set${1:$(tk/capitalize yas-text)}] = useState<${2:boolean}>($3)

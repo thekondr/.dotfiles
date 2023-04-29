@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: try-finally
-# key: tf
-# --
-try {
-  ${1:`(tk/yas-selected-text-i)`}
-} finally {
-  $2
-}$0`(tk/yas-selected-text-o)`

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: else
-# key: el
-# --
-else {
-  ${1:`(tk/yas-selected-text-i)`}
-}$0`(tk/yas-selected-text-o)`

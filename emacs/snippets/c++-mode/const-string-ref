@@ -1,6 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: const std::string&
-# key: csr
-# binding: direct-keybinding
-# --
-const std::string& 

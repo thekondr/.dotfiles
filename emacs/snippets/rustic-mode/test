@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: test
-# key: t
-# --
-#[test]
-fn ${1:new_test}() {
-  $2
-}

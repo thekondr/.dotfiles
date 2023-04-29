@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: json-parse-stringify
-# key: jj
-# --
-JSON.parse(JSON.stringify(${1:`yas-selected-text`}))

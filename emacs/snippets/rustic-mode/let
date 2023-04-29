@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: let
-# key: k
-# --
-let ${2:new_variable} = $1

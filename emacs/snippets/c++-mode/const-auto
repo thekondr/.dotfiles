@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: const-auto
-# key: k
-# --
-const auto ${2:new_variable} = $1

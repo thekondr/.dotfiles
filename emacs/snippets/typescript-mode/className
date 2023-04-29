@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: className
-# key: cn
-# --
-className={${1:classes.${2:`(s-lower-camel-case (file-name-base))`}}}

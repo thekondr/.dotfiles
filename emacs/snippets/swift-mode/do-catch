@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: do-catch
-# key: try
-# --
-do {
-  $1
-} catch {
-  $2
-}

@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: useSagas
-# key: uss
-# --
-const sagas = useSagas()

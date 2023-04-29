@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: console.group
-# key: cg
-# --
-console.group($1)
-  ${2:`(tk/yas-selected-text-i)`}
-console.groupEnd()$0`(tk/yas-selected-text-o)`

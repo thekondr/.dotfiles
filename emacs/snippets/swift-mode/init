@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: init
-# key: cn
-# --
-init($1) {
-  $2
-}

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: arrow-function
-# key: j
-# --
-|$1| ${2:\{
-  $3
-\}}

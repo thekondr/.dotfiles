@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: for-await-of
-# key: fa
-# --
-for await (const ${2:\{ $3 \}} of $1) {
-  ${4:`(tk/yas-selected-text-i)`}
-}$0`(tk/yas-selected-text-o)`

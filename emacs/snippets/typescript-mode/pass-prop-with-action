@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: pass-prop-with-action
-# key: ppa
-# --
-$1={action('$1')}

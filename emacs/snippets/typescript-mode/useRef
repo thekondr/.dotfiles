@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: useRef
-# key: ur
-# --
-const ${4:ref} = useRef<${1:HTMLInputElement}>(${3:null})

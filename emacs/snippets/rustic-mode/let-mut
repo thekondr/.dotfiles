@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: let-mut
-# key: l
-# --
-let mut ${2:new_variable} = $1

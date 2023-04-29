@@ -1,4 +1,0 @@
-# key: ca
-# name: create-action
-# --
-export const $1 = createAction<$2>('${1:$(s-upcase (s-snake-case yas-text))}')
